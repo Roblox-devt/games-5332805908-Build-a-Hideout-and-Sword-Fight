@@ -529,7 +529,7 @@ async function init() {
             if (isMenuOpen) {
                 if (key === 'l') triggerLeaveSequence();
                 if (key === 'r') triggerRespawnSequence();
-                if (e.key === 'Enter') { e.preventDefault(); if (document.getElementById('leave-confirmation-panel').style.display === 'flex') window.location.href = "https://www.roblox.com"; else if (document.getElementById('respawn-confirmation-panel').style.display === 'flex') triggerResetOrDeath(); }
+                if (e.key === 'Enter') { e.preventDefault(); if (document.getElementById('leave-confirmation-panel').style.display === 'flex') window.location.href = "https://roblox-devt.github.io/home/"; else if (document.getElementById('respawn-confirmation-panel').style.display === 'flex') triggerResetOrDeath(); }
                 return;
             }
             if (e.key === 'Tab' && !checkPhone()) { e.preventDefault(); toggleLeaderboard(); }
