@@ -47,12 +47,10 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
 .dd-item:hover{background:rgba(128,128,128,0.4)}
 .dd-icon{width:24px;height:24px;fill:none;stroke:white;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
 .dd-text{font-size:14px;font-weight:600;color:white}
-#top-ui-bar{position:absolute;top:12px;left:50%;transform:translateX(-50%);display:flex;align-items:stretch;z-index:80;pointer-events:auto;background:#f2f2f2;border-radius:10px 10px 0 0;overflow:hidden;box-shadow:0 3px 10px rgba(0,0,0,0.22);border-bottom:4px solid #0f6cbd}
-.ui-btn{width:54px;height:50px;background:transparent;border:none;border-right:1px solid rgba(0,0,0,0.08);display:flex;justify-content:center;align-items:center;cursor:pointer;transition:background 0.12s;margin:0;transform:none;border-radius:0;box-shadow:none}
-.ui-btn:last-child{border-right:none}
-.ui-btn:hover{background:#d8e6f7}
-.ui-btn:active{background:#c3d9f2}
-.ui-btn svg{width:28px;height:28px;overflow:visible}
+#top-ui-bar{position:absolute;top:15px;left:50%;transform:translateX(-50%);display:flex;align-items:flex-end;z-index:80;pointer-events:auto}
+.ui-btn{width:60px;height:60px;background:#fff;border:1px solid #ccc;border-radius:0;display:flex;justify-content:center;align-items:center;cursor:pointer;transition:transform 0.2s cubic-bezier(0.175,0.885,0.32,1.275),margin 0.2s ease,box-shadow 0.2s ease;transform-origin:bottom center;margin:0 3px}
+.ui-btn:hover{transform:scale(1.1);margin:0 6px;z-index:81;box-shadow:0 4px 10px rgba(0,0,0,0.1)}
+.ui-btn svg{width:45px;height:45px;overflow:visible}
 #version-text{position:absolute;bottom:10px;left:10px;color:rgba(255,255,255,0.7);font-family:'Open Sans',sans-serif;font-size:16px;z-index:80;pointer-events:none}
 #player-health-bar-container{position:absolute;top:20px;right:20px;width:200px;height:20px;background:#333;border:2px solid #000;border-radius:10px;overflow:hidden;display:none;z-index:80}
 #player-health-bar-fill{height:100%;width:100%;background:#69ff75;transition:width 0.1s linear,background-color 0.1s linear;border-radius:8px}
@@ -185,6 +183,7 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
 .player-chatbubble{position:absolute;transform:translate(-50%,-100%);background:#ffffff;color:#000000;border-radius:10px;padding:4px 10px;font-size:12px;font-weight:600;pointer-events:none;white-space:nowrap;max-width:280px;overflow:hidden;text-overflow:ellipsis;z-index:8;display:none;box-shadow:0 2px 8px rgba(0,0,0,0.4)}
 .player-healthbar{position:absolute;transform:translate(-50%,-100%);width:72px;height:7px;background:rgba(0,0,0,0.55);border:1px solid rgba(0,0,0,0.75);border-radius:4px;overflow:hidden;pointer-events:none;z-index:8;display:none}
 .player-healthbar-fill{height:100%;width:100%;background:#69ff75;border-radius:3px}
+.plot-label{position:absolute;transform:translate(-50%,-100%);color:#fff;font-family:'Fredoka One','Open Sans',sans-serif;font-weight:bold;font-size:15px;text-shadow:0 1px 4px rgba(0,0,0,0.9);pointer-events:none;white-space:nowrap;z-index:8;display:none}
 #player-profile-overlay{position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(25,25,25,0.97);z-index:15;display:none;flex-direction:column;padding:18px 18px 18px 10px;box-sizing:border-box;overflow-y:auto;scrollbar-width:thin;scrollbar-color:rgba(255,255,255,0.28) transparent}
 #player-profile-overlay::-webkit-scrollbar{width:8px}
 #player-profile-overlay::-webkit-scrollbar-track{background:transparent}
@@ -304,7 +303,7 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
 <div id="loading-screen"><div id="loading-bg"></div><div id="loading-container"><div id="loading-icon-wrap"><div id="loading-custom-square"></div></div><div id="loading-card"><h1 id="loading-title">Build a Hideout and Sword Fight</h1><p id="loading-studio">Build | Official</p></div></div><div id="loading-spinner"></div></div>
 <div id="roblox-menu-btn"><svg viewBox="0 0 100 100"><rect x="25" y="25" width="50" height="50" transform="rotate(15 50 50)" /><rect x="42.5" y="42.5" width="15" height="15" fill="#000000" transform="rotate(15 50 50)" /></svg></div>
 <div id="player-health-bar-container"><div id="player-health-bar-fill"></div></div>
-<div id="top-ui-bar"><div class="ui-btn" data-interface="player-commands-interface" title="Player Commands"><svg viewBox="0 0 24 24" fill="none" stroke="#2b2b2b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 5l7 7-7 7"/><path d="M17 5v14"/></svg></div><div class="ui-btn" data-interface="build-marketplace-interface" title="Build Marketplace"><svg viewBox="0 0 24 24" fill="none" stroke="#2b2b2b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6.2 8h11.6l-1.1 11.3a2 2 0 0 1-2 1.7H9.3a2 2 0 0 1-2-1.7L6.2 8z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/><path d="M10 12.2l4.4 4.4"/><path d="M14.4 12.2l-4.4 4.4"/></svg></div><div class="ui-btn" data-interface="settings-interface" title="Settings"><svg viewBox="0 0 24 24" fill="none" stroke="#2b2b2b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.4"/><path d="M12 2.8v3M12 18.2v3M2.8 12h3M18.2 12h3M5.5 5.5l2.1 2.1M16.4 16.4l2.1 2.1M18.5 5.5l-2.1 2.1M7.6 16.4l-2.1 2.1"/></svg></div><div class="ui-btn" data-interface="marketplace-interface" title="Marketplace"><svg viewBox="0 0 24 24" fill="none" stroke="#2b2b2b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4.5h2.6l2.3 10.8a1.7 1.7 0 0 0 1.7 1.4h8a1.7 1.7 0 0 0 1.7-1.3L20.8 8H6.4"/><circle cx="9.8" cy="19.3" r="1.5"/><circle cx="17" cy="19.3" r="1.5"/><path d="M10 8h3.6v3.4H9.6zM13.6 8h3l-.7 3.4h-2.3z"/></svg></div><div class="ui-btn" data-interface="home-interface" title="Home"><svg viewBox="0 0 24 24" fill="none" stroke="#2b2b2b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5L12 4l8 6.5"/><path d="M5.8 9.5V20h12.4V9.5"/><path d="M10 20v-5.2h4V20"/></svg></div><div class="ui-btn" data-interface="report-interface" title="Report"><svg viewBox="0 0 24 24" fill="none" stroke="#2b2b2b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 5.5L5.8 9.2H3.5v5.6h2.3L14 18.5v-13z"/><path d="M17 9.5a4 4 0 0 1 0 5"/><path d="M19.2 7.5a7 7 0 0 1 0 9"/></svg></div><div class="ui-btn" data-interface="clan-interface" title="Clan"><svg viewBox="0 0 24 24" fill="none" stroke="#2b2b2b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7.5 2.7v6.2c0 4.6-3.2 7.7-7.5 9.1-4.3-1.4-7.5-4.5-7.5-9.1V5.7L12 3z"/><path d="M9 12l2.2 2.2L15.4 10"/></svg></div></div>
+<div id="top-ui-bar"><div class="ui-btn" data-interface="player-commands-interface" title="Player Commands"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M7 5.5l7.5 6.5L7 18.5" stroke="#c8c8c8" stroke-width="3.4"/><path d="M15.5 18.5h4.5" stroke="#9a9a9a" stroke-width="3.2"/></svg></div><div class="ui-btn" data-interface="build-marketplace-interface" title="Build Marketplace"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M6.6 9h10.8l-1 10.4a2 2 0 0 1-2 1.8H9.6a2 2 0 0 1-2-1.8L6.6 9z" stroke="#c8c8c8" stroke-width="2"/><path d="M9.2 9V7a2.8 2.8 0 0 1 5.6 0v2" stroke="#c8c8c8" stroke-width="2"/><path d="M10.1 12.1l3.8 3.8M13.9 12.1l-3.8 3.8M9.5 12.7l1.1-1.1M14.5 12.7l-1.1-1.1" stroke="#9a9a9a" stroke-width="1.9"/></svg></div><div class="ui-btn" data-interface="settings-interface" title="Settings"><svg viewBox="0 0 24 24"><g fill="#c8c8c8"><circle cx="12" cy="12" r="5.6"/><rect x="10.55" y="5.05" width="2.9" height="2.9"/><rect x="10.55" y="16.05" width="2.9" height="2.9"/><rect x="5.05" y="10.55" width="2.9" height="2.9"/><rect x="16.05" y="10.55" width="2.9" height="2.9"/><rect x="14.44" y="4.66" width="2.9" height="2.9" transform="rotate(-45 15.89 6.11)"/><rect x="6.66" y="4.66" width="2.9" height="2.9" transform="rotate(45 8.11 6.11)"/><rect x="6.66" y="16.44" width="2.9" height="2.9" transform="rotate(-45 8.11 17.89)"/><rect x="14.44" y="16.44" width="2.9" height="2.9" transform="rotate(45 15.89 17.89)"/></g><circle cx="12" cy="12" r="2.4" fill="#9a9a9a"/></svg></div><div class="ui-btn" data-interface="marketplace-interface" title="Marketplace"><svg viewBox="0 0 24 24" fill="none" stroke="#c8c8c8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4.5h2.6l2.3 10.8a1.7 1.7 0 0 0 1.7 1.4h8a1.7 1.7 0 0 0 1.7-1.3L20.8 8H6.4"/><circle cx="9.8" cy="19.3" r="1.5"/><circle cx="17" cy="19.3" r="1.5"/><path d="M10 8h3.6v3.4H9.6zM13.6 8h3l-.7 3.4h-2.3z"/></svg></div><div class="ui-btn" data-interface="home-interface" title="Home"><svg viewBox="0 0 24 24" fill="none" stroke="#c8c8c8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 10.5 L12 5 L17.5 10.5 V19 H14 V15.5 H10 V19 H6.5 Z"/><path d="M4.5 8.6 L12 2.6 L19.5 8.6"/><path d="M8.6 0.6 H11.8 V1.4 H11.4 L9.0 3.4 V1.4 H8.6 Z"/></svg></div><div class="ui-btn" data-interface="report-interface" title="Report"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M14 5.5L5.8 9.2H3.5v5.6h2.3L14 18.5v-13z" stroke="#c8c8c8" stroke-width="2"/><path d="M17 9.5a4 4 0 0 1 0 5" stroke="#9a9a9a" stroke-width="2"/><path d="M19.2 7.5a7 7 0 0 1 0 9" stroke="#9a9a9a" stroke-width="2"/></svg></div><div class="ui-btn" data-interface="clan-interface" title="Clan"><svg viewBox="0 0 24 24" fill="none"><path d="M12 1.6 L3.8 4.5 v6.6 c0 5 3.4 8.3 8.2 10.1" stroke="#c8c8c8" stroke-width="1.7" stroke-linecap="round"/><path d="M12 1.6 l8.2 2.9 v6.6 c0 5 -3.4 8.3 -8.2 10.1" stroke="#9a9a9a" stroke-width="1.7" stroke-linecap="round"/><path d="M12 5.2 L6.4 7.2 v4.6 c0 3.7 2.6 6.2 5.6 7.6 z" fill="#c8c8c8"/><path d="M12 5.2 l5.6 2 v4.6 c0 3.7 -2.6 6.2 -5.6 7.6 z" fill="#9a9a9a"/></svg></div></div>
 <div id="settings-interface" class="game-interface"><div class="settings-title-bar"><span class="settings-title-text">Settings</span><div class="settings-close-btn" onclick="closeInterface('settings-interface')">X</div></div><div class="settings-body"><div class="settings-left-panel"><div class="setting-item"><span class="setting-text">Player Sounds</span><button class="toggle-btn on" data-setting="playersounds" onclick="toggleSetting(this)">ON</button></div><div class="setting-item"><span class="setting-text">Time Cycle</span><button class="toggle-btn on" data-setting="timecycle" onclick="toggleSetting(this)">ON</button></div><div class="setting-item"><span class="setting-text">Textures</span><button class="toggle-btn on" data-setting="textures" onclick="toggleSetting(this)">ON</button></div><div class="setting-item"><span class="setting-text">Forcefield</span><button class="toggle-btn off" data-setting="forcefield" onclick="toggleSetting(this)">OFF</button></div><div class="setting-item"><span class="setting-text">Ingame Music</span><button class="toggle-btn on" data-setting="ingamemusic" onclick="toggleSetting(this)">ON</button></div><div class="setting-item"><span class="setting-text small">Kill Clan Members</span><button class="toggle-btn on" data-setting="killclanmembers" onclick="toggleSetting(this)">ON</button></div></div></div></div>
 <div id="top-bar-menu"><div class="top-btn" id="tb-btn-1"><div class="hover-bg"></div><svg class="icon-menu" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg><svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line></svg></div><div class="top-btn" id="tb-btn-2"><div class="hover-bg"></div><svg viewBox="0 0 24 24"><path class="tb2-bubble" d="M4 3 H20 A1 1 0 0 1 21 4 V15 A1 1 0 0 1 20 16 H15 L12 20 L9 16 H4 A1 1 0 0 1 3 15 V4 A1 1 0 0 1 4 3 Z" /><line class="tb2-line" x1="7" y1="8" x2="17" y2="8" /><line class="tb2-line" x1="7" y1="12" x2="12" y2="12" /></svg></div><div class="top-btn" id="tb-btn-3"><div class="hover-bg"></div><svg viewBox="0 0 24 24"><defs><clipPath id="mic-clip"><path d="M12 2C10.34 2 9 3.34 9 5V11C9 12.66 10.34 14 12 14C13.66 14 15 12.66 15 11V5C15 3.34 13.66 2 12 2Z" /></clipPath></defs><path class="mic-pill" d="M12 2C10.34 2 9 3.34 9 5V11C9 12.66 10.34 14 12 14C13.66 14 15 12.66 15 11V5C15 3.34 13.66 2 12 2Z" /><rect class="mic-green" x="8" y="14" width="8" height="0" fill="#00ff00" clip-path="url(#mic-clip)" /><path class="mic-stand" d="M17 11C17 13.76 14.76 16 12 16C9.24 16 7 13.76 7 11H5C5 14.53 7.61 17.43 11 17.92V21H13V17.92C16.39 17.43 19 14.53 19 11H17Z" /><line class="mic-slash" x1="4" y1="20" x2="20" y2="4" /></svg></div></div>
 <div id="dropdown-menu"><div class="dd-item" id="dd-avatar"><svg class="dd-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="white" stroke-width="2"/><circle cx="12" cy="9" r="3" fill="none" stroke="white" stroke-width="2"/><path d="M6 19c0-3.3 2.7-6 6-6s6 2.7, 6 6" fill="none" stroke="white" stroke-width="2"/></svg><span class="dd-text">Switch avatar</span></div><div class="dd-item" id="dd-leaderboard"><svg class="dd-icon" viewBox="0 0 24 24"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0V4zM7 6H4v2a3 3 0 0 0 3 3M17 6h3v2a3 3 0 0 1-3 3" /></svg><span class="dd-text">Leaderboard</span></div><div class="dd-item" id="dd-inventory"><svg class="dd-icon" viewBox="0 0 24 24"><path d="M9 3h6a3 3 0 0 1 3 3v12a3 3 0 0 1-3 3H9a3 3 0 0 1-3-3V6a3 3 0 0 1 3-3zM9 3V2a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1" /><path d="M9 14h6M9 10h6" /></svg><span class="dd-text">Inventory</span></div><div class="dd-item" id="dd-respawn"><svg class="dd-icon" viewBox="0 0 24 24"><circle cx="10" cy="8" r="4" /><path d="M2 21v-1a7 7 0 0 1 14 0v1" /><path d="M18 14a4 4 0 1 1 3-1M21 10v3h-3" /></svg><span class="dd-text">Respawn</span></div></div>
@@ -316,7 +315,7 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
 <div class="menu-scroll-area" id="mscroll-settings" style="display: none;"><div class="settings-section"><div class="settings-section-header">Audio</div><div class="setting-row"><span class="setting-label">Volume</span><div class="volume-control-wrap"><button id="vol-minus" class="volume-adjust-btn">-</button><div id="volume-bars" class="volume-bar-container"></div><button id="vol-plus" class="volume-adjust-btn">+</button></div></div></div>
 <div class="settings-section"><div class="settings-section-header">Display &amp; graphics</div><div class="setting-row"><span class="setting-label">Graphics mode</span><div class="cycle-setting" id="cycler-graphics-mode"><div class="cycle-arrow left"><svg viewBox="0 0 24 24"><polyline points="14,4 6,12 14,20" /></svg></div><div class="cycle-value-wrap"><span class="cycle-value">Auto</span></div><div class="cycle-arrow right"><svg viewBox="0 0 24 24"><polyline points="10,4 18,12 10,20" /></svg></div></div></div><div class="setting-row" style="margin-top: 12px;"><span class="setting-label">Graphics quality</span><div class="volume-control-wrap"><button id="gfx-minus" class="volume-adjust-btn">-</button><div id="graphics-bars" class="volume-bar-container"></div><button id="gfx-plus" class="volume-adjust-btn">+</button></div></div><div class="setting-row" style="margin-top: 12px;"><span class="setting-label">Show player names</span><div class="cycle-setting" id="cycler-show-names"><div class="cycle-arrow left"><svg viewBox="0 0 24 24"><polyline points="14,4 6,12 14,20" /></svg></div><div class="cycle-value-wrap"><span class="cycle-value">On</span></div><div class="cycle-arrow right"><svg viewBox="0 0 24 24"><polyline points="10,4 18,12 10,20" /></svg></div></div></div><div class="setting-row" style="margin-top: 12px;"><span class="setting-label">Shift lock cursor</span><div class="cycle-setting" id="cycler-shiftlock-cursor"><div class="cycle-arrow left"><svg viewBox="0 0 24 24"><polyline points="14,4 6,12 14,20" /></svg></div><div class="cycle-value-wrap"><span class="cycle-value">On</span></div><div class="cycle-arrow right"><svg viewBox="0 0 24 24"><polyline points="10,4 18,12 10,20" /></svg></div></div></div></div>
 <div class="settings-section"><div class="settings-section-header">View &amp; controls</div><div class="setting-row"><span class="setting-label">Camera sensitivity</span><div class="volume-control-wrap"><span id="cam-value-display" style="color: #ffffff; width: 30px; text-align: center;">1</span><button id="cam-minus" class="volume-adjust-btn">-</button><div id="camera-bars" class="volume-bar-container"></div><button id="cam-plus" class="volume-adjust-btn">+</button></div></div><div class="setting-row" style="margin-top: 12px;"><span class="setting-label">Movement mode</span><div class="cycle-setting" id="cycler-movement-mode"><div class="cycle-arrow left"><svg viewBox="0 0 24 24"><polyline points="14,4 6,12 14,20" /></svg></div><div class="cycle-value-wrap"><span class="cycle-value">Keyboard + Mouse</span></div><div class="cycle-arrow right"><svg viewBox="0 0 24 24"><polyline points="10,4 18,12 10,20" /></svg></div></div></div><div class="setting-row" style="margin-top: 12px;"><span class="setting-label">Shift lock switch</span><div class="cycle-setting" id="cycler-shiftlock"><div class="cycle-arrow left"><svg viewBox="0 0 24 24"><polyline points="14,4 6,12 14,20" /></svg></div><div class="cycle-value-wrap"><span class="cycle-value">On</span></div><div class="cycle-arrow right"><svg viewBox="0 0 24 24"><polyline points="10,4 18,12 10,20" /></svg></div></div></div></div></div>
-<div class="menu-scroll-area" id="mscroll-help" style="display: none;"><div class="settings-section"><div class="settings-section-header">Controls</div><div id="help-controls-pc"><div class="help-row"><span class="help-label">Move</span><span class="help-keys"><span class="keycap">W</span><span class="keycap">A</span><span class="keycap">S</span><span class="keycap">D</span></span></div><div class="help-row"><span class="help-label">Jump</span><span class="help-keys"><span class="keycap">Space</span></span></div><div class="help-row"><span class="help-label">Shift lock</span><span class="help-keys"><span class="keycap">Shift</span></span></div><div class="help-row"><span class="help-label">Rotate camera</span><span class="help-keys"><span class="help-label">Right mouse drag</span></span></div><div class="help-row"><span class="help-label">Zoom camera</span><span class="help-keys"><span class="keycap">Scroll</span><span class="keycap">I</span><span class="keycap">O</span></span></div><div class="help-row"><span class="help-label">Rotate camera (keys)</span><span class="help-keys"><span class="keycap">&larr;</span><span class="keycap">&rarr;</span></span></div><div class="help-row"><span class="help-label">Leaderboard</span><span class="help-keys"><span class="keycap">Tab</span></span></div><div class="help-row"><span class="help-label">Inventory</span><span class="help-keys"><span class="keycap">`</span></span></div><div class="help-row"><span class="help-label">Chat</span><span class="help-keys"><span class="keycap">/</span></span></div><div class="help-row"><span class="help-label">Emotes</span><span class="help-keys"><span class="help-label">/e cheer, wave, laugh, dance, dance1, dance2, dance3</span></span></div><div class="help-row"><span class="help-label">Equip / unequip item</span><span class="help-keys"><span class="keycap">1</span><span class="keycap">0</span></span></div><div class="help-row"><span class="help-label">Drop held item</span><span class="help-keys"><span class="keycap">Backspace</span></span></div><div class="help-row"><span class="help-label">Sword swing / lunge</span><span class="help-keys"><span class="help-label">Click / Double-click</span></span></div><div class="help-row"><span class="help-label">Pause menu</span><span class="help-keys"><span class="keycap">Esc</span></span></div><div class="help-row"><span class="help-label">Climb</span><span class="help-keys"><span class="help-label">Walk into a truss</span></span></div><div class="help-row"><span class="help-label">Wall jump</span><span class="help-keys"><span class="help-label">Jump while pushing into a wall</span></span></div><div class="help-row"><span class="help-label">Claim plot</span><span class="help-keys"><span class="help-label">:claim 1-9 in chat</span></span></div></div><div id="help-controls-mobile" style="display: none;"><div class="help-row"><span class="help-label">Move</span><span class="help-keys"><span class="help-label">Left thumbstick</span></span></div><div class="help-row"><span class="help-label">Jump</span><span class="help-keys"><span class="help-label">Jump button</span></span></div><div class="help-row"><span class="help-label">Shift lock</span><span class="help-keys"><span class="help-label">Lock button</span></span></div><div class="help-row"><span class="help-label">Rotate camera</span><span class="help-keys"><span class="help-label">Drag screen</span></span></div><div class="help-row"><span class="help-label">Zoom camera</span><span class="help-keys"><span class="help-label">Pinch screen</span></span></div><div class="help-row"><span class="help-label">Move mode</span><span class="help-keys"><span class="help-label">Tap to move option</span></span></div><div class="help-row"><span class="help-label">Leaderboard / inventory / chat</span><span class="help-keys"><span class="help-label">Menu button</span></span></div><div class="help-row"><span class="help-label">Sword swing / lunge</span><span class="help-keys"><span class="help-label">Tap screen / Double-tap</span></span></div><div class="help-row"><span class="help-label">Climb</span><span class="help-keys"><span class="help-label">Walk into a truss</span></span></div><div class="help-row"><span class="help-label">Claim plot</span><span class="help-keys"><span class="help-label">:claim 1-9 in chat</span></span></div></div></div></div>
+<div class="menu-scroll-area" id="mscroll-help" style="display: none;"><div class="settings-section"><div class="settings-section-header">Controls</div><div id="help-controls-pc"><div class="help-row"><span class="help-label">Move</span><span class="help-keys"><span class="keycap">W</span><span class="keycap">A</span><span class="keycap">S</span><span class="keycap">D</span></span></div><div class="help-row"><span class="help-label">Jump</span><span class="help-keys"><span class="keycap">Space</span></span></div><div class="help-row"><span class="help-label">Shift lock</span><span class="help-keys"><span class="keycap">Shift</span></span></div><div class="help-row"><span class="help-label">Rotate camera</span><span class="help-keys"><span class="help-label">Right mouse drag</span></span></div><div class="help-row"><span class="help-label">Zoom camera</span><span class="help-keys"><span class="keycap">Scroll</span><span class="keycap">I</span><span class="keycap">O</span></span></div><div class="help-row"><span class="help-label">Rotate camera (keys)</span><span class="help-keys"><span class="keycap">&larr;</span><span class="keycap">&rarr;</span></span></div><div class="help-row"><span class="help-label">Leaderboard</span><span class="help-keys"><span class="keycap">Tab</span></span></div><div class="help-row"><span class="help-label">Plot owners</span><span class="help-keys"><span class="keycap">Q</span></span></div><div class="help-row"><span class="help-label">Inventory</span><span class="help-keys"><span class="keycap">`</span></span></div><div class="help-row"><span class="help-label">Chat</span><span class="help-keys"><span class="keycap">/</span></span></div><div class="help-row"><span class="help-label">Emotes</span><span class="help-keys"><span class="help-label">/e cheer, wave, laugh, dance, dance1, dance2, dance3</span></span></div><div class="help-row"><span class="help-label">Equip / unequip item</span><span class="help-keys"><span class="keycap">1</span><span class="keycap">0</span></span></div><div class="help-row"><span class="help-label">Drop held item</span><span class="help-keys"><span class="keycap">Backspace</span></span></div><div class="help-row"><span class="help-label">Sword swing / lunge</span><span class="help-keys"><span class="help-label">Click / Double-click</span></span></div><div class="help-row"><span class="help-label">Pause menu</span><span class="help-keys"><span class="keycap">Esc</span></span></div><div class="help-row"><span class="help-label">Climb</span><span class="help-keys"><span class="help-label">Walk into a truss</span></span></div><div class="help-row"><span class="help-label">Wall jump</span><span class="help-keys"><span class="help-label">Jump while pushing into a wall</span></span></div><div class="help-row"><span class="help-label">Claim plot</span><span class="help-keys"><span class="help-label">:claim 1-9 in chat</span></span></div></div><div id="help-controls-mobile" style="display: none;"><div class="help-row"><span class="help-label">Move</span><span class="help-keys"><span class="help-label">Left thumbstick</span></span></div><div class="help-row"><span class="help-label">Jump</span><span class="help-keys"><span class="help-label">Jump button</span></span></div><div class="help-row"><span class="help-label">Shift lock</span><span class="help-keys"><span class="help-label">Lock button</span></span></div><div class="help-row"><span class="help-label">Rotate camera</span><span class="help-keys"><span class="help-label">Drag screen</span></span></div><div class="help-row"><span class="help-label">Zoom camera</span><span class="help-keys"><span class="help-label">Pinch screen</span></span></div><div class="help-row"><span class="help-label">Move mode</span><span class="help-keys"><span class="help-label">Tap to move option</span></span></div><div class="help-row"><span class="help-label">Leaderboard / inventory / chat</span><span class="help-keys"><span class="help-label">Menu button</span></span></div><div class="help-row"><span class="help-label">Sword swing / lunge</span><span class="help-keys"><span class="help-label">Tap screen / Double-tap</span></span></div><div class="help-row"><span class="help-label">Climb</span><span class="help-keys"><span class="help-label">Walk into a truss</span></span></div><div class="help-row"><span class="help-label">Claim plot</span><span class="help-keys"><span class="help-label">:claim 1-9 in chat</span></span></div></div></div></div>
 <div class="menu-btn-container"><button id="menu-leave" class="menu-row-btn btn-dark-gray"><span class="desktop-shortcut keycap">L</span>Leave</button><button id="menu-respawn" class="menu-row-btn btn-dark-gray"><span class="desktop-shortcut keycap">R</span>Respawn</button><button id="menu-resume" class="menu-row-btn btn-blue"><span class="desktop-shortcut keycap">ESC</span>Resume</button></div>
 <div id="player-profile-overlay"><div class="profile-back-row" id="profile-back-btn"><svg viewBox="0 0 24 24"><polyline points="14,4 6,12 14,20"/></svg><span>People</span></div><div class="player-info-field"><label for="pi-display-name">Display name</label><input type="text" id="pi-display-name" class="player-info-input" maxlength="20" placeholder="Player" /></div><div class="player-info-field"><label for="pi-username">Username</label><input type="text" id="pi-username" class="player-info-input" maxlength="20" placeholder="Enter username" /></div><div class="player-info-field"><label>Chat tag color</label><div class="color-picker-row" id="pi-color-picker"></div></div><button id="pi-save-btn" class="save-info-btn">Save</button></div></div>
 <div id="invite-menu"><div id="invite-close-btn"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line></svg></div><div class="invite-title">Invite friends</div><div class="invite-row"><input type="text" class="invite-input" id="invite-link-input" readonly /><div class="invite-copy-btn" id="invite-link-copy">Copy</div></div><div class="invite-action-row"><button class="invite-action-btn" id="invite-join-btn">Join</button><button class="invite-action-btn" id="invite-host-btn">Host</button></div><div class="invite-row"><input type="text" class="invite-input" id="invite-code-input" placeholder="Enter a 6-digit game code..." /><div class="invite-copy-btn" id="invite-code-copy">Copy</div></div></div>
@@ -328,7 +327,7 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
 <div id="dynamic-joystick-zone" style="position: absolute; bottom: 20px; left: 20px; width: 40%; height: 50%; border: 3px dashed rgba(255,255,255,0.4); background: rgba(255,255,255,0.02); border-radius: 20px; pointer-events: auto; display: none; box-sizing: border-box; z-index: 25;"></div>
 <div id="dynamic-joystick-container" style="position: absolute; width: 100px; height: 100px; background: rgba(255,255,255,0.1); border: 2px solid rgba(255,255,255,0.5); border-radius: 50%; display: none; pointer-events: none; transform: translate(-50%, -50%); z-index: 26;"><div id="dynamic-joystick-knob" style="position: absolute; width: 44px; height: 44px; background: rgba(255,255,255,0.85); border-radius: 50%; transform: translate(-50%, -50%);"></div></div>
 <div class="info-saved-toast" id="info-saved-toast">Player information saved!</div>
-<div id="version-text">Version 2.1.0</div>
+<div id="version-text">Version 1.18.7</div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.160.0/three.min.js"></script>
 <script src="https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js"></script>
 <script>
@@ -386,6 +385,17 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
         let npc = null;
         let currentMaterialOpacity = 1;
         let invDragData = null;
+        let heldGearId = '';
+        let isHoldingSword = false, isHoldingSpeedCoil = false, isHoldingGravityCoil = false;
+        let speedCoilModel, gravityCoilModel;
+        let speedCoilSound, gravityCoilSound;
+        let airHorizontalVel = new THREE.Vector3(); // airborne momentum velocity
+        const AIR_BRAKE_ACCEL = 55;  // studs/s^2 - reversing/braking (time scales with speed)
+        const AIR_TURN_ACCEL = 140;  // studs/s^2 - perpendicular steering (responsive)
+        let coilParticles = [], coilParticleTimer = 0, coilSmokeTex = null;
+        let plotOwners = new Array(9).fill(null);
+        let plotLabelAnchors = [], plotLabelEls = [], showPlotOwners = false;
+        let pointerLockRetryTimer = null;
         let spawnPoints = [], currentSpawnIndex = 0;
         let ambientLight, sun, hemiLight = null;
         let sunSprite, moonSprite;
@@ -450,19 +460,39 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
         const _hilt = new THREE.Vector3(), _tip = new THREE.Vector3(), _targetPos = new THREE.Vector3();
         const _lineVec = new THREE.Vector3(), _pointVec = new THREE.Vector3(), _closestPoint = new THREE.Vector3();
 
-        // ===================== POINTER LOCK SAFETY (crash fix) =====================
-        // Chrome enforces a ~1.25s cooldown on requestPointerLock after ANY exit, and rejects
-        // requests made outside a user gesture. The old code could call requestPointerLock
-        // from the game loop (dying while shift-locked) and hammer request/exit on fast
-        // Shift toggles - flooding Chrome with rejected requests until pointer lock gets
-        // denied for the whole tab session (why reloading didn't fix it). This is safe now.
+        // ===================== POINTER LOCK SAFETY =====================
+        // Chrome enforces a ~1.25s cooldown on requestPointerLock after ANY exit, and
+        // rejects requests made outside a user gesture. Every request is gesture-safe
+        // here, cooldown-blocked requests are QUEUED and auto-retried (so enabling
+        // shiftlock always locks the mouse by itself), and rejections resync state.
         const POINTER_LOCK_RELOCK_COOLDOWN = 1.35;
         let lastPointerLockExitAt = -1e9;
         let pointerLockRequestPending = false;
+        let lastPointerLockAttemptAt = -1e9;
         function safeRequestPointerLock() {
             if (!renderer || document.pointerLockElement === renderer.domElement) return;
             if (pointerLockRequestPending) return;
-            if (performance.now() / 1000 - lastPointerLockExitAt < POINTER_LOCK_RELOCK_COOLDOWN) return;
+            // Never request while the window is unfocused - that is the main source of
+            // rejection storms that can stall Chrome's input pipeline.
+            if (!document.hasFocus()) return;
+            const tNow = performance.now() / 1000;
+            const sinceExit = tNow - lastPointerLockExitAt;
+            if (sinceExit < POINTER_LOCK_RELOCK_COOLDOWN) {
+                // Queue an automatic retry once the browser cooldown expires
+                if (!pointerLockRetryTimer) {
+                    pointerLockRetryTimer = setTimeout(() => {
+                        pointerLockRetryTimer = null;
+                        if (!isMenuOpen && !isAvatarEditorOpen && !isRagdoll && isRunning &&
+                            (isShiftLock || camDist <= FIRST_PERSON_DIST)) {
+                            safeRequestPointerLock();
+                        }
+                    }, (POINTER_LOCK_RELOCK_COOLDOWN - sinceExit) * 1000 + 60);
+                }
+                return;
+            }
+            // Rate limit: at most one real attempt every 0.25s, no matter what calls this
+            if (tNow - lastPointerLockAttemptAt < 0.25) return;
+            lastPointerLockAttemptAt = tNow;
             pointerLockRequestPending = true;
             let released = false;
             const release = () => { if (!released) { released = true; pointerLockRequestPending = false; } };
@@ -479,14 +509,23 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
             } catch (e) { release(); resync(); console.warn('Pointer lock request failed:', e); }
         }
         function safeExitPointerLock() {
+            if (pointerLockRetryTimer) { clearTimeout(pointerLockRetryTimer); pointerLockRetryTimer = null; }
             if (document.pointerLockElement === renderer.domElement) {
                 lastPointerLockExitAt = performance.now() / 1000;
                 document.exitPointerLock();
             }
         }
-
         // ===================== CORE FUNCTIONS =====================
         function checkPhone() { return /iPhone|iPod|Android.*Mobile/i.test(navigator.userAgent) || (isMobile && Math.min(window.innerWidth, window.innerHeight) < 600); }
+        // FIX: a wrap loop fed Infinity (or a value that never converges) froze the
+        // tab permanently. Every yaw wrap now goes through this guarded helper.
+        function wrapAngle(a) {
+            if (!isFinite(a)) return 0;
+            let guard = 0;
+            while (a > Math.PI && guard++ < 100) a -= Math.PI * 2;
+            while (a < -Math.PI && guard++ < 100) a += Math.PI * 2;
+            return THREE.MathUtils.clamp(a, -Math.PI, Math.PI);
+        }
 
         function loadPlayerInfo() {
             const savedName = localStorage.getItem('toh_displayName');
@@ -504,11 +543,13 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
         }
 
         function loadDefaultInventory() {
-            playerInventory[0] = { id: 'stamper', name: 'Stamper', icon: 'https://static.wikia.nocookie.net/roblox/images/d/d0/Stamper.png/revision/latest/scale-to-width-down/420?cb=20141218091901' };
+            playerInventory[0] = { id: 'stamper', name: 'Stamper', icon: 'https://www.nocookie.net/roblox/images/d/df/Stampbuild.png/revision/latest?cb=20170214035416' };
             playerInventory[1] = { id: 'hammer', name: 'Hammer', icon: 'https://static.wikitide.net/combatinitiationwiki/8/81/Hammer.png' };
             playerInventory[2] = { id: 'sword', name: 'Sword', icon: 'https://tr.rbxcdn.com/180DAY-e39f79dce4937ea8598d4a5a793a0da0/420/420/Gear/Webp/noFilter' };
             const wiringIcon = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='64' height='64'><rect width='64' height='64' fill='%23333' rx='4' ry='4'/><text x='32' y='36' font-family='sans-serif' font-size='14' fill='white' text-anchor='middle'>Wiring</text></svg>";
             playerInventory[3] = { id: 'wiring', name: 'Wiring', icon: wiringIcon };
+            playerInventory[4] = { id: 'speedcoil', name: 'Speed Coil', icon: 'https://static.wikitide.net/nicosnextbotswiki/f/f4/Nextbot_speedcoil.png' };
+            playerInventory[5] = { id: 'gravitycoil', name: 'Gravity Coil', icon: 'https://static.wikia.nocookie.net/roblox/images/e/e1/Gravity_Coil1.png/revision/latest/thumbnail/width/360/height/450?cb=20180702034124' };
         }
 
         function setupSoundObjects() {
@@ -554,6 +595,8 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
             localStorage.setItem('toh_chatTagColor', chatTagColor);
             updateLeaderboardName();
             buildPeopleGrid();
+            const lo = plotOwners.findIndex(o => o && o.kind === 'local');
+            if (lo !== -1) plotOwners[lo].name = playerDisplayName;
             const toast = document.getElementById('info-saved-toast');
             toast.classList.add('show');
             setTimeout(() => toast.classList.remove('show'), 2200);
@@ -592,21 +635,25 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
             });
         }
 
-        // --- Sound playback (gated by the Player Sounds setting) ---
+        // --- Sound playback (one-shots clone their own element, so they all overlap freely) ---
         function playOofSound() { if (!playerSoundsEnabled || audioVolume <= 0 || !deathAudio) return; const sound = deathAudio.cloneNode(); sound.volume = audioVolume / 10; sound.play().catch(() => {}); }
         function playWalkSound() { if (!playerSoundsEnabled || audioVolume <= 0 || !walkAudio) return; if (walkAudio.paused) { walkAudio.currentTime = 0; walkAudio.play().catch(() => {}); } }
         function stopWalkSound() { if (!walkAudio) return; if (!walkAudio.paused) { walkAudio.pause(); walkAudio.currentTime = 0; } }
         function playJumpSound() { if (!playerSoundsEnabled || audioVolume <= 0 || !jumpAudio) return; const sound = jumpAudio.cloneNode(); sound.volume = audioVolume / 10; sound.play().catch(() => {}); }
         function playClimbSound() { if (!playerSoundsEnabled || audioVolume <= 0 || !climbAudio) return; if (climbAudio.paused) { climbAudio.currentTime = 0; climbAudio.play().catch(() => {}); } }
         function stopClimbSound() { if (!climbAudio) return; if (!climbAudio.paused) { climbAudio.pause(); climbAudio.currentTime = 0; } }
-        function playEquipSound() { if (!playerSoundsEnabled || audioVolume <= 0 || !equipSound) return; const s = equipSound.cloneNode(); s.volume = audioVolume / 10; s.play().catch(() => {}); }
-        function playSlashSound() { if (!playerSoundsEnabled || audioVolume <= 0 || !slashSound) return; const s = slashSound.cloneNode(); s.volume = audioVolume / 10; s.play().catch(() => {}); }
-        function playLungeSound() { if (!playerSoundsEnabled || audioVolume <= 0 || !lungeSound) return; const s = lungeSound.cloneNode(); s.volume = audioVolume / 10; s.play().catch(() => {}); }
+        function playEquipSound() { if (!playerSoundsEnabled || audioVolume <= 0 || !equipSound) return; const s = equipSound.cloneNode(); s.currentTime = 0; s.volume = audioVolume / 10; s.play().catch(() => {}); }
+        function playSlashSound() { if (!playerSoundsEnabled || audioVolume <= 0 || !slashSound) return; const s = slashSound.cloneNode(); s.currentTime = 0; s.volume = audioVolume / 10; s.play().catch(() => {}); }
+        function playLungeSound() { if (!playerSoundsEnabled || audioVolume <= 0 || !lungeSound) return; const s = lungeSound.cloneNode(); s.currentTime = 0; s.volume = audioVolume / 10; s.play().catch(() => {}); }
+        function playSpeedCoilSound() { if (!playerSoundsEnabled || audioVolume <= 0 || !speedCoilSound) return; const s = speedCoilSound.cloneNode(); s.currentTime = 0; s.volume = audioVolume / 10; s.play().catch(() => {}); }
+        function playGravityCoilSound() { if (!playerSoundsEnabled || audioVolume <= 0 || !gravityCoilSound) return; const s = gravityCoilSound.cloneNode(); s.currentTime = 0; s.volume = audioVolume / 10; s.play().catch(() => {}); }
 
         function loadSounds() {
             equipSound = new Audio('https://us-tuna-sounds-files.voicemod.net/215645d0-9633-4bef-9598-f7c78c184e00-1693085492415.mp3');
             slashSound = new Audio('https://us-tuna-sounds-files.voicemod.net/c4a606ff-eaf8-4699-b289-3071debb92c2-1693085608654.mp3');
             lungeSound = new Audio('https://us-tuna-sounds-files.voicemod.net/10d8de95-aae7-43ca-8018-62e8c3281ca2-1693085739438.mp3');
+            speedCoilSound = new Audio('https://www.myinstants.com/media/sounds/roblox-speed-coil.mp3');
+            gravityCoilSound = new Audio('https://us-tuna-sounds-files.voicemod.net/b08b96bb-ba2a-4664-a541-490874e2143a-1659832866447.mp3');
         }
 
         function createSwordModel() {
@@ -622,6 +669,39 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
             const bladeTipGeo = new THREE.ConeGeometry(0.125, 0.75, 16); const bladeTip = new THREE.Mesh(bladeTipGeo, grayMat); bladeTip.position.y = 3.125; group.add(bladeTip);
             group.traverse(obj => { if (obj.isMesh) { obj.castShadow = true; obj.receiveShadow = true; } });
             return group;
+        }
+
+        // Spring coil model: a thin helix that wraps around the right forearm
+        function createCoilModel(colorHex) {
+            const pts = [];
+            const turns = 5.5, height = 1.8, radius = 0.62, segs = 120;
+            for (let i = 0; i <= segs; i++) {
+                const t = i / segs;
+                const ang = t * turns * Math.PI * 2;
+                pts.push(new THREE.Vector3(Math.cos(ang) * radius, -t * height, Math.sin(ang) * radius));
+            }
+            const curve = new THREE.CatmullRomCurve3(pts);
+            const geo = new THREE.TubeGeometry(curve, 180, 0.09, 8, false);
+            const mesh = new THREE.Mesh(geo, new THREE.MeshStandardMaterial({ color: colorHex, roughness: 0.35, metalness: 0.45 }));
+            mesh.castShadow = true;
+            return mesh;
+        }
+
+        // Single source of truth for what the player is holding
+        function applyEquipState(item) {
+            heldGearId = item ? item.id : '';
+            isHoldingItem = !!item;
+            isHoldingSword = heldGearId === 'sword';
+            isHoldingSpeedCoil = heldGearId === 'speedcoil';
+            isHoldingGravityCoil = heldGearId === 'gravitycoil';
+            if (swordModel) swordModel.visible = isHoldingSword;
+            if (speedCoilModel) speedCoilModel.visible = isHoldingSpeedCoil;
+            if (gravityCoilModel) gravityCoilModel.visible = isHoldingGravityCoil;
+        }
+        function playGearEquipSound(itemId) {
+            if (itemId === 'sword') playEquipSound();
+            else if (itemId === 'speedcoil') playSpeedCoilSound();
+            else if (itemId === 'gravitycoil') playGravityCoilSound();
         }
 
         // ===================== LEADERBOARD (player + Dec + remotes, live K/D) =====================
@@ -698,7 +778,16 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                     moonSprite.visible = false;
                 }
                 buildPlayground();
-                try { await document.fonts.load('80px Orbitron'); await document.fonts.load('50px Orbitron'); } catch(e) { console.error("Font loading failed, proceeding with fallback.", e); }
+                // FIX: a stalled font stylesheet used to hang this await FOREVER -
+                // nothing after it ever ran and the loading screen never closed.
+                // Race the font load against a 1.5s timeout; the game always proceeds.
+                await Promise.race([
+                    Promise.all([
+                        document.fonts.load('80px Orbitron'),
+                        document.fonts.load('50px Orbitron')
+                    ]).catch(() => {}),
+                    new Promise(res => setTimeout(res, 1500))
+                ]);
                 buildCharacter();
                 templateChar = charGroup.clone(true);
                 const templateStrip = [];
@@ -731,6 +820,8 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                 isForcefieldActive = true;
                 if (!isForcefieldPermanent) { forcefieldMoveTimer = 0; forcefieldFade = 0; }
                 spawnNPC("ULTIMATE_DECIMATION", spawnPoints[1]); // Dec claims Plot 2
+                plotOwners[0] = { name: playerDisplayName, kind: 'local' };
+                plotOwners[1] = { name: 'Dec', kind: 'npc' };
                 loadSounds();
                 updateLeaderboardStats();
                 camera.position.set(94, 14, -70);
@@ -800,16 +891,16 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                     }
                     if (e.key === 'Tab' && !checkPhone()) { e.preventDefault(); toggleLeaderboard(); }
                     if (e.key === '`' && !checkPhone()) { e.preventDefault(); toggleInventory(); }
+                    if (key === 'q' && !checkPhone()) { showPlotOwners = !showPlotOwners; }
                     if (e.key === '/' && !checkPhone() && document.activeElement.id !== 'chat-input') { e.preventDefault(); toggleChat(true, true); return; }
                     if (e.key >= '0' && e.key <= '9') {
                         let slotIndex = parseInt(e.key);
                         if (slotIndex === 0) slotIndex = 9; else slotIndex -= 1;
-                        if (equippedSlot === slotIndex) { equippedSlot = -1; isHoldingItem = false; if (swordModel) swordModel.visible = false; }
+                        if (equippedSlot === slotIndex) { equippedSlot = -1; applyEquipState(null); }
                         else if (playerInventory[slotIndex]) {
                             equippedSlot = slotIndex;
-                            isHoldingItem = (playerInventory[slotIndex].id === 'sword');
-                            if (swordModel) swordModel.visible = isHoldingItem;
-                            if (isHoldingItem) playEquipSound();
+                            applyEquipState(playerInventory[slotIndex]);
+                            playGearEquipSound(heldGearId);
                         }
                         buildInventoryUI();
                     }
@@ -858,7 +949,7 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                 });
                 window.addEventListener('mousedown', (e) => {
                     if (e.button === 2) { isRightMouseDown = true; checkPointerLockNeeds(); }
-                    if (e.button === 0 && isHoldingItem && !isMenuOpen && !isAvatarEditorOpen && !isRagdoll && isRunning) {
+                    if (e.button === 0 && isHoldingSword && !isMenuOpen && !isAvatarEditorOpen && !isRagdoll && isRunning) {
                         const uiHit = e.target.closest && e.target.closest('#inventory, #top-ui-bar, #roblox-menu-btn, #top-bar-menu, #dropdown-menu, .game-interface, #pause-menu, #avatar-editor-menu, #avatar-naming-modal, #invite-menu, #player-profile-overlay, .confirmation-panel');
                         if (!uiHit) handleSwordClick();
                     }
@@ -900,7 +991,7 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                         if (isInsideJoystick || isInsideDynamicZone || isInsideJump || isInsideLock || isInsideTopMenu) continue;
                         if (cameraTouches.length < 2) {
                             cameraTouches.push({ id: t.identifier, lastX: t.clientX, lastY: t.clientY });
-                            if (cameraTouches.length === 1 && isHoldingItem && !isRagdoll) handleSwordClick();
+                            if (cameraTouches.length === 1 && isHoldingSword && !isRagdoll) handleSwordClick();
                         }
                     }
                     if (cameraTouches.length === 2) {
@@ -1048,7 +1139,6 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
             } else ['head', 'leftArm', 'rightArm', 'leftLeg', 'rightLeg'].forEach(part => applySkinColor(part, runtimeProcessedHex));
             return true;
         }
-
         function renderSkinEditor() {
             const container = document.getElementById('avatar-skin-editor');
             if (!container) return;
@@ -1141,7 +1231,6 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                 } else ['head', 'leftArm', 'rightArm', 'leftLeg', 'rightLeg'].forEach(p => applySkinColor(p, activeModifiedHex));
             };
         }
-
         function renderSavedAvatarsGridPanel() {
             const grid = document.getElementById('saved-avatars-grid');
             if (!grid) return;
@@ -1271,7 +1360,6 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
             window.addEventListener('touchmove', (e) => { if (!isDragging) return; const dx = e.touches[0].clientX - prevX; previewChar.rotation.y += dx * 0.01; prevX = e.touches[0].clientX; }, { passive: true });
             window.addEventListener('touchend', () => { isDragging = false; });
         }
-
         // --- Shared 3D avatar snapshot (People tab + avatar editor thumbnails) ---
         function initSnapshotRenderer() {
             if (snapshotRenderer || !templateChar) return;
@@ -1323,7 +1411,6 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
             snapshotRenderer.render(snapshotScene, snapshotCamera);
             return snapshotRenderer.domElement.toDataURL('image/png');
         }
-
         function buildPeopleGrid() {
             const grid = document.getElementById('people-grid');
             if (!grid) return;
@@ -1640,7 +1727,6 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                 });
             });
         }
-
         // ===================== CYCLE SETTINGS =====================
         const GRAPHICS_MODE_CYCLE_OPTIONS = [
             { value: 'auto', label: 'Auto' },
@@ -1755,7 +1841,6 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
             svg.offsetHeight;
             svg.style.animation = isOpening ? 'logoGrow 0.25s ease forwards' : 'logoShrink 0.25s ease forwards';
         }
-
         // ===================== MENU LOGIC =====================
         function setupMenuLogic() {
             refreshKeycapVisibility();
@@ -2005,6 +2090,9 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                                 return;
                             }
                             currentSpawnIndex = plotNum - 1;
+                            // Update plot ownership (local player)
+                            for (let pi = 0; pi < 9; pi++) { if (plotOwners[pi] && plotOwners[pi].kind === 'local') plotOwners[pi] = null; }
+                            plotOwners[currentSpawnIndex] = { name: playerDisplayName, kind: 'local' };
                             const sp = spawnPoints[currentSpawnIndex];
                             playerPos.set(sp.x, sp.y, sp.z);
                             playerVel.set(0, 0, 0);
@@ -2188,8 +2276,7 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                         playerBackpack[targetIndex] = temp;
                         if (equippedSlot === invDragData.index) {
                             equippedSlot = -1;
-                            isHoldingItem = false;
-                            if (swordModel) swordModel.visible = false;
+                            applyEquipState(null);
                         }
                     } else if (invDragData.type === 'backpack' && targetType === 'hotbar') {
                         let temp = playerBackpack[invDragData.index];
@@ -2208,8 +2295,7 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                             playerInventory[invDragData.index] = null;
                             if (equippedSlot === invDragData.index) {
                                 equippedSlot = -1;
-                                isHoldingItem = false;
-                                if (swordModel) swordModel.visible = false;
+                                applyEquipState(null);
                             }
                         }
                     }
@@ -2221,25 +2307,23 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                             playerInventory[invDragData.index] = null;
                             if (equippedSlot === invDragData.index) {
                                 equippedSlot = -1;
-                                isHoldingItem = false;
-                                if (swordModel) swordModel.visible = false;
+                                applyEquipState(null);
                             }
                         }
                     }
                 }
                 if (invDragData.clone) invDragData.clone.remove();
             } else {
+                // Tap/click (no drag) = equip or unequip
                 if (invDragData.type === 'hotbar') {
                     const i = invDragData.index;
                     if (equippedSlot === i) {
                         equippedSlot = -1;
-                        isHoldingItem = false;
-                        if (swordModel) swordModel.visible = false;
+                        applyEquipState(null);
                     } else if (playerInventory[i]) {
                         equippedSlot = i;
-                        isHoldingItem = (playerInventory[i].id === 'sword');
-                        if (swordModel) swordModel.visible = isHoldingItem;
-                        if (isHoldingItem) playEquipSound();
+                        applyEquipState(playerInventory[i]);
+                        playGearEquipSound(heldGearId);
                     }
                 } else if (invDragData.type === 'backpack') {
                     const i = invDragData.index;
@@ -2248,17 +2332,15 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                         playerInventory[emptySlot] = playerBackpack[i];
                         playerBackpack.splice(i, 1);
                         equippedSlot = emptySlot;
-                        isHoldingItem = (playerInventory[emptySlot].id === 'sword');
-                        if (swordModel) swordModel.visible = isHoldingItem;
-                        if (isHoldingItem) playEquipSound();
+                        applyEquipState(playerInventory[emptySlot]);
+                        playGearEquipSound(heldGearId);
                     } else {
                         if (equippedSlot !== -1) {
                             let temp = playerInventory[equippedSlot];
                             playerInventory[equippedSlot] = playerBackpack[i];
                             playerBackpack[i] = temp;
-                            isHoldingItem = (playerInventory[equippedSlot].id === 'sword');
-                            if (swordModel) swordModel.visible = isHoldingItem;
-                            if (isHoldingItem) playEquipSound();
+                            applyEquipState(playerInventory[equippedSlot]);
+                            playGearEquipSound(heldGearId);
                         }
                     }
                 }
@@ -2372,8 +2454,7 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                 ragdollPlayer();
                 playerInventory = new Array(10).fill(null);
                 equippedSlot = -1;
-                isHoldingItem = false;
-                if (swordModel) swordModel.visible = false;
+                applyEquipState(null);
                 buildInventoryUI();
                 playerDeaths += 1;
                 if (attacker === 'npc') {
@@ -2404,6 +2485,7 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
             playerPos.set(sp.x, sp.y, sp.z);
             playerVel.set(0, 0, 0);
             playerHorizontalVel.set(0, 0, 0);
+            airHorizontalVel.set(0, 0, 0);
             playerHealth = 100;
             camYaw = 0;
             camPitch = 0;
@@ -2429,8 +2511,7 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
             if (!isForcefieldPermanent) { forcefieldMoveTimer = 0; forcefieldFade = 0; }
             loadDefaultInventory();
             equippedSlot = -1;
-            isHoldingItem = false;
-            if (swordModel) swordModel.visible = false;
+            applyEquipState(null);
             buildInventoryUI();
         }
         function respawnNPC() {
@@ -3156,7 +3237,7 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
             aoState.materials.forEach(m => { m.vertexColors = useColor; m.needsUpdate = true; });
         }
 
-        // ===================== CHARACTER (right-hand sword) =====================
+        // ===================== CHARACTER (right-hand sword + coils) =====================
         function buildCharacter() {
             charGroup = new THREE.Group();
             const headRadius = 0.6, headHeight = 1.2, headBevel = 0.3;
@@ -3233,6 +3314,17 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
             swordModel.visible = false;
             swordModel.userData.templateSkip = true;
             pR_Arm.add(swordModel);
+            // Coil gear models (red = speed, blue = gravity), wrapped around the right forearm
+            speedCoilModel = createCoilModel(0xff2a2a);
+            speedCoilModel.position.y = 0.35;
+            speedCoilModel.visible = false;
+            speedCoilModel.userData.templateSkip = true;
+            pR_Arm.add(speedCoilModel);
+            gravityCoilModel = createCoilModel(0x2a66ff);
+            gravityCoilModel.position.y = 0.35;
+            gravityCoilModel.visible = false;
+            gravityCoilModel.userData.templateSkip = true;
+            pR_Arm.add(gravityCoilModel);
             // Circular forcefield sprite (spawn protection)
             const ffCanvas = document.createElement('canvas'); ffCanvas.width = 128; ffCanvas.height = 128;
             const ffCtx = ffCanvas.getContext('2d');
@@ -3343,7 +3435,7 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
             };
         }
 
-        // ===================== TRUSS (climbable, AO-registered) =====================
+        // ===================== TRUSS (climbable, AO-registered - dormant building hook) =====================
         function createTruss(color) {
             const trussGroup = new THREE.Group();
             const mat = new THREE.MeshPhongMaterial({ color });
@@ -3371,7 +3463,6 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                 ladderObjs.push(mesh);
                 aoState.occluders.push(mesh);
             });
-            // Exactly ONE 45-degree diagonal brace per side face (4 total)
             const diagLen = 2 * p * Math.SQRT2;
             const diagGeo = new THREE.BoxGeometry(s, diagLen, s);
             const addDiag = (x, y, z, rx, rz) => {
@@ -3402,7 +3493,7 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
             return trussGroup;
         }
 
-        // ===================== WORLD =====================
+        // ===================== WORLD (game map; showcase content removed) =====================
         function buildPlayground() {
             // Brick base: 116x116 grid of 4-stud instanced bricks (464x464), plot holes cut out
             const brickTexture = new THREE.TextureLoader().load("https://devforum-uploads.s3.dualstack.us-east-2.amazonaws.com/uploads/original/4X/f/0/4/f04a1aabddc808b5cef98214d1a7f4724a7e5c2a.png");
@@ -3438,7 +3529,7 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
             brickMesh.userData.size = new THREE.Vector3(4, 4, 4);
             scene.add(brickMesh);
             collisionObjs.push(brickMesh);
-            aoState.baseplate = brickMesh; // analytic AO ground-plane flag (spans +-232, top y=2)
+            aoState.baseplate = brickMesh;
             // 9 building plots (112x112) with corner spawn platforms
             const plotSize = 112;
             const plotTexture = new THREE.TextureLoader().load("https://devforum-uploads.s3.dualstack.us-east-2.amazonaws.com/uploads/original/4X/b/8/6/b869e84d1e494b69aa91a4c0ae32dfcf7d43e811.png");
@@ -3480,6 +3571,7 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                 cornerPlat.castShadow = true;
                 scene.add(cornerPlat);
                 spawnPoints.push(new THREE.Vector3(spX, 7.6, spZ));
+                plotLabelAnchors.push(new THREE.Vector3(center.x, 10, center.z));
             });
             // Grass border ring (88 studs wide around the brick base)
             const grassTex = new THREE.TextureLoader().load("https://devforum-uploads.s3.dualstack.us-east-2.amazonaws.com/uploads/optimized/4X/5/6/4/564d55107b215d781458200a8b52afce6e8f3c1c_2_750x750.png");
@@ -3599,54 +3691,6 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
             ocean.position.y = -2.0;
             ocean.receiveShadow = true;
             scene.add(ocean);
-            // === NEW CONTENT: engine showcase on the north grass (z = 268) ===
-            const pinkTexTile = createPinkStudTexture();
-            const addPinkBox = (sx, sy, sz, x, y, z, color) => {
-                const geo = new THREE.BoxGeometry(sx, sy, sz,
-                    Math.max(1, Math.round(sx)), Math.max(1, Math.round(sy)), Math.max(1, Math.round(sz)));
-                applyStudUVsToBox(geo, sx, sy, sz);
-                const mat = new THREE.MeshStandardMaterial({ map: pinkTexTile, roughness: 0.6, color: color });
-                attachAOShader(mat);
-                const mesh = new THREE.Mesh(geo, mat);
-                mesh.position.set(x, y, z);
-                mesh.castShadow = true;
-                mesh.receiveShadow = true;
-                scene.add(mesh);
-                collisionObjs.push(mesh);
-                aoState.receivers.push(mesh);
-                aoState.occluders.push(mesh);
-                aoState.materials.push(mat);
-                return mesh;
-            };
-            addPinkBox(10, 10, 10, -30, 2.0 + 5, 268, 0xffffff);
-            addPinkBox(8, 8, 8, -30, 2.0 + 10 + 4, 268, 0xffffff);
-            for (let i = 0; i < 9; i++) {
-                const stackTruss = createTruss(0xCCCCCC);
-                stackTruss.position.set(-30, 21 + i * 2, 268);
-                scene.add(stackTruss);
-            }
-            addPinkBox(20, 1, 20, -16, 20.5, 268, 0xffffff);
-            addPinkBox(20, 1, 2, 7, 20.5, 268, 0xffffff);
-            addPinkBox(20, 1, 2, 7, 21.5, 268, 0x808080);
-            addPinkBox(20, 12, 2, 7, 28, 268, 0xffffff);
-            addPinkBox(20, 1, 20, 30, 20.5, 268, 0xffffff);
-            // Static killbar hazard (glowing red): side contact kills, top is standable
-            const kbGeo = new THREE.BoxGeometry(2, 2, 4, 2, 2, 4);
-            const kbMat = new THREE.MeshStandardMaterial({ color: 0xff0000, emissive: 0xff0000, emissiveIntensity: 1.0 });
-            attachAOShader(kbMat);
-            const killBrick = new THREE.Mesh(kbGeo, kbMat);
-            killBrick.position.set(50, 2.0 + 1, 268);
-            killBrick.castShadow = true;
-            killBrick.receiveShadow = true;
-            scene.add(killBrick);
-            collisionObjs.push(killBrick);
-            aoState.receivers.push(killBrick);
-            aoState.occluders.push(killBrick);
-            aoState.materials.push(kbMat);
-            spinningObstacles.push({
-                mesh: killBrick, speed: 0, type: 'static_killbar',
-                y: 3.0, x: 50, z: 268, rotY: 0, halfWidth: 1, halfLen: 2, halfHeight: 1
-            });
         }
         // ===================== WALL COLLISION =====================
         // Swept wall test: rays from the CURRENT position with a reach covering the
@@ -3703,8 +3747,7 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                     }
                     const hitObj = hits[0].object;
                     let topY = 2.0;
-                    // Terrain fast-path (instanced bricks/plots/borders carry topY in userData;
-                    // Box3.setFromObject cannot size an InstancedMesh)
+                    // Terrain fast-path (instanced bricks/plots/borders carry topY in userData)
                     if (hitObj.userData.topY !== undefined) {
                         topY = hitObj.userData.topY;
                     } else {
@@ -4036,7 +4079,7 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
         function playEmote(name) {
             const def = EMOTES[name];
             if (!def) return false;
-            // Emotes blocked while holding the sword (poses would fight the sword arm)
+            // Emotes blocked while holding any gear (poses would fight the held item)
             if (!isRunning || isRagdoll || isFlyMode || isCurrentlyClimbing || !isGrounded || isHoldingItem) return false;
             emoteRecovery = null;
             emoteTotalTime = 0;
@@ -4089,7 +4132,7 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
         }
         function updateEmote(dt) {
             if (!activeEmote) return false;
-            // Equipping the sword mid-emote triggers smooth recovery
+            // Equipping gear mid-emote triggers smooth recovery
             if (moveKeys.w || moveKeys.a || moveKeys.s || moveKeys.d || moveKeys.space ||
                 joystickVector.length() > 0 || isWalking || isCurrentlyClimbing || isFlyMode || isHoldingItem) {
                 startEmoteRecovery();
@@ -4233,9 +4276,7 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                 const smoothing = 1 - Math.exp(-dt * 14);
                 if (rp.tpos.distanceTo(rp.pos) > 12) rp.pos.copy(rp.tpos);
                 else rp.pos.lerp(rp.tpos, smoothing);
-                let dyaw = rp.try_ - rp.ry;
-                while (dyaw > Math.PI) dyaw -= Math.PI * 2;
-                while (dyaw < -Math.PI) dyaw += Math.PI * 2;
+                let dyaw = wrapAngle(rp.try_ - rp.ry);
                 rp.ry += dyaw * smoothing;
                 if (st.em && EMOTES[st.em]) {
                     const pose = computeRemoteEmotePose(EMOTES[st.em], st.et);
@@ -4254,20 +4295,6 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                 rp.group.position.copy(rp.pos);
                 rp.group.rotation.y = rp.ry;
                 const sw = Math.sin(st.at);
-                // PvP sword visuals: visible while holding, right-arm swing poses
-                if (rp.sword) rp.sword.visible = !!st.h;
-                if (rp.swingTime > 0) {
-                    rp.swingTime -= dt;
-                    let progress = 1.0 - (rp.swingTime / rp.swingDur);
-                    if (rp.swingType === 'single') {
-                        if (progress < 0.5) rp.rArm.rotation.x = THREE.MathUtils.lerp(-Math.PI / 2, 0, progress / 0.5);
-                        else rp.rArm.rotation.x = THREE.MathUtils.lerp(0, -Math.PI / 2, (progress - 0.5) / 0.5);
-                    } else {
-                        rp.rArm.rotation.x = -Math.PI / 2;
-                    }
-                } else if (st.h) {
-                    rp.rArm.rotation.x = -Math.PI / 2;
-                }
                 if (st.c) {
                     rp.torso.position.set(0, 3, -0.5);
                     rp.head.position.set(0, 4.5, -0.5);
@@ -4319,6 +4346,25 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                         rp.rArm.position.y = 3.5 + armBob;
                         rp.lArm.rotation.x = 0; rp.rArm.rotation.x = 0;
                         rp.lLeg.rotation.x = 0; rp.rLeg.rotation.x = 0;
+                    }
+                }
+                // Held gear: model visibility + right arm sticks out (AFTER pose branches,
+                // so the walk/climb poses can never overwrite the hold pose)
+                if (rp.sword) rp.sword.visible = (st.hi === 'sword');
+                if (rp.speedCoil) rp.speedCoil.visible = (st.hi === 'speedcoil');
+                if (rp.gravCoil) rp.gravCoil.visible = (st.hi === 'gravitycoil');
+                if (st.h) {
+                    if (rp.swingTime > 0) {
+                        rp.swingTime -= dt;
+                        let progress = 1.0 - (rp.swingTime / rp.swingDur);
+                        if (rp.swingType === 'single') {
+                            if (progress < 0.5) rp.rArm.rotation.x = THREE.MathUtils.lerp(-Math.PI / 2, 0, progress / 0.5);
+                            else rp.rArm.rotation.x = THREE.MathUtils.lerp(0, -Math.PI / 2, (progress - 0.5) / 0.5);
+                        } else {
+                            rp.rArm.rotation.x = -Math.PI / 2;
+                        }
+                    } else {
+                        rp.rArm.rotation.x = -Math.PI / 2;
                     }
                 }
             });
@@ -4403,10 +4449,44 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                 }
             }
         }
+
+        // ===================== PLOT OWNER LABELS (Q key, Fredoka) =====================
+        function ensurePlotLabels() {
+            if (plotLabelEls.length) return;
+            for (let i = 0; i < 9; i++) {
+                const el = document.createElement('div');
+                el.className = 'plot-label';
+                document.body.appendChild(el);
+                plotLabelEls.push(el);
+            }
+        }
+        const _plotLabelV = new THREE.Vector3();
+        function updatePlotLabels() {
+            if (!showPlotOwners) {
+                if (plotLabelEls.length) plotLabelEls.forEach(el => el.style.display = 'none');
+                return;
+            }
+            ensurePlotLabels();
+            for (let i = 0; i < 9; i++) {
+                const el = plotLabelEls[i];
+                const anchor = plotLabelAnchors[i];
+                if (!anchor) { el.style.display = 'none'; continue; }
+                _plotLabelV.copy(anchor);
+                _plotLabelV.project(camera);
+                const visible = _plotLabelV.z < 1 && Math.abs(_plotLabelV.x) < 1.15 && Math.abs(_plotLabelV.y) < 1.15;
+                if (!visible) { el.style.display = 'none'; continue; }
+                el.style.display = 'block';
+                el.style.left = ((_plotLabelV.x * 0.5 + 0.5) * window.innerWidth) + 'px';
+                el.style.top = ((-_plotLabelV.y * 0.5 + 0.5) * window.innerHeight) + 'px';
+                const owner = plotOwners[i];
+                el.textContent = owner ? ('Plot ' + (i + 1) + ': ' + owner.name) : ('Plot ' + (i + 1));
+            }
+        }
         // ===================== MULTIPLAYER (engine, PeerJS star topology) =====================
         // Host owns a Peer whose id encodes a 6-digit game code; clients connect from
         // anywhere. All traffic is relayed by the host. Dec is HOST-SIMULATED and
-        // broadcast at 10Hz so every client sees identical bot movement.
+        // broadcast at 10Hz so every client sees identical bot movement. Joiners are
+        // assigned the LOWEST UNCLAIMED PLOT by the host.
         function addSystemChat(msg) {
             const messages = document.getElementById('chat-messages');
             const div = document.createElement('div');
@@ -4433,6 +4513,11 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                 if (c !== exceptConn && c.open) { try { c.send(obj); } catch (e) {} }
             });
         }
+        function freePlotOf(id) {
+            for (let i = 0; i < 9; i++) {
+                if (plotOwners[i] && plotOwners[i].kind === 'remote' && plotOwners[i].id === id) plotOwners[i] = null;
+            }
+        }
         function createRemotePlayer(id, info) {
             if (!id || remotePlayers.has(id) || id === myNetId() || !templateChar) return;
             const g = templateChar.clone(true);
@@ -4451,12 +4536,20 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                 }
             });
             scene.add(g);
-            // PvP: remote players carry a sword on their right arm (visible while holding)
+            // PvP: remote players carry gear on their right arm (visible while holding)
             const rSword = createSwordModel();
             rSword.position.y = -1.5;
             rSword.rotation.set(-Math.PI / 2, 0, Math.PI);
             rSword.visible = false;
             rArm.add(rSword);
+            const rSpeedCoil = createCoilModel(0xff2a2a);
+            rSpeedCoil.position.y = 0.35;
+            rSpeedCoil.visible = false;
+            rArm.add(rSpeedCoil);
+            const rGravCoil = createCoilModel(0x2a66ff);
+            rGravCoil.position.y = 0.35;
+            rGravCoil.visible = false;
+            rArm.add(rGravCoil);
             const tag = document.createElement('div');
             tag.className = 'player-nametag';
             tag.textContent = info.name;
@@ -4473,18 +4566,19 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                 chatColor: info.color || '#FD2943', skinMap: info.skinMap,
                 group: g, head: head, torso: torso,
                 lArm: lArm, rArm: rArm, lLeg: lLeg, rLeg: rLeg,
-                sword: rSword, swingType: '', swingTime: 0, swingDur: 0.3,
+                sword: rSword, speedCoil: rSpeedCoil, gravCoil: rGravCoil,
+                swingType: '', swingTime: 0, swingDur: 0.3,
                 mats: {
                     head: head.material, torso: torso.material,
                     leftArm: lArm.children[0].material, rightArm: rArm.children[0].material,
                     leftLeg: lLeg.children[0].material, rightLeg: rLeg.children[0].material
                 },
-                tag: tag, bubbles: [], hpBar: hpBar, hpFill: hpFill,
+                tag: tag, bubbles: [], hpBar: hpBar, hpFill: hpFill, plot: 0,
                 pos: new THREE.Vector3(0, 2, 10), tpos: new THREE.Vector3(0, 2, 10),
                 ry: 0, try_: 0,
                 netVel: new THREE.Vector3(), lastNetPos: new THREE.Vector3(0, 2, 10),
                 dead: false, debris: [],
-                st: { p: [0, 2, 10], ry: 0, w: false, c: false, g: true, d: false, em: '', et: 0, at: 0, hp: 100, h: false, k: 0, dd: 0 }
+                st: { p: [0, 2, 10], ry: 0, w: false, c: false, g: true, d: false, em: '', et: 0, at: 0, hp: 100, h: false, hi: '', k: 0, dd: 0 }
             };
             remotePlayers.set(id, rp);
             applyRemoteSkin(rp, info.skinMap);
@@ -4505,6 +4599,7 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
         function removeRemotePlayer(id) {
             const rp = remotePlayers.get(id);
             if (!rp) return;
+            freePlotOf(id);
             scene.remove(rp.group);
             rp.tag.remove();
             rp.hpBar.remove();
@@ -4540,12 +4635,18 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
             const id = conn.peer;
             if (d.t === 'hello') {
                 createRemotePlayer(id, d);
-                const list = [{ id: myNetId(), name: playerDisplayName, username: playerUsername, color: chatTagColor, skinMap: skinPartsHexMemory }];
+                // Assign the lowest unclaimed plot to the joining player
+                let plotIdx = plotOwners.findIndex(o => o === null);
+                if (plotIdx === -1) plotIdx = 8; // full server: share the last plot
+                plotOwners[plotIdx] = { name: d.name || 'Player', kind: 'remote', id: id };
+                const rpNew = remotePlayers.get(id);
+                if (rpNew) rpNew.plot = plotIdx + 1;
+                const list = [{ id: myNetId(), name: playerDisplayName, username: playerUsername, color: chatTagColor, skinMap: skinPartsHexMemory, plot: currentSpawnIndex + 1 }];
                 remotePlayers.forEach(rp => {
-                    if (rp.id !== id) list.push({ id: rp.id, name: rp.name, username: rp.username, color: rp.chatColor, skinMap: rp.skinMap });
+                    if (rp.id !== id) list.push({ id: rp.id, name: rp.name, username: rp.username, color: rp.chatColor, skinMap: rp.skinMap, plot: rp.plot || 0 });
                 });
-                try { conn.send({ t: 'players', list: list }); } catch (e) {}
-                broadcast({ t: 'join', id: id, name: d.name, username: d.username, color: d.color, skinMap: d.skinMap }, conn);
+                try { conn.send({ t: 'players', list: list, plot: plotIdx + 1 }); } catch (e) {}
+                broadcast({ t: 'join', id: id, name: d.name, username: d.username, color: d.color, skinMap: d.skinMap, plot: plotIdx + 1 }, conn);
                 addSystemChat('Your friend ' + d.name + ' has joined the game.');
             } else if (d.t === 'state') {
                 const rp = remotePlayers.get(id);
@@ -4586,10 +4687,23 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
         function handleClientData(d) {
             if (!d || typeof d !== 'object') return;
             if (d.t === 'players' && Array.isArray(d.list)) {
-                d.list.forEach(p => createRemotePlayer(p.id, p));
+                d.list.forEach(p => {
+                    createRemotePlayer(p.id, p);
+                    const rp = remotePlayers.get(p.id);
+                    if (rp && p.plot) { rp.plot = p.plot; plotOwners[p.plot - 1] = { name: rp.name, kind: 'remote', id: p.id }; }
+                });
+                if (d.plot) {
+                    // My assigned plot: spawn there and claim it locally
+                    currentSpawnIndex = d.plot - 1;
+                    for (let pi = 0; pi < 9; pi++) { if (plotOwners[pi] && plotOwners[pi].kind === 'local') plotOwners[pi] = null; }
+                    plotOwners[currentSpawnIndex] = { name: playerDisplayName, kind: 'local' };
+                    if (spawnPoints[currentSpawnIndex]) playerPos.copy(spawnPoints[currentSpawnIndex]);
+                }
             } else if (d.t === 'join') {
                 if (d.id === myNetId()) return;
                 createRemotePlayer(d.id, d);
+                const rp = remotePlayers.get(d.id);
+                if (rp && d.plot) { rp.plot = d.plot; plotOwners[d.plot - 1] = { name: rp.name, kind: 'remote', id: d.id }; }
                 addSystemChat('Your friend ' + d.name + ' has joined the game.');
             } else if (d.t === 'state') {
                 if (d.id === myNetId()) return;
@@ -4671,7 +4785,7 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                     netJoined = true;
                     if (netJoinTimeout) { clearTimeout(netJoinTimeout); netJoinTimeout = null; }
                     hideLoadingScreen();
-                    // Joining player spawns at their claimed plot's platform
+                    // Joining player spawns at their plot platform (host assigns the plot)
                     activeDebris.forEach(item => scene.remove(item.mesh));
                     activeDebris = [];
                     charGroup.visible = true;
@@ -4707,7 +4821,7 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
             netPeer = null;
             isHost = false;
             netJoined = false;
-            decNet = null; // clients stop rendering synced Dec; local sim resumes on next host
+            decNet = null;
             clearRemotePlayers();
         }
         function fallbackCopyText(text, btn) {
@@ -4796,9 +4910,7 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                 else {
                     npc.horizontalVel.copy(dirToPlayer).multiplyScalar(16);
                     npcApplyMove();
-                    let angleDiff = targetYaw - npc.yaw;
-                    while (angleDiff < -Math.PI) angleDiff += Math.PI * 2;
-                    while (angleDiff > Math.PI) angleDiff -= Math.PI * 2;
+                    let angleDiff = wrapAngle(targetYaw - npc.yaw);
                     npc.yaw += angleDiff * 0.15;
                 }
             } else if (npc.state === 'DECIDE') {
@@ -4825,9 +4937,7 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                         else { npc.executeType = 'PURSUE'; npc.executeTime = 2.5; npc.strafeTarget = null; npc.aimOffset.set(0,0,0); }
                     }
                 }
-                let angleDiff = targetYaw - npc.yaw;
-                while (angleDiff < -Math.PI) angleDiff += Math.PI * 2;
-                while (angleDiff > Math.PI) angleDiff -= Math.PI * 2;
+                let angleDiff = wrapAngle(targetYaw - npc.yaw);
                 npc.yaw += angleDiff * 0.15;
             } else if (npc.state === 'EXECUTE') {
                 if (npc.executeType === 'RUSH' && !playerStanding) {
@@ -4929,9 +5039,7 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
             const smoothing = 1 - Math.exp(-dt * 14);
             if (npc.pos.distanceTo(decNet.tpos) > 15) npc.pos.copy(decNet.tpos);
             else npc.pos.lerp(decNet.tpos, smoothing);
-            let dyaw = decNet.try_ - npc.yaw;
-            while (dyaw > Math.PI) dyaw -= Math.PI * 2;
-            while (dyaw < -Math.PI) dyaw += Math.PI * 2;
+            let dyaw = wrapAngle(decNet.try_ - npc.yaw);
             npc.yaw += dyaw * smoothing;
             npc.group.position.set(npc.pos.x, npc.pos.y - 5.5, npc.pos.z);
             npc.group.rotation.y = npc.yaw;
@@ -4979,11 +5087,11 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
         // (flick rotation, or either body moving through the other) - (b) has a
         // 0.25s damage cooldown. Leaving the hitbox re-arms.
         const SWORD_HIT_RADIUS = 2.0;
-        const SWORD_MOVE_THRESHOLD = 0.3; // studs of tip travel that counts as "moving"
-        const SWORD_MOVE_COOLDOWN = 0.25; // seconds between movement re-hits
-        let playerSwingId = 0;            // increments on every new swing the PLAYER starts
-        const playerSwordStates = new Map(); // targetKey -> hit state (player's sword)
-        const decSwordStates = new Map();    // targetKey -> hit state (Dec's sword)
+        const SWORD_MOVE_THRESHOLD = 0.3;
+        const SWORD_MOVE_COOLDOWN = 0.25;
+        let playerSwingId = 0;
+        const playerSwordStates = new Map();
+        const decSwordStates = new Map();
         function makeSwordHitState() {
             return { inBox: false, armed: true, lastTip: new THREE.Vector3(), lastHitAt: -1e9, lastSwingId: 0 };
         }
@@ -4998,9 +5106,8 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
             return 5;
         }
         function swordDamageCheck(sword, swingId, st, targetTorso, targetFF, now, onDamage) {
-            if (targetFF) { st.inBox = false; st.armed = true; return; } // forcefields reset tracking
+            if (targetFF) { st.inBox = false; st.armed = true; return; }
             if (!sword || !sword.visible) return;
-            // Closest point on the sword line (handle -> blade tip) to the target torso
             sword.localToWorld(_hilt.set(0, -0.5, 0));
             sword.localToWorld(_tip.set(0, 3.5, 0));
             targetTorso.getWorldPosition(_targetPos);
@@ -5014,10 +5121,10 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
             if (dist < SWORD_HIT_RADIUS) {
                 const wasIn = st.inBox;
                 st.inBox = true;
-                if (!wasIn) st.armed = true;                                     // entering re-arms
-                if (swingId !== st.lastSwingId) st.armed = true;                 // new swing re-arms
+                if (!wasIn) st.armed = true;
+                if (swingId !== st.lastSwingId) st.armed = true;
                 const moved = wasIn && st.lastTip.distanceTo(_tip) > SWORD_MOVE_THRESHOLD;
-                if (moved && now - st.lastHitAt >= SWORD_MOVE_COOLDOWN) st.armed = true; // movement re-arm (0.25s cd)
+                if (moved && now - st.lastHitAt >= SWORD_MOVE_COOLDOWN) st.armed = true;
                 if (st.armed) {
                     st.armed = false;
                     st.lastHitAt = now;
@@ -5029,7 +5136,7 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                 }
             } else {
                 st.inBox = false;
-                st.armed = true; // leaving the hitbox re-arms
+                st.armed = true;
             }
         }
         function applyLocalDamage(dmg, attacker, attackerId) {
@@ -5040,14 +5147,11 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
             setTimeout(() => { df.style.opacity = '0'; }, 100);
             if (playerHealth <= 0) triggerResetOrDeath('player', attacker, attackerId);
         }
-        // Runs every frame after movement: all sword pairs involving the local player.
-        // Authority: your sword -> you detect & notify the victim; your body -> the
-        // attacker detects & notifies you. Dec is simulated only by host/singleplayer.
         function updateSwordCombat(now) {
             if (isRagdoll) return;
-            const decLocal = !(netJoined && !isHost); // singleplayer or host simulates Dec
+            const decLocal = !(netJoined && !isHost);
             // MY sword vs Dec
-            if (npc && !npc.isDead && isHoldingItem && swordModel && swordModel.visible) {
+            if (npc && !npc.isDead && isHoldingSword && swordModel && swordModel.visible) {
                 const st = stateFor(playerSwordStates, 'dec');
                 swordDamageCheck(swordModel, playerSwingId, st, npc.torso, npc.forcefieldActive, now, () => {
                     const dmg = swingDamage(swordSwingType);
@@ -5055,12 +5159,12 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                         npc.health = Math.max(0, npc.health - dmg);
                         if (npc.health <= 0) triggerResetOrDeath('npc', 'player');
                     } else if (netJoined) {
-                        broadcast({ t: 'npdmg', dmg: dmg }); // ask the host to apply it
+                        broadcast({ t: 'npdmg', dmg: dmg });
                     }
                 });
             }
             // MY sword vs remote players (victim applies the damage themselves)
-            if (netJoined && isHoldingItem && swordModel && swordModel.visible) {
+            if (netJoined && isHoldingSword && swordModel && swordModel.visible) {
                 remotePlayers.forEach(rp => {
                     if (rp.dead) return;
                     const st = stateFor(playerSwordStates, 'rp:' + rp.id);
@@ -5099,14 +5203,14 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                 dropModel.rotation.set(-Math.PI / 2, 0, Math.PI); scene.add(dropModel);
                 droppedItems.push({ mesh: dropModel, item: item, vel: new THREE.Vector3((Math.random()-0.5)*2, 5, (Math.random()-0.5)*2), rotVel: new THREE.Vector3((Math.random()-0.5)*5, (Math.random()-0.5)*5, (Math.random()-0.5)*5) });
             }
-            playerInventory[equippedSlot] = null; equippedSlot = -1; isHoldingItem = false; if (swordModel) swordModel.visible = false; buildInventoryUI();
+            playerInventory[equippedSlot] = null; equippedSlot = -1; applyEquipState(null); buildInventoryUI();
         }
         function handleSwordClick() {
             const now = Date.now();
             const isDouble = (now - lastClickTime < 300);
-            if (isDouble && lungeCooldownTimer <= 0) { swordSwingType = 'double'; swordSwingDuration = 0.5; swordSwingTime = 0.5; lungeCooldownTimer = 0.1; playLungeSound(); }
+            if (isDouble && lungeCooldownTimer <= 0) { swordSwingType = 'double'; swordSwingDuration = 0.5; swordSwingTime = 0.5; lungeCooldownTimer = 0.3; playLungeSound(); }
             else if (!isDouble) { swordSwingType = 'single'; swordSwingDuration = 0.3; swordSwingTime = 0.3; playSlashSound(); }
-            else { lastClickTime = now; return; } // double-click during lunge cooldown: no swing
+            else { lastClickTime = now; return; }
             playerSwingId++; // re-arms the damage system for this new swing
             if (netJoined && netConns.length > 0) {
                 const msg = { t: 'swing', type: swordSwingType };
@@ -5212,14 +5316,12 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                 }
                 const dist = drop.mesh.position.distanceTo(charGroup.position);
                 if (dist < 3) {
-                    // Real empty hotbar slot first; backpack only when hotbar is full
                     let emptySlot = playerInventory.findIndex(s => s === null);
                     if (emptySlot !== -1) {
                         playerInventory[emptySlot] = drop.item;
                         equippedSlot = emptySlot;
-                        isHoldingItem = (drop.item.id === 'sword');
-                        if (swordModel) swordModel.visible = isHoldingItem;
-                        if (isHoldingItem) playEquipSound();
+                        applyEquipState(drop.item);
+                        playGearEquipSound(heldGearId);
                         scene.remove(drop.mesh); droppedItems.splice(i, 1); buildInventoryUI();
                     } else if (playerBackpack.length < 28) {
                         playerBackpack.push(drop.item);
@@ -5341,7 +5443,9 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                         }
                     }
                     let moveDir = d.clone().applyAxisAngle(new THREE.Vector3(0,1,0), camYaw).normalize();
-                    let moveDelta = moveDir.clone().multiplyScalar(16 * dt);
+                    const moveSpeed = isHoldingSpeedCoil ? 32 : 16;       // Speed Coil: 2x speed
+                    const gravityScale = isHoldingGravityCoil ? 0.25 : 1;  // Gravity Coil: 75% less gravity
+                    let moveDelta = moveDir.clone().multiplyScalar(moveSpeed * dt);
                     updateWallhopEmbedState();
                     let climbTopY = 0;
                     isWalking = false;
@@ -5362,7 +5466,6 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                                 }
                                 const bb = new THREE.Box3().setFromObject(hitObj);
                                 const topY = bb.max.y;
-                                // ONLY trusses/ladders are climbable
                                 const isClimbable = ladderObjs.includes(hitObj);
                                 if (isClimbable && playerPos.y - 5.5 < topY - 0.1) {
                                     stillClimbing = true;
@@ -5381,6 +5484,7 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                                 }
                                 isCurrentlyClimbing = false;
                                 isWalking = true;
+                                airHorizontalVel.set(moveDir.x * moveSpeed, 0, moveDir.z * moveSpeed);
                             } else {
                                 playerVel.set(0, 0, 0);
                                 let upDir = 1;
@@ -5395,7 +5499,6 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                                     const cHHits = ceilingRay.intersectObjects(collisionObjs);
                                     if (cHHits.length > 0 && cHHits[0].distance < 0.9) climbDelta = 0;
                                 }
-                                // Climb-down floor stop
                                 if (climbDelta < 0) {
                                     floorRay.set(new THREE.Vector3(playerPos.x, playerPos.y - 5.4, playerPos.z), new THREE.Vector3(0, -1, 0));
                                     const gHits = floorRay.intersectObjects(collisionObjs);
@@ -5421,7 +5524,7 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                                 moveDelta.set(0, 0, 0);
                             }
                         } else {
-                            playerVel.y -= GRAVITY * dt;
+                            playerVel.y -= GRAVITY * gravityScale * dt;
                         }
                     } else {
                         const climbCheckDir = moveDir.length() > 0 ? moveDir : new THREE.Vector3(0,0,1).applyAxisAngle(new THREE.Vector3(0,1,0), camYaw);
@@ -5455,72 +5558,91 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                             }
                         }
                         if (!isCurrentlyClimbing) {
-                            playerVel.y -= GRAVITY * dt;
+                            playerVel.y -= GRAVITY * gravityScale * dt;
                             depenetrateFromPlayers(dt);
-                            if (moveDelta.x !== 0) {
-                                let dirX = new THREE.Vector3(Math.sign(moveDelta.x), 0, 0);
-                                if (!hasWallCollision(playerPos, dirX, collisionObjs, Math.abs(moveDelta.x) + 0.5) && !playerBodyOverlaps(playerPos.x + moveDelta.x, playerPos.z)) {
-                                    playerPos.x += moveDelta.x; isWalking = true;
-                                } else {
-                                    let stepY = tryStepUp(playerPos, dirX, collisionObjs);
-                                    if (stepY !== null) { playerPos.y = stepY; playerPos.x += moveDelta.x; isWalking = true; }
-                                }
-                            }
-                            if (moveDelta.z !== 0) {
-                                let dirZ = new THREE.Vector3(0,0, Math.sign(moveDelta.z));
-                                if (!hasWallCollision(playerPos, dirZ, collisionObjs, Math.abs(moveDelta.z) + 0.5) && !playerBodyOverlaps(playerPos.x, playerPos.z + moveDelta.z)) {
-                                    playerPos.z += moveDelta.z; isWalking = true;
-                                } else {
-                                    let stepY = tryStepUp(playerPos, dirZ, collisionObjs);
-                                    if (stepY !== null) { playerPos.y = stepY; playerPos.z += moveDelta.z; isWalking = true; }
-                                }
-                            }
-                            // Launched horizontal velocity (ladder-jump launch)
-                            if (!isGrounded && (playerVel.x !== 0 || playerVel.z !== 0)) {
-                                if (playerVel.x !== 0) {
-                                    const hvx = playerVel.x * dt;
-                                    const dirX = new THREE.Vector3(Math.sign(hvx), 0, 0);
-                                    if (!hasWallCollision(playerPos, dirX, collisionObjs, Math.abs(hvx) + 0.5) && !playerBodyOverlaps(playerPos.x + hvx, playerPos.z)) {
-                                        playerPos.x += hvx;
+                            const hasMoveInput = moveKeys.w || moveKeys.a || moveKeys.s || moveKeys.d || joystickVector.length() > 0;
+                            if (isGrounded) {
+                                // GROUNDED: direct control
+                                if (moveDelta.x !== 0) {
+                                    let dirX = new THREE.Vector3(Math.sign(moveDelta.x), 0, 0);
+                                    if (!hasWallCollision(playerPos, dirX, collisionObjs, Math.abs(moveDelta.x) + 0.5) && !playerBodyOverlaps(playerPos.x + moveDelta.x, playerPos.z)) {
+                                        playerPos.x += moveDelta.x; isWalking = true;
                                     } else {
-                                        playerVel.x = 0;
+                                        let stepY = tryStepUp(playerPos, dirX, collisionObjs);
+                                        if (stepY !== null) { playerPos.y = stepY; playerPos.x += moveDelta.x; isWalking = true; }
                                     }
                                 }
-                                if (playerVel.z !== 0) {
-                                    const hvz = playerVel.z * dt;
-                                    const dirZ = new THREE.Vector3(0, 0, Math.sign(hvz));
-                                    if (!hasWallCollision(playerPos, dirZ, collisionObjs, Math.abs(hvz) + 0.5) && !playerBodyOverlaps(playerPos.x, playerPos.z + hvz)) {
-                                        playerPos.z += hvz;
+                                if (moveDelta.z !== 0) {
+                                    let dirZ = new THREE.Vector3(0,0, Math.sign(moveDelta.z));
+                                    if (!hasWallCollision(playerPos, dirZ, collisionObjs, Math.abs(moveDelta.z) + 0.5) && !playerBodyOverlaps(playerPos.x, playerPos.z + moveDelta.z)) {
+                                        playerPos.z += moveDelta.z; isWalking = true;
                                     } else {
-                                        playerVel.z = 0;
+                                        let stepY = tryStepUp(playerPos, dirZ, collisionObjs);
+                                        if (stepY !== null) { playerPos.y = stepY; playerPos.z += moveDelta.z; isWalking = true; }
                                     }
                                 }
-                            }
-                            if (isWalking) {
+                                // Sync airborne momentum to the ground state
+                                if (isWalking) airHorizontalVel.copy(moveDir).multiplyScalar(moveSpeed);
+                                else airHorizontalVel.set(0, 0, 0);
+                                if (isWalking) {
+                                    if (isShiftLock || isFirstPerson) { charGroup.rotation.y = camYaw + Math.PI; }
+                                    else {
+                                        let targetRot = Math.atan2(moveDir.x, moveDir.z);
+                                        let angleDiff = wrapAngle(targetRot - charGroup.rotation.y);
+                                        charGroup.rotation.y += angleDiff * Math.min(1, 12 * dt);
+                                    }
+                                } else {
+                                    if (isShiftLock || isFirstPerson) charGroup.rotation.y = camYaw + Math.PI;
+                                }
+                            } else {
+                                // AIRBORNE: momentum - carried velocity must decelerate before
+                                // reversing (turns stay responsive; brake time grows with speed)
+                                const desired = hasMoveInput ? moveDir.clone().multiplyScalar(moveSpeed) : null;
+                                if (desired) {
+                                    const curSp = airHorizontalVel.length();
+                                    if (curSp > 0.0001) {
+                                        const dir = airHorizontalVel.clone().divideScalar(curSp);
+                                        const alongTarget = desired.dot(dir);
+                                        const perpTarget = desired.clone().addScaledVector(dir, -alongTarget);
+                                        let along = THREE.MathUtils.clamp(alongTarget - curSp, -AIR_BRAKE_ACCEL * dt, AIR_BRAKE_ACCEL * dt) + curSp;
+                                        const perp = perpTarget.clone();
+                                        if (perp.length() > AIR_TURN_ACCEL * dt) perp.setLength(AIR_TURN_ACCEL * dt);
+                                        airHorizontalVel.copy(dir.multiplyScalar(along)).add(perp);
+                                    } else {
+                                        airHorizontalVel.copy(desired);
+                                        if (airHorizontalVel.length() > AIR_TURN_ACCEL * dt) airHorizontalVel.setLength(AIR_TURN_ACCEL * dt);
+                                    }
+                                }
+                                const hdtX = airHorizontalVel.x * dt;
+                                if (hdtX !== 0) {
+                                    const dirX = new THREE.Vector3(Math.sign(hdtX), 0, 0);
+                                    if (!hasWallCollision(playerPos, dirX, collisionObjs, Math.abs(hdtX) + 0.5) && !playerBodyOverlaps(playerPos.x + hdtX, playerPos.z)) playerPos.x += hdtX;
+                                    else airHorizontalVel.x = 0;
+                                }
+                                const hdtZ = airHorizontalVel.z * dt;
+                                if (hdtZ !== 0) {
+                                    const dirZ = new THREE.Vector3(0, 0, Math.sign(hdtZ));
+                                    if (!hasWallCollision(playerPos, dirZ, collisionObjs, Math.abs(hdtZ) + 0.5) && !playerBodyOverlaps(playerPos.x, playerPos.z + hdtZ)) playerPos.z += hdtZ;
+                                    else airHorizontalVel.z = 0;
+                                }
                                 if (isShiftLock || isFirstPerson) {
                                     charGroup.rotation.y = camYaw + Math.PI;
                                 } else {
-                                    let targetRot = Math.atan2(moveDir.x, moveDir.z);
-                                    let angleDiff = targetRot - charGroup.rotation.y;
-                                    while (angleDiff < -Math.PI) angleDiff += Math.PI * 2;
-                                    while (angleDiff > Math.PI) angleDiff += Math.PI * 2;
-                                    charGroup.rotation.y += angleDiff * Math.min(1, 12 * dt);
+                                    const faceDir = hasMoveInput ? moveDir : (airHorizontalVel.lengthSq() > 4 ? airHorizontalVel : null);
+                                    if (faceDir) {
+                                        let targetRot = Math.atan2(faceDir.x, faceDir.z);
+                                        let angleDiff = wrapAngle(targetRot - charGroup.rotation.y);
+                                        charGroup.rotation.y += angleDiff * Math.min(1, 10 * dt);
+                                    }
                                 }
-                            } else {
-                                if (isShiftLock || isFirstPerson) charGroup.rotation.y = camYaw + Math.PI;
                             }
                         }
                     }
                     // Horizontal velocity tracking (Dec's AI reads this; airborne launches count)
-                    if (isCurrentlyClimbing) {
-                        playerHorizontalVel.set(0, 0, 0);
-                    } else if (isWalking) {
-                        playerHorizontalVel.copy(moveDir).multiplyScalar(16);
-                    } else if (!isGrounded && (playerVel.x !== 0 || playerVel.z !== 0)) {
-                        playerHorizontalVel.set(playerVel.x, 0, playerVel.z);
-                    } else {
-                        playerHorizontalVel.set(0, 0, 0);
-                    }
+                    if (isCurrentlyClimbing) playerHorizontalVel.set(0, 0, 0);
+                    else if (isWalking) playerHorizontalVel.copy(moveDir).multiplyScalar(moveSpeed);
+                    else if (!isGrounded) playerHorizontalVel.copy(airHorizontalVel);
+                    else playerHorizontalVel.set(0, 0, 0);
                     // Spawn-protection forcefield
                     if (isForcefieldPermanent) forcefieldFade = Math.min(1, forcefieldFade + dt * 2);
                     else if (isForcefieldActive) {
@@ -5592,7 +5714,7 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                             stopWalkSound();
                         } else if (isJumpingAnim) {
                             jumpAnimTimer += dt;
-                            let jumpDuration = THREE.MathUtils.clamp(jumpStartVelY / GRAVITY, 0.27, 0.6);
+                            let jumpDuration = THREE.MathUtils.clamp(jumpStartVelY / (GRAVITY * gravityScale), 0.27, 1.2);
                             let t = Math.min(jumpAnimTimer / jumpDuration, 1.0);
                             let easeT = t * t * t * (t * (t * 6 - 15) + 10);
                             pL_Arm.rotation.x = THREE.MathUtils.lerp(jumpStartRot.pL_Arm_x, -Math.PI * 0.75, easeT);
@@ -5736,9 +5858,9 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                         }
                     }
 
-                    // === SWORD SWING POSES (right hand; runs after the overhaul so the
-                    // armed RIGHT arm always resolves to the sword pose) ===
-                    if (isHoldingItem) {
+                    // === SWORD SWING POSES (right hand; after the overhaul so the armed
+                    // RIGHT arm always resolves to the sword pose) ===
+                    if (isHoldingSword) {
                         if (swordSwingTime > 0) {
                             swordSwingTime -= dt;
                             let progress = 1.0 - (swordSwingTime / swordSwingDuration);
@@ -5761,6 +5883,10 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                             if (lungeCooldownTimer > 0) lungeCooldownTimer -= dt;
                         }
                     }
+                    // Coil hold pose: right arm sticks out to hold the spring
+                    if (isHoldingSpeedCoil || isHoldingGravityCoil) {
+                        pR_Arm.rotation.x = -Math.PI / 2;
+                    }
 
                     // === JUMP INPUT (solved heights + wall jump + climb launch) ===
                     if (moveKeys.space) {
@@ -5774,16 +5900,16 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                             // Ballistic launch: cover 13 studs total from the ladder
                             floorRay.set(new THREE.Vector3(playerPos.x, playerPos.y - 2, playerPos.z), new THREE.Vector3(0, -1, 0));
                             const landHits = floorRay.intersectObjects(collisionObjs);
-                            let flightTime = 2 * 62.6 / GRAVITY;
+                            let flightTime = 2 * 62.6 / (GRAVITY * gravityScale);
                             if (landHits.length > 0 && landHits[0].distance < 300) {
                                 const dropY = playerPos.y - (landHits[0].point.y + 5.5);
                                 if (dropY > 0) {
-                                    flightTime = (62.6 + Math.sqrt(62.6 * 62.6 + 2 * GRAVITY * dropY)) / GRAVITY;
+                                    flightTime = (62.6 + Math.sqrt(62.6 * 62.6 + 2 * GRAVITY * gravityScale * dropY)) / (GRAVITY * gravityScale);
                                 }
                             }
                             const launchSpeed = (13 - 2) / flightTime;
-                            playerVel.x = backDir.x * launchSpeed;
-                            playerVel.z = backDir.z * launchSpeed;
+                            playerVel.x = 0; playerVel.z = 0;
+                            airHorizontalVel.copy(backDir).multiplyScalar(launchSpeed);
                             isCurrentlyClimbing = false;
                             lastGroundedTime = 0;
                             playJumpSound();
@@ -5797,7 +5923,7 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                                 wallJumpStartY = playerPos.y;
                                 wallJumpHeightGoal = 10;
                             }
-                            playerVel.y = Math.sqrt(2 * GRAVITY * jumpStuds);
+                            playerVel.y = Math.sqrt(2 * GRAVITY * gravityScale * jumpStuds);
                             jumpStartVelY = playerVel.y;
                             jumpVelCaptured = true;
                             isGrounded = false;
@@ -5815,7 +5941,7 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                         if (wallJumpHeightGoal > 10) {
                             const climbed = playerPos.y - wallJumpStartY;
                             const remaining = Math.max(0, wallJumpHeightGoal - climbed);
-                            const targetVel = Math.sqrt(2 * GRAVITY * remaining);
+                            const targetVel = Math.sqrt(2 * GRAVITY * gravityScale * remaining);
                             if (playerVel.y < targetVel) {
                                 playerVel.y = Math.min(targetVel, playerVel.y + 260 * dt);
                             }
@@ -5909,6 +6035,9 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
             // --- SWORD COMBAT (all pairs involving the local player) ---
             updateSwordCombat(now);
 
+            // --- SPEED COIL SMOKE TRAIL (no trail with the Gravity Coil) ---
+            updateCoilTrail(dt);
+
             // --- CAMERA (material updates only when opacity actually changes) ---
             if (!isRagdoll) {
                 charGroup.position.set(
@@ -5919,7 +6048,7 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                 const headWorldPos = new THREE.Vector3();
                 charHead.getWorldPosition(headWorldPos);
                 if (isGrounded && !isWalking && !isJumpingAnim && !isFallingAnim && !activeEmote && !emoteRecovery) {
-                    headWorldPos.y = charGroup.position.y + 4.5; // base head Y without bob
+                    headWorldPos.y = charGroup.position.y + 4.5;
                 }
                 const isFirstPersonCam = camDist <= FIRST_PERSON_DIST;
                 let camOffset = (isShiftLock && !isFirstPersonCam) ? new THREE.Vector3(1,0,0).applyAxisAngle(new THREE.Vector3(0,1,0), camYaw).multiplyScalar(1.75) : new THREE.Vector3();
@@ -5961,6 +6090,7 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                         at: Math.round(animTimer * 50) / 50,
                         hp: Math.round(playerHealth),
                         h: isHoldingItem,
+                        hi: heldGearId,
                         k: playerKills, dd: playerDeaths
                     };
                     const msg = { t: 'state', s: s };
@@ -5987,6 +6117,49 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
             updateRemotePlayers(dt);
         }
 
+        // ===================== COIL SMOKE TRAIL =====================
+        function getCoilSmokeTexture() {
+            if (coilSmokeTex) return coilSmokeTex;
+            const c = document.createElement('canvas');
+            c.width = 64; c.height = 64;
+            const ctx = c.getContext('2d');
+            const g = ctx.createRadialGradient(32, 32, 4, 32, 32, 32);
+            g.addColorStop(0, 'rgba(235,235,235,0.85)');
+            g.addColorStop(0.6, 'rgba(210,210,210,0.4)');
+            g.addColorStop(1, 'rgba(200,200,200,0)');
+            ctx.fillStyle = g;
+            ctx.fillRect(0, 0, 64, 64);
+            coilSmokeTex = new THREE.CanvasTexture(c);
+            return coilSmokeTex;
+        }
+        function updateCoilTrail(dt) {
+            // Speed Coil smoke trail while moving (no trail with the Gravity Coil)
+            if (isHoldingSpeedCoil && !isRagdoll && playerHorizontalVel.length() > 6) {
+                coilParticleTimer += dt;
+                if (coilParticleTimer >= 0.045) {
+                    coilParticleTimer = 0;
+                    const s = new THREE.Sprite(new THREE.SpriteMaterial({ map: getCoilSmokeTexture(), transparent: true, opacity: 0.5, depthWrite: false }));
+                    s.position.set(
+                        charGroup.position.x + (Math.random() - 0.5) * 0.9,
+                        charGroup.position.y + 1 + Math.random() * 2.2,
+                        charGroup.position.z + (Math.random() - 0.5) * 0.9
+                    );
+                    s.scale.setScalar(1.4 + Math.random() * 0.8);
+                    scene.add(s);
+                    coilParticles.push({ mesh: s, life: 0, maxLife: 0.55 });
+                }
+            }
+            for (let i = coilParticles.length - 1; i >= 0; i--) {
+                const p = coilParticles[i];
+                p.life += dt;
+                const k = p.life / p.maxLife;
+                p.mesh.scale.multiplyScalar(1 + dt * 2.4);
+                p.mesh.position.y += dt * 1.4;
+                p.mesh.material.opacity = 0.5 * (1 - k);
+                if (k >= 1) { scene.remove(p.mesh); p.mesh.material.dispose(); coilParticles.splice(i, 1); }
+            }
+        }
+
         // ===================== SHIFTLOCK CURSOR =====================
         function updateShiftlockCursor() {
             const el = document.getElementById('shiftlock-cursor');
@@ -5997,20 +6170,22 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
         }
 
         function renderFrame() {
+            if (!renderer || !scene || !camera) return;
             updateSkyElements(); // dome + sun + moon follow the camera (unreachable)
             if (isAvatarEditorOpen && previewRenderer) {
                 previewRenderer.render(previewScene, previewCamera);
             }
             renderer.render(scene, camera);
             updateOverheadUI();
+            updatePlotLabels();
             updateShiftlockCursor();
         }
 
         // Real-time tick: sub-stepped simulation (max 0.1s per step) + render only while
-        // the tab is visible. The hidden-tab interval in init() keeps this ticking while
-        // backgrounded. Armored: a single bad frame can NEVER kill the game loop.
+        // the tab is visible. Armored: a single bad frame can NEVER kill the game loop.
         function gameTick() {
             const t = performance.now();
+            if (!lastTickTime) { lastTickTime = t; return; }
             let dt = (t - lastTickTime) / 1000;
             lastTickTime = t;
             if (dt <= 0) return;
@@ -6067,7 +6242,7 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                 localStorage.setItem('toh_timecycle', isTimeCycleActive);
                 timeCycleTime = Math.PI / 3; // reset to morning either way
                 if (wasOn) {
-                    // OFF: freeze on the day skybox, park the sun, hide the sprites
+                    // OFF: pure DEFAULT DAY SKYBOX at full weight - no tint, no blending
                     if (skyDome) {
                         skyDome.material.uniforms.uDayW.value = 1;
                         skyDome.material.uniforms.uSunsetW.value = 0;
@@ -6118,7 +6293,30 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
         // Top UI bar wiring
         document.querySelectorAll('.ui-btn').forEach(btn => { btn.addEventListener('click', () => { toggleInterface(btn.getAttribute('data-interface')); }); });
 
-        init();
+        // ===================== BOOT SAFETY NET =====================
+        // No matter WHAT kills initialization (stalled network resource, script error,
+        // a duplicated chunk from a bad paste), the loading overlay is force-cleared
+        // so the page can never be left permanently unresponsive, and the real cause
+        // is surfaced in the console.
+        let __booted = false;
+        const __forceCloseLoader = () => {
+            const l = document.getElementById('loading-screen');
+            if (l) { l.style.opacity = '0'; setTimeout(() => { l.style.display = 'none'; }, 500); }
+        };
+        const __watchdog = setTimeout(() => {
+            if (__booted) return;
+            console.error('Game failed to finish initializing within 6s - forcing the loading screen closed. Check the errors above.');
+            __forceCloseLoader();
+        }, 6000);
+        window.addEventListener('error', (e) => {
+            // A SyntaxError (e.g. "Identifier 'x' has already been declared" from a
+            // duplicated chunk) kills the entire script silently - this surfaces it
+            // and clears the overlay instead of leaving a dead page.
+            if (!__booted) __forceCloseLoader();
+            console.error('Global error:', e.message, 'at', e.filename, 'line', e.lineno);
+        });
+        init().then(() => { __booted = true; clearTimeout(__watchdog); })
+              .catch((err) => { __booted = true; clearTimeout(__watchdog); __forceCloseLoader(); console.error('Init failed:', err); });
     </script>
 </body>
 </html>
