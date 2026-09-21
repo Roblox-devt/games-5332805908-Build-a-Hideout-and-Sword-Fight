@@ -62,13 +62,21 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
 .settings-close-btn{width:30px;height:30px;background:red;color:#fff;border-radius:0;display:flex;align-items:center;justify-content:center;cursor:pointer;font-weight:bold;font-size:18px}
 .settings-body{display:flex;flex:1}
 .settings-left-panel{width:50%;padding:15px;box-sizing:border-box;display:flex;flex-direction:column;gap:10px}
-.setting-item{background:#fcfcfc;border-radius:0;height:50px;display:flex;align-items:center;justify-content:space-between;padding:0 15px;box-sizing:border-box;border:1px solid #eee}
+.setting-item{background:#fcfcfc;height:50px;display:flex;align-items:center;justify-content:space-between;padding:0 15px;box-sizing:border-box;border:1px solid #eee}
 .setting-text{color:#000;font-weight:bold;font-size:16px}
 .setting-text.small{font-size:13px}
-.toggle-btn{width:50px;height:24px;border-radius:0;color:#fff;font-weight:bold;font-size:12px;display:flex;align-items:center;justify-content:center;cursor:pointer;border:none;transition:background 0.2s}
-.toggle-btn.on{background:#28a745}
-.toggle-btn.off{background:#dc3545}
-#settings-interface .settings-title-text, #settings-interface .setting-text, #settings-interface .toggle-btn { font-family: 'Fredoka One', 'Open Sans', sans-serif; font-weight: bold; }
+.toggle-btn{min-width:64px;height:26px;border-radius:13px;color:#fff;font-family:'Fredoka One','Open Sans',sans-serif;font-weight:bold;font-size:13px;display:flex;align-items:center;justify-content:center;cursor:pointer;border:none;transition:background 0.2s;padding:0 14px}
+.toggle-btn.on{background:#02b857}
+.toggle-btn.off{background:#e22b3a}
+.toggle-btn.locked{background:#6b6b6b;cursor:not-allowed}
+#settings-right-panel{width:50%;padding:15px;box-sizing:border-box;display:flex;flex-direction:column;gap:10px;border-left:1px solid #ccc}
+.sr-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px}
+.sr-arrows{display:flex;gap:6px}
+.sr-arrow{width:28px;height:28px;border-radius:50%;background:#ddd;cursor:pointer;display:flex;align-items:center;justify-content:center;font-weight:bold;color:#333}
+.sr-input{width:100%;padding:9px;background:#fff;border:1px solid #bbb;border-radius:6px;font-family:'Fredoka One','Open Sans',sans-serif;font-size:14px;outline:none;box-sizing:border-box;color:#000}
+.sr-btn{padding:10px;border:none;border-radius:8px;background:#3a3a3a;color:#fff;font-family:'Fredoka One','Open Sans',sans-serif;font-weight:bold;font-size:14px;cursor:pointer}
+.sr-btn:hover{background:#4a4a4a}
+.sr-stats{margin-top:auto;display:flex;justify-content:space-between;font-family:'Fredoka One','Open Sans',sans-serif;font-weight:bold;font-size:14px;color:#333}
 #leaderboard{position:absolute;background:rgba(0,0,0,0.8);border-radius:12px;padding:15px;z-index:60;color:rgba(255,255,255,0.9);font-family:'Open Sans',sans-serif;opacity:0;pointer-events:none;box-sizing:border-box}
 #leaderboard.active{opacity:1;pointer-events:auto}
 #leaderboard.desktop{top:80px;right:20px;width:350px;transform:translateX(50px);transition:opacity 0.3s ease,transform 0.3s ease}
@@ -295,6 +303,19 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
 .save-info-btn:active{transform:scale(0.97)}
 .info-saved-toast{position:absolute;bottom:20px;right:20px;background:#02B857;color:#fff;padding:10px 18px;border-radius:8px;font-size:14px;font-weight:600;opacity:0;transform:translateY(10px);transition:opacity 0.3s,transform 0.3s;pointer-events:none;z-index:200}
 .info-saved-toast.show{opacity:1;transform:translateY(0)}
+#stamper-menu{position:absolute;top:50%;left:15px;transform:translateY(-50%);width:280px;background:#fff;border:3px solid #c9c9c9;border-top:26px solid #c9c9c9;border-bottom:26px solid #c9c9c9;border-radius:6px;z-index:70;display:none;flex-direction:column;box-sizing:border-box;overflow:visible}
+#stamper-menu-title{position:absolute;top:-26px;left:0;width:100%;height:26px;display:flex;align-items:center;justify-content:center;color:#fff;font-family:'Fredoka One','Open Sans',sans-serif;font-weight:bold;font-size:14px}
+#stamper-menu-footer{position:absolute;bottom:-26px;left:0;width:100%;height:26px}
+#stamper-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:10px}
+.stamper-card{background:#d9d9d9;border-radius:6px;padding:6px;cursor:pointer;display:flex;flex-direction:column;align-items:flex-end;gap:4px;transition:background 0.15s}
+.stamper-card:hover{background:#c7c7c7}
+.stamper-thumb{width:44px;height:44px;object-fit:contain;pointer-events:none}
+.stamper-card-name{width:100%;text-align:center;color:#fff;font-family:'Fredoka One','Open Sans',sans-serif;font-weight:bold;font-size:11px;pointer-events:none}
+#stamper-detail{display:none;flex-direction:column;gap:8px;padding:10px;align-items:center}
+#stamper-detail-canvas{width:100%;height:180px;background:#e9e9e9;border-radius:6px;overflow:hidden}
+#stamper-detail-name{font-family:'Fredoka One','Open Sans',sans-serif;font-weight:bold;font-size:15px;color:#fff;background:#8b8b8b;padding:4px 14px;border-radius:8px}
+.stamper-dbtn{flex:1;text-align:center;background:#d9d9d9;border-radius:6px;padding:8px 0;cursor:pointer;font-family:'Fredoka One','Open Sans',sans-serif;font-weight:bold;font-size:13px}
+.stamper-rainbow{color:#fff;background:conic-gradient(red,yellow,lime,cyan,blue,magenta,red)}
 </style>
 </head>
 <body>
@@ -304,7 +325,7 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
 <div id="roblox-menu-btn"><svg viewBox="0 0 100 100"><rect x="25" y="25" width="50" height="50" transform="rotate(15 50 50)" /><rect x="42.5" y="42.5" width="15" height="15" fill="#000000" transform="rotate(15 50 50)" /></svg></div>
 <div id="player-health-bar-container"><div id="player-health-bar-fill"></div></div>
 <div id="top-ui-bar"><div class="ui-btn" data-interface="player-commands-interface" title="Player Commands"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M7 5.5l7.5 6.5L7 18.5" stroke="#c8c8c8" stroke-width="3.4"/><path d="M15.5 18.5h4.5" stroke="#9a9a9a" stroke-width="3.2"/></svg></div><div class="ui-btn" data-interface="build-marketplace-interface" title="Build Marketplace"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M6.6 9h10.8l-1 10.4a2 2 0 0 1-2 1.8H9.6a2 2 0 0 1-2-1.8L6.6 9z" stroke="#c8c8c8" stroke-width="2"/><path d="M9.2 9V7a2.8 2.8 0 0 1 5.6 0v2" stroke="#c8c8c8" stroke-width="2"/><path d="M10.1 12.1l3.8 3.8M13.9 12.1l-3.8 3.8M9.5 12.7l1.1-1.1M14.5 12.7l-1.1-1.1" stroke="#9a9a9a" stroke-width="1.9"/></svg></div><div class="ui-btn" data-interface="settings-interface" title="Settings"><svg viewBox="0 0 24 24"><g fill="#c8c8c8"><circle cx="12" cy="12" r="5.6"/><rect x="10.55" y="5.05" width="2.9" height="2.9"/><rect x="10.55" y="16.05" width="2.9" height="2.9"/><rect x="5.05" y="10.55" width="2.9" height="2.9"/><rect x="16.05" y="10.55" width="2.9" height="2.9"/><rect x="14.44" y="4.66" width="2.9" height="2.9" transform="rotate(-45 15.89 6.11)"/><rect x="6.66" y="4.66" width="2.9" height="2.9" transform="rotate(45 8.11 6.11)"/><rect x="6.66" y="16.44" width="2.9" height="2.9" transform="rotate(-45 8.11 17.89)"/><rect x="14.44" y="16.44" width="2.9" height="2.9" transform="rotate(45 15.89 17.89)"/></g><circle cx="12" cy="12" r="2.4" fill="#9a9a9a"/></svg></div><div class="ui-btn" data-interface="marketplace-interface" title="Marketplace"><svg viewBox="0 0 24 24" fill="none" stroke="#c8c8c8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4.5h2.6l2.3 10.8a1.7 1.7 0 0 0 1.7 1.4h8a1.7 1.7 0 0 0 1.7-1.3L20.8 8H6.4"/><circle cx="9.8" cy="19.3" r="1.5"/><circle cx="17" cy="19.3" r="1.5"/><path d="M10 8h3.6v3.4H9.6zM13.6 8h3l-.7 3.4h-2.3z"/></svg></div><div class="ui-btn" data-interface="home-interface" title="Home"><svg viewBox="0 0 24 24" fill="none" stroke="#c8c8c8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 10.5 L12 5 L17.5 10.5 V19 H14 V15.5 H10 V19 H6.5 Z"/><path d="M4.5 8.6 L12 2.6 L19.5 8.6"/><path d="M8.6 0.6 H11.8 V1.4 H11.4 L9.0 3.4 V1.4 H8.6 Z"/></svg></div><div class="ui-btn" data-interface="report-interface" title="Report"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M14 5.5L5.8 9.2H3.5v5.6h2.3L14 18.5v-13z" stroke="#c8c8c8" stroke-width="2"/><path d="M17 9.5a4 4 0 0 1 0 5" stroke="#9a9a9a" stroke-width="2"/><path d="M19.2 7.5a7 7 0 0 1 0 9" stroke="#9a9a9a" stroke-width="2"/></svg></div><div class="ui-btn" data-interface="clan-interface" title="Clan"><svg viewBox="0 0 24 24" fill="none"><path d="M12 1.6 L3.8 4.5 v6.6 c0 5 3.4 8.3 8.2 10.1" stroke="#c8c8c8" stroke-width="1.7" stroke-linecap="round"/><path d="M12 1.6 l8.2 2.9 v6.6 c0 5 -3.4 8.3 -8.2 10.1" stroke="#9a9a9a" stroke-width="1.7" stroke-linecap="round"/><path d="M12 5.2 L6.4 7.2 v4.6 c0 3.7 2.6 6.2 5.6 7.6 z" fill="#c8c8c8"/><path d="M12 5.2 l5.6 2 v4.6 c0 3.7 -2.6 6.2 -5.6 7.6 z" fill="#9a9a9a"/></svg></div></div>
-<div id="settings-interface" class="game-interface"><div class="settings-title-bar"><span class="settings-title-text">Settings</span><div class="settings-close-btn" onclick="closeInterface('settings-interface')">X</div></div><div class="settings-body"><div class="settings-left-panel"><div class="setting-item"><span class="setting-text">Player Sounds</span><button class="toggle-btn on" data-setting="playersounds" onclick="toggleSetting(this)">ON</button></div><div class="setting-item"><span class="setting-text">Time Cycle</span><button class="toggle-btn on" data-setting="timecycle" onclick="toggleSetting(this)">ON</button></div><div class="setting-item"><span class="setting-text">Textures</span><button class="toggle-btn on" data-setting="textures" onclick="toggleSetting(this)">ON</button></div><div class="setting-item"><span class="setting-text">Forcefield</span><button class="toggle-btn off" data-setting="forcefield" onclick="toggleSetting(this)">OFF</button></div><div class="setting-item"><span class="setting-text">Ingame Music</span><button class="toggle-btn on" data-setting="ingamemusic" onclick="toggleSetting(this)">ON</button></div><div class="setting-item"><span class="setting-text small">Kill Clan Members</span><button class="toggle-btn on" data-setting="killclanmembers" onclick="toggleSetting(this)">ON</button></div></div></div></div>
+<div id="settings-interface" class="game-interface"><div class="settings-title-bar"><span class="settings-title-text">Settings</span><div class="settings-close-btn" onclick="closeInterface('settings-interface')">X</div></div><div class="settings-body"><div class="settings-left-panel"><div class="setting-item"><span class="setting-text">Player Sounds</span><button class="toggle-btn on" data-setting="playersounds" onclick="toggleSetting(this)">ON</button></div><div class="setting-item"><span class="setting-text">Time Cycle</span><button class="toggle-btn on" data-setting="timecycle" onclick="toggleSetting(this)">ON</button></div><div class="setting-item"><span class="setting-text">Textures</span><button class="toggle-btn on" data-setting="textures" onclick="toggleSetting(this)">ON</button></div><div class="setting-item"><span class="setting-text">Forcefield</span><button class="toggle-btn locked" data-setting="forcefield" onclick="return false">LOCKED</button></div><div class="setting-item"><span class="setting-text">Ingame Music</span><button class="toggle-btn on" data-setting="ingamemusic" onclick="toggleSetting(this)">ON</button></div><div class="setting-item"><span class="setting-text small">Kill Clan Members</span><button class="toggle-btn on" data-setting="killclanmembers" onclick="toggleSetting(this)">ON</button></div></div><div id="settings-right-panel"><div class="sr-header"><span class="settings-title-text" style="font-size:16px;">Builds</span><div class="sr-arrows"><div class="sr-arrow">&#8249;</div><div class="sr-arrow">&#8250;</div></div></div><input type="text" id="build-save-name" class="sr-input" placeholder="Save name..." maxlength="24"><button class="sr-btn" id="build-save-name-btn">Save Name</button><div style="display:flex;gap:8px;"><button class="sr-btn" id="build-load-btn" style="flex:1;">Load</button><button class="sr-btn" id="build-save-btn" style="flex:1;">Save</button></div><button class="sr-btn" id="build-rotate-btn">Rotate 90&deg;</button><div class="sr-stats"><span id="ping-display">Ping: --ms</span><span id="fps-display">FPS: --</span></div></div></div></div>
 <div id="top-bar-menu"><div class="top-btn" id="tb-btn-1"><div class="hover-bg"></div><svg class="icon-menu" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg><svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line></svg></div><div class="top-btn" id="tb-btn-2"><div class="hover-bg"></div><svg viewBox="0 0 24 24"><path class="tb2-bubble" d="M4 3 H20 A1 1 0 0 1 21 4 V15 A1 1 0 0 1 20 16 H15 L12 20 L9 16 H4 A1 1 0 0 1 3 15 V4 A1 1 0 0 1 4 3 Z" /><line class="tb2-line" x1="7" y1="8" x2="17" y2="8" /><line class="tb2-line" x1="7" y1="12" x2="12" y2="12" /></svg></div><div class="top-btn" id="tb-btn-3"><div class="hover-bg"></div><svg viewBox="0 0 24 24"><defs><clipPath id="mic-clip"><path d="M12 2C10.34 2 9 3.34 9 5V11C9 12.66 10.34 14 12 14C13.66 14 15 12.66 15 11V5C15 3.34 13.66 2 12 2Z" /></clipPath></defs><path class="mic-pill" d="M12 2C10.34 2 9 3.34 9 5V11C9 12.66 10.34 14 12 14C13.66 14 15 12.66 15 11V5C15 3.34 13.66 2 12 2Z" /><rect class="mic-green" x="8" y="14" width="8" height="0" fill="#00ff00" clip-path="url(#mic-clip)" /><path class="mic-stand" d="M17 11C17 13.76 14.76 16 12 16C9.24 16 7 13.76 7 11H5C5 14.53 7.61 17.43 11 17.92V21H13V17.92C16.39 17.43 19 14.53 19 11H17Z" /><line class="mic-slash" x1="4" y1="20" x2="20" y2="4" /></svg></div></div>
 <div id="dropdown-menu"><div class="dd-item" id="dd-avatar"><svg class="dd-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="white" stroke-width="2"/><circle cx="12" cy="9" r="3" fill="none" stroke="white" stroke-width="2"/><path d="M6 19c0-3.3 2.7-6 6-6s6 2.7, 6 6" fill="none" stroke="white" stroke-width="2"/></svg><span class="dd-text">Switch avatar</span></div><div class="dd-item" id="dd-leaderboard"><svg class="dd-icon" viewBox="0 0 24 24"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0V4zM7 6H4v2a3 3 0 0 0 3 3M17 6h3v2a3 3 0 0 1-3 3" /></svg><span class="dd-text">Leaderboard</span></div><div class="dd-item" id="dd-inventory"><svg class="dd-icon" viewBox="0 0 24 24"><path d="M9 3h6a3 3 0 0 1 3 3v12a3 3 0 0 1-3 3H9a3 3 0 0 1-3-3V6a3 3 0 0 1 3-3zM9 3V2a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1" /><path d="M9 14h6M9 10h6" /></svg><span class="dd-text">Inventory</span></div><div class="dd-item" id="dd-respawn"><svg class="dd-icon" viewBox="0 0 24 24"><circle cx="10" cy="8" r="4" /><path d="M2 21v-1a7 7 0 0 1 14 0v1" /><path d="M18 14a4 4 0 1 1 3-1M21 10v3h-3" /></svg><span class="dd-text">Respawn</span></div></div>
 <div id="leaderboard"><div id="lb-close-btn"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line></svg></div><div id="lb-header"><span class="lb-h-left">People</span><div class="lb-h-stats"><span class="lb-h-stat">Kills</span><span class="lb-h-stat">Deaths</span></div></div><div id="lb-body"></div></div>
@@ -315,7 +336,7 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
 <div class="menu-scroll-area" id="mscroll-settings" style="display: none;"><div class="settings-section"><div class="settings-section-header">Audio</div><div class="setting-row"><span class="setting-label">Volume</span><div class="volume-control-wrap"><button id="vol-minus" class="volume-adjust-btn">-</button><div id="volume-bars" class="volume-bar-container"></div><button id="vol-plus" class="volume-adjust-btn">+</button></div></div></div>
 <div class="settings-section"><div class="settings-section-header">Display &amp; graphics</div><div class="setting-row"><span class="setting-label">Graphics mode</span><div class="cycle-setting" id="cycler-graphics-mode"><div class="cycle-arrow left"><svg viewBox="0 0 24 24"><polyline points="14,4 6,12 14,20" /></svg></div><div class="cycle-value-wrap"><span class="cycle-value">Auto</span></div><div class="cycle-arrow right"><svg viewBox="0 0 24 24"><polyline points="10,4 18,12 10,20" /></svg></div></div></div><div class="setting-row" style="margin-top: 12px;"><span class="setting-label">Graphics quality</span><div class="volume-control-wrap"><button id="gfx-minus" class="volume-adjust-btn">-</button><div id="graphics-bars" class="volume-bar-container"></div><button id="gfx-plus" class="volume-adjust-btn">+</button></div></div><div class="setting-row" style="margin-top: 12px;"><span class="setting-label">Show player names</span><div class="cycle-setting" id="cycler-show-names"><div class="cycle-arrow left"><svg viewBox="0 0 24 24"><polyline points="14,4 6,12 14,20" /></svg></div><div class="cycle-value-wrap"><span class="cycle-value">On</span></div><div class="cycle-arrow right"><svg viewBox="0 0 24 24"><polyline points="10,4 18,12 10,20" /></svg></div></div></div><div class="setting-row" style="margin-top: 12px;"><span class="setting-label">Shift lock cursor</span><div class="cycle-setting" id="cycler-shiftlock-cursor"><div class="cycle-arrow left"><svg viewBox="0 0 24 24"><polyline points="14,4 6,12 14,20" /></svg></div><div class="cycle-value-wrap"><span class="cycle-value">On</span></div><div class="cycle-arrow right"><svg viewBox="0 0 24 24"><polyline points="10,4 18,12 10,20" /></svg></div></div></div></div>
 <div class="settings-section"><div class="settings-section-header">View &amp; controls</div><div class="setting-row"><span class="setting-label">Camera sensitivity</span><div class="volume-control-wrap"><span id="cam-value-display" style="color: #ffffff; width: 30px; text-align: center;">1</span><button id="cam-minus" class="volume-adjust-btn">-</button><div id="camera-bars" class="volume-bar-container"></div><button id="cam-plus" class="volume-adjust-btn">+</button></div></div><div class="setting-row" style="margin-top: 12px;"><span class="setting-label">Movement mode</span><div class="cycle-setting" id="cycler-movement-mode"><div class="cycle-arrow left"><svg viewBox="0 0 24 24"><polyline points="14,4 6,12 14,20" /></svg></div><div class="cycle-value-wrap"><span class="cycle-value">Keyboard + Mouse</span></div><div class="cycle-arrow right"><svg viewBox="0 0 24 24"><polyline points="10,4 18,12 10,20" /></svg></div></div></div><div class="setting-row" style="margin-top: 12px;"><span class="setting-label">Shift lock switch</span><div class="cycle-setting" id="cycler-shiftlock"><div class="cycle-arrow left"><svg viewBox="0 0 24 24"><polyline points="14,4 6,12 14,20" /></svg></div><div class="cycle-value-wrap"><span class="cycle-value">On</span></div><div class="cycle-arrow right"><svg viewBox="0 0 24 24"><polyline points="10,4 18,12 10,20" /></svg></div></div></div></div></div>
-<div class="menu-scroll-area" id="mscroll-help" style="display: none;"><div class="settings-section"><div class="settings-section-header">Controls</div><div id="help-controls-pc"><div class="help-row"><span class="help-label">Move</span><span class="help-keys"><span class="keycap">W</span><span class="keycap">A</span><span class="keycap">S</span><span class="keycap">D</span></span></div><div class="help-row"><span class="help-label">Jump</span><span class="help-keys"><span class="keycap">Space</span></span></div><div class="help-row"><span class="help-label">Shift lock</span><span class="help-keys"><span class="keycap">Shift</span></span></div><div class="help-row"><span class="help-label">Rotate camera</span><span class="help-keys"><span class="help-label">Right mouse drag</span></span></div><div class="help-row"><span class="help-label">Zoom camera</span><span class="help-keys"><span class="keycap">Scroll</span><span class="keycap">I</span><span class="keycap">O</span></span></div><div class="help-row"><span class="help-label">Rotate camera (keys)</span><span class="help-keys"><span class="keycap">&larr;</span><span class="keycap">&rarr;</span></span></div><div class="help-row"><span class="help-label">Leaderboard</span><span class="help-keys"><span class="keycap">Tab</span></span></div><div class="help-row"><span class="help-label">Plot owners</span><span class="help-keys"><span class="keycap">Q</span></span></div><div class="help-row"><span class="help-label">Inventory</span><span class="help-keys"><span class="keycap">`</span></span></div><div class="help-row"><span class="help-label">Chat</span><span class="help-keys"><span class="keycap">/</span></span></div><div class="help-row"><span class="help-label">Emotes</span><span class="help-keys"><span class="help-label">/e cheer, wave, laugh, dance, dance1, dance2, dance3</span></span></div><div class="help-row"><span class="help-label">Equip / unequip item</span><span class="help-keys"><span class="keycap">1</span><span class="keycap">0</span></span></div><div class="help-row"><span class="help-label">Drop held item</span><span class="help-keys"><span class="keycap">Backspace</span></span></div><div class="help-row"><span class="help-label">Sword swing / lunge</span><span class="help-keys"><span class="help-label">Click / Double-click</span></span></div><div class="help-row"><span class="help-label">Pause menu</span><span class="help-keys"><span class="keycap">Esc</span></span></div><div class="help-row"><span class="help-label">Climb</span><span class="help-keys"><span class="help-label">Walk into a truss</span></span></div><div class="help-row"><span class="help-label">Wall jump</span><span class="help-keys"><span class="help-label">Jump while pushing into a wall</span></span></div><div class="help-row"><span class="help-label">Claim plot</span><span class="help-keys"><span class="help-label">:claim 1-9 in chat</span></span></div></div><div id="help-controls-mobile" style="display: none;"><div class="help-row"><span class="help-label">Move</span><span class="help-keys"><span class="help-label">Left thumbstick</span></span></div><div class="help-row"><span class="help-label">Jump</span><span class="help-keys"><span class="help-label">Jump button</span></span></div><div class="help-row"><span class="help-label">Shift lock</span><span class="help-keys"><span class="help-label">Lock button</span></span></div><div class="help-row"><span class="help-label">Rotate camera</span><span class="help-keys"><span class="help-label">Drag screen</span></span></div><div class="help-row"><span class="help-label">Zoom camera</span><span class="help-keys"><span class="help-label">Pinch screen</span></span></div><div class="help-row"><span class="help-label">Move mode</span><span class="help-keys"><span class="help-label">Tap to move option</span></span></div><div class="help-row"><span class="help-label">Leaderboard / inventory / chat</span><span class="help-keys"><span class="help-label">Menu button</span></span></div><div class="help-row"><span class="help-label">Sword swing / lunge</span><span class="help-keys"><span class="help-label">Tap screen / Double-tap</span></span></div><div class="help-row"><span class="help-label">Climb</span><span class="help-keys"><span class="help-label">Walk into a truss</span></span></div><div class="help-row"><span class="help-label">Claim plot</span><span class="help-keys"><span class="help-label">:claim 1-9 in chat</span></span></div></div></div></div>
+<div class="menu-scroll-area" id="mscroll-help" style="display: none;"><div class="settings-section"><div class="settings-section-header">Controls</div><div id="help-controls-pc"><div class="help-row"><span class="help-label">Move</span><span class="help-keys"><span class="keycap">W</span><span class="keycap">A</span><span class="keycap">S</span><span class="keycap">D</span></span></div><div class="help-row"><span class="help-label">Jump</span><span class="help-keys"><span class="keycap">Space</span></span></div><div class="help-row"><span class="help-label">Shift lock</span><span class="help-keys"><span class="keycap">Shift</span></span></div><div class="help-row"><span class="help-label">Rotate camera</span><span class="help-keys"><span class="help-label">Right mouse drag</span></span></div><div class="help-row"><span class="help-label">Zoom camera</span><span class="help-keys"><span class="keycap">Scroll</span><span class="keycap">I</span><span class="keycap">O</span></span></div><div class="help-row"><span class="help-label">Rotate camera (keys)</span><span class="help-keys"><span class="keycap">&larr;</span><span class="keycap">&rarr;</span></span></div><div class="help-row"><span class="help-label">Leaderboard</span><span class="help-keys"><span class="keycap">Tab</span></span></div><div class="help-row"><span class="help-label">Plot owners</span><span class="help-keys"><span class="keycap">Q</span></span></div><div class="help-row"><span class="help-label">Inventory</span><span class="help-keys"><span class="keycap">`</span></span></div><div class="help-row"><span class="help-label">Chat</span><span class="help-keys"><span class="keycap">/</span></span></div><div class="help-row"><span class="help-label">Emotes</span><span class="help-keys"><span class="help-label">/e cheer, wave, laugh, dance, dance1, dance2, dance3</span></span></div><div class="help-row"><span class="help-label">Equip / unequip item</span><span class="help-keys"><span class="keycap">1</span><span class="keycap">0</span></span></div><div class="help-row"><span class="help-label">Drop held item</span><span class="help-keys"><span class="keycap">Backspace</span></span></div><div class="help-row"><span class="help-label">Sword swing / lunge</span><span class="help-keys"><span class="help-label">Click / Double-click</span></span></div><div class="help-row"><span class="help-label">Rotate / Tilt / Roll block</span><span class="help-keys"><span class="keycap">R</span><span class="keycap">T</span><span class="keycap">Z</span></span></div><div class="help-row"><span class="help-label">Pause menu</span><span class="help-keys"><span class="keycap">Esc</span></span></div><div class="help-row"><span class="help-label">Climb</span><span class="help-keys"><span class="help-label">Walk into a truss</span></span></div><div class="help-row"><span class="help-label">Wall jump</span><span class="help-keys"><span class="help-label">Jump while pushing into a wall</span></span></div><div class="help-row"><span class="help-label">Claim plot</span><span class="help-keys"><span class="help-label">:claim 1-9 in chat</span></span></div></div><div id="help-controls-mobile" style="display: none;"><div class="help-row"><span class="help-label">Move</span><span class="help-keys"><span class="help-label">Left thumbstick</span></span></div><div class="help-row"><span class="help-label">Jump</span><span class="help-keys"><span class="help-label">Jump button</span></span></div><div class="help-row"><span class="help-label">Shift lock</span><span class="help-keys"><span class="help-label">Lock button</span></span></div><div class="help-row"><span class="help-label">Rotate camera</span><span class="help-keys"><span class="help-label">Drag screen</span></span></div><div class="help-row"><span class="help-label">Zoom camera</span><span class="help-keys"><span class="help-label">Pinch screen</span></span></div><div class="help-row"><span class="help-label">Move mode</span><span class="help-keys"><span class="help-label">Tap to move option</span></span></div><div class="help-row"><span class="help-label">Leaderboard / inventory / chat</span><span class="help-keys"><span class="help-label">Menu button</span></span></div><div class="help-row"><span class="help-label">Sword swing / lunge</span><span class="help-keys"><span class="help-label">Tap screen / Double-tap</span></span></div><div class="help-row"><span class="help-label">Climb</span><span class="help-keys"><span class="help-label">Walk into a truss</span></span></div><div class="help-row"><span class="help-label">Claim plot</span><span class="help-keys"><span class="help-label">:claim 1-9 in chat</span></span></div></div></div></div>
 <div class="menu-btn-container"><button id="menu-leave" class="menu-row-btn btn-dark-gray"><span class="desktop-shortcut keycap">L</span>Leave</button><button id="menu-respawn" class="menu-row-btn btn-dark-gray"><span class="desktop-shortcut keycap">R</span>Respawn</button><button id="menu-resume" class="menu-row-btn btn-blue"><span class="desktop-shortcut keycap">ESC</span>Resume</button></div>
 <div id="player-profile-overlay"><div class="profile-back-row" id="profile-back-btn"><svg viewBox="0 0 24 24"><polyline points="14,4 6,12 14,20"/></svg><span>People</span></div><div class="player-info-field"><label for="pi-display-name">Display name</label><input type="text" id="pi-display-name" class="player-info-input" maxlength="20" placeholder="Player" /></div><div class="player-info-field"><label for="pi-username">Username</label><input type="text" id="pi-username" class="player-info-input" maxlength="20" placeholder="Enter username" /></div><div class="player-info-field"><label>Chat tag color</label><div class="color-picker-row" id="pi-color-picker"></div></div><button id="pi-save-btn" class="save-info-btn">Save</button></div></div>
 <div id="invite-menu"><div id="invite-close-btn"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line></svg></div><div class="invite-title">Invite friends</div><div class="invite-row"><input type="text" class="invite-input" id="invite-link-input" readonly /><div class="invite-copy-btn" id="invite-link-copy">Copy</div></div><div class="invite-action-row"><button class="invite-action-btn" id="invite-join-btn">Join</button><button class="invite-action-btn" id="invite-host-btn">Host</button></div><div class="invite-row"><input type="text" class="invite-input" id="invite-code-input" placeholder="Enter a 6-digit game code..." /><div class="invite-copy-btn" id="invite-code-copy">Copy</div></div></div>
@@ -326,6 +347,7 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
 <div id="mobile-controls"><div id="joystick-container"><div id="joystick-knob"></div></div><div id="jump-button"><img src="https://tr.rbxcdn.com/180DAY-4243bea8c6446ddc6edfd7051cae4f10/150/150/Image/Webp/noFilter" alt="" draggable="false"></div><div id="mobile-shiftlock"></div></div>
 <div id="dynamic-joystick-zone" style="position: absolute; bottom: 20px; left: 20px; width: 40%; height: 50%; border: 3px dashed rgba(255,255,255,0.4); background: rgba(255,255,255,0.02); border-radius: 20px; pointer-events: auto; display: none; box-sizing: border-box; z-index: 25;"></div>
 <div id="dynamic-joystick-container" style="position: absolute; width: 100px; height: 100px; background: rgba(255,255,255,0.1); border: 2px solid rgba(255,255,255,0.5); border-radius: 50%; display: none; pointer-events: none; transform: translate(-50%, -50%); z-index: 26;"><div id="dynamic-joystick-knob" style="position: absolute; width: 44px; height: 44px; background: rgba(255,255,255,0.85); border-radius: 50%; transform: translate(-50%, -50%);"></div></div>
+<div id="stamper-menu"><div id="stamper-menu-title">Basic Building</div><div id="stamper-menu-footer"></div><div id="stamper-grid"></div><div id="stamper-detail"><div id="stamper-detail-canvas"></div><div id="stamper-detail-name"></div><div style="display:flex;gap:8px;width:100%;"><div class="stamper-dbtn" id="stamper-back-btn">Back</div><div class="stamper-dbtn stamper-rainbow" id="stamper-rainbow-btn">Rainbow</div></div></div></div>
 <div class="info-saved-toast" id="info-saved-toast">Player information saved!</div>
 <div id="version-text">Version 1.18.7</div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.160.0/three.min.js"></script>
@@ -339,8 +361,6 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
         const CLIMB_LEG_SWING = 0.35;
         const GRAVITY = 196.2;
         const FIRST_PERSON_DIST = 2.5;
-        // Sky system: day/sunset/night skyboxes (fading) + realistic sun & moon.
-        // Sun and moon are camera-locked skybox elements - the player can NEVER reach them.
         const SKY_DAY_SOURCE = "https://nocookie.net/roblox/images/1/13/DefaultSkybox2021.png/revision/latest?cb=20250114020329";
         const SKY_SUNSET_SOURCE = "https://devforum-uploads.s3.dualstack.us-east-2.amazonaws.com/uploads/original/5X/b/b/b/2/bbb2720e7b6cd4a9842850e32e75c1e4c57081a6.jpeg";
         const SKY_NIGHT_SOURCE = "https://www.reddit.com/media?url=https%3A%2F%2Fi.redd.it%2Fthoughts-on-official-roblox-skyboxes-which-one-is-your-v0-v0ftaga270h91.png%3Fwidth%3D512%26format%3Dpng%26auto%3Dwebp%26s%3Df8eccc2d546a21ad530eaa5b0633d6fdaacbe7e6";
@@ -354,6 +374,7 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
         const NAMETAG_FADE_START = 45;
         const NAMETAG_FADE_END = 95;
         const EMOTE_D2R = Math.PI / 180;
+        const BRICK_COLOR = 0xbe6862;
 
         // ===================== CORE STATE =====================
         let scene, camera, renderer;
@@ -386,12 +407,12 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
         let currentMaterialOpacity = 1;
         let invDragData = null;
         let heldGearId = '';
-        let isHoldingSword = false, isHoldingSpeedCoil = false, isHoldingGravityCoil = false;
-        let speedCoilModel, gravityCoilModel;
+        let isHoldingSword = false, isHoldingSpeedCoil = false, isHoldingGravityCoil = false, isHoldingStamper = false, isHoldingHammer = false;
+        let speedCoilModel, gravityCoilModel, stamperModel, hammerModel;
         let speedCoilSound, gravityCoilSound;
-        let airHorizontalVel = new THREE.Vector3(); // airborne momentum velocity
-        const AIR_BRAKE_ACCEL = 55;  // studs/s^2 - reversing/braking (time scales with speed)
-        const AIR_TURN_ACCEL = 140;  // studs/s^2 - perpendicular steering (responsive)
+        let airHorizontalVel = new THREE.Vector3();
+        const AIR_BRAKE_ACCEL = 150;
+        const AIR_TURN_ACCEL = 380;
         let coilParticles = [], coilParticleTimer = 0, coilSmokeTex = null;
         let plotOwners = new Array(9).fill(null);
         let plotLabelAnchors = [], plotLabelEls = [], showPlotOwners = false;
@@ -456,15 +477,12 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
         let decNet = null, decSendTimer = 0;
         let decTag = null, decHpBar = null, decHpFill = null;
         let currentOpenInterface = null;
+        let fpsFrames = 0, fpsLastTick = performance.now(), currentFPS = 0, netPingMs = null, pingTimer = 0;
         const _wallOrigin1 = new THREE.Vector3(), _wallOrigin2 = new THREE.Vector3(), _wallOrigin3 = new THREE.Vector3();
         const _hilt = new THREE.Vector3(), _tip = new THREE.Vector3(), _targetPos = new THREE.Vector3();
         const _lineVec = new THREE.Vector3(), _pointVec = new THREE.Vector3(), _closestPoint = new THREE.Vector3();
 
         // ===================== POINTER LOCK SAFETY =====================
-        // Chrome enforces a ~1.25s cooldown on requestPointerLock after ANY exit, and
-        // rejects requests made outside a user gesture. Every request is gesture-safe
-        // here, cooldown-blocked requests are QUEUED and auto-retried (so enabling
-        // shiftlock always locks the mouse by itself), and rejections resync state.
         const POINTER_LOCK_RELOCK_COOLDOWN = 1.35;
         let lastPointerLockExitAt = -1e9;
         let pointerLockRequestPending = false;
@@ -472,13 +490,10 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
         function safeRequestPointerLock() {
             if (!renderer || document.pointerLockElement === renderer.domElement) return;
             if (pointerLockRequestPending) return;
-            // Never request while the window is unfocused - that is the main source of
-            // rejection storms that can stall Chrome's input pipeline.
             if (!document.hasFocus()) return;
             const tNow = performance.now() / 1000;
             const sinceExit = tNow - lastPointerLockExitAt;
             if (sinceExit < POINTER_LOCK_RELOCK_COOLDOWN) {
-                // Queue an automatic retry once the browser cooldown expires
                 if (!pointerLockRetryTimer) {
                     pointerLockRetryTimer = setTimeout(() => {
                         pointerLockRetryTimer = null;
@@ -490,7 +505,6 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                 }
                 return;
             }
-            // Rate limit: at most one real attempt every 0.25s, no matter what calls this
             if (tNow - lastPointerLockAttemptAt < 0.25) return;
             lastPointerLockAttemptAt = tNow;
             pointerLockRequestPending = true;
@@ -515,10 +529,9 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                 document.exitPointerLock();
             }
         }
+
         // ===================== CORE FUNCTIONS =====================
         function checkPhone() { return /iPhone|iPod|Android.*Mobile/i.test(navigator.userAgent) || (isMobile && Math.min(window.innerWidth, window.innerHeight) < 600); }
-        // FIX: a wrap loop fed Infinity (or a value that never converges) froze the
-        // tab permanently. Every yaw wrap now goes through this guarded helper.
         function wrapAngle(a) {
             if (!isFinite(a)) return 0;
             let guard = 0;
@@ -526,7 +539,6 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
             while (a < -Math.PI && guard++ < 100) a += Math.PI * 2;
             return THREE.MathUtils.clamp(a, -Math.PI, Math.PI);
         }
-
         function loadPlayerInfo() {
             const savedName = localStorage.getItem('toh_displayName');
             if (savedName !== null && savedName !== '') playerDisplayName = savedName;
@@ -541,33 +553,29 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
             }
             updateLeaderboardName();
         }
-
         function loadDefaultInventory() {
             playerInventory[0] = { id: 'stamper', name: 'Stamper', icon: 'https://www.nocookie.net/roblox/images/d/df/Stampbuild.png/revision/latest?cb=20170214035416' };
             playerInventory[1] = { id: 'hammer', name: 'Hammer', icon: 'https://static.wikitide.net/combatinitiationwiki/8/81/Hammer.png' };
             playerInventory[2] = { id: 'sword', name: 'Sword', icon: 'https://tr.rbxcdn.com/180DAY-e39f79dce4937ea8598d4a5a793a0da0/420/420/Gear/Webp/noFilter' };
-            const wiringIcon = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='64' height='64'><rect width='64' height='64' fill='%23333' rx='4' ry='4'/><text x='32' y='36' font-family='sans-serif' font-size='14' fill='white' text-anchor='middle'>Wiring</text></svg>";
+            const wiringIcon = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='64' height='64'><text x='32' y='40' font-family='Arial' font-weight='bold' font-size='15' fill='%23333' text-anchor='middle'>Wiring</text></svg>";
             playerInventory[3] = { id: 'wiring', name: 'Wiring', icon: wiringIcon };
             playerInventory[4] = { id: 'speedcoil', name: 'Speed Coil', icon: 'https://static.wikitide.net/nicosnextbotswiki/f/f4/Nextbot_speedcoil.png' };
             playerInventory[5] = { id: 'gravitycoil', name: 'Gravity Coil', icon: 'https://static.wikia.nocookie.net/roblox/images/e/e1/Gravity_Coil1.png/revision/latest/thumbnail/width/360/height/450?cb=20180702034124' };
         }
-
         function setupSoundObjects() {
             walkAudio = new Audio(WALK_SOUND_URL);
             walkAudio.volume = audioVolume / 10; walkAudio.loop = true; walkAudio.preload = 'auto';
-            climbAudio = new Audio(CLIMB_SOUND_URL); // single looping track (no stacked clones)
+            climbAudio = new Audio(CLIMB_SOUND_URL);
             climbAudio.volume = audioVolume / 10; climbAudio.loop = true; climbAudio.preload = 'auto';
             jumpAudio = new Audio(JUMP_SOUND_URL); jumpAudio.volume = audioVolume / 10; jumpAudio.preload = 'auto';
             deathAudio = new Audio(DEATH_SOUND_URL); deathAudio.volume = audioVolume / 10; deathAudio.preload = 'auto';
         }
-
         function updateSoundVolumes() {
             if (walkAudio) walkAudio.volume = audioVolume / 10;
             if (climbAudio) climbAudio.volume = audioVolume / 10;
             if (jumpAudio) jumpAudio.volume = audioVolume / 10;
             if (deathAudio) deathAudio.volume = audioVolume / 10;
         }
-
         function renderColorPicker() {
             const container = document.getElementById('pi-color-picker');
             if (!container) return;
@@ -581,7 +589,6 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                 container.appendChild(circle);
             });
         }
-
         function savePlayerInfo() {
             const nameInput = document.getElementById('pi-display-name');
             const userInput = document.getElementById('pi-username');
@@ -596,12 +603,11 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
             updateLeaderboardName();
             buildPeopleGrid();
             const lo = plotOwners.findIndex(o => o && o.kind === 'local');
-            if (lo !== -1) plotOwners[lo].name = playerDisplayName;
+            if (lo !== -1) plotOwners[lo].name = playerUsername || playerDisplayName;
             const toast = document.getElementById('info-saved-toast');
             toast.classList.add('show');
             setTimeout(() => toast.classList.remove('show'), 2200);
         }
-
         function loadSettings() {
             const savedAudio = localStorage.getItem('toh_audio'); if (savedAudio !== null) audioVolume = parseInt(savedAudio);
             const savedGfxMode = localStorage.getItem('toh_gfxMode'); if (savedGfxMode !== null) currentGraphicsMode = savedGfxMode;
@@ -618,15 +624,14 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
             const savedMusic = localStorage.getItem('toh_ingamemusic'); if (savedMusic !== null) ingameMusicEnabled = (savedMusic === 'true');
             const savedKillClan = localStorage.getItem('toh_killclanmembers'); if (savedKillClan !== null) killClanMembersEnabled = (savedKillClan === 'true');
         }
-
         function syncGameSettingsUI() {
             document.querySelectorAll('#settings-interface .toggle-btn').forEach(btn => {
                 const setting = btn.dataset.setting;
+                if (setting === 'forcefield') return; // LOCKED
                 let on = true;
                 if (setting === 'playersounds') on = playerSoundsEnabled;
                 else if (setting === 'timecycle') on = isTimeCycleActive;
                 else if (setting === 'textures') on = texturesEnabled;
-                else if (setting === 'forcefield') on = isForcefieldPermanent;
                 else if (setting === 'ingamemusic') on = ingameMusicEnabled;
                 else if (setting === 'killclanmembers') on = killClanMembersEnabled;
                 btn.classList.toggle('on', on);
@@ -634,7 +639,6 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                 btn.innerText = on ? 'ON' : 'OFF';
             });
         }
-
         // --- Sound playback (one-shots clone their own element, so they all overlap freely) ---
         function playOofSound() { if (!playerSoundsEnabled || audioVolume <= 0 || !deathAudio) return; const sound = deathAudio.cloneNode(); sound.volume = audioVolume / 10; sound.play().catch(() => {}); }
         function playWalkSound() { if (!playerSoundsEnabled || audioVolume <= 0 || !walkAudio) return; if (walkAudio.paused) { walkAudio.currentTime = 0; walkAudio.play().catch(() => {}); } }
@@ -647,7 +651,6 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
         function playLungeSound() { if (!playerSoundsEnabled || audioVolume <= 0 || !lungeSound) return; const s = lungeSound.cloneNode(); s.currentTime = 0; s.volume = audioVolume / 10; s.play().catch(() => {}); }
         function playSpeedCoilSound() { if (!playerSoundsEnabled || audioVolume <= 0 || !speedCoilSound) return; const s = speedCoilSound.cloneNode(); s.currentTime = 0; s.volume = audioVolume / 10; s.play().catch(() => {}); }
         function playGravityCoilSound() { if (!playerSoundsEnabled || audioVolume <= 0 || !gravityCoilSound) return; const s = gravityCoilSound.cloneNode(); s.currentTime = 0; s.volume = audioVolume / 10; s.play().catch(() => {}); }
-
         function loadSounds() {
             equipSound = new Audio('https://us-tuna-sounds-files.voicemod.net/215645d0-9633-4bef-9598-f7c78c184e00-1693085492415.mp3');
             slashSound = new Audio('https://us-tuna-sounds-files.voicemod.net/c4a606ff-eaf8-4699-b289-3071debb92c2-1693085608654.mp3');
@@ -655,7 +658,6 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
             speedCoilSound = new Audio('https://www.myinstants.com/media/sounds/roblox-speed-coil.mp3');
             gravityCoilSound = new Audio('https://us-tuna-sounds-files.voicemod.net/b08b96bb-ba2a-4664-a541-490874e2143a-1659832866447.mp3');
         }
-
         function createSwordModel() {
             const group = new THREE.Group();
             const grayMat = new THREE.MeshStandardMaterial({ color: 0x888888, roughness: 0.5 });
@@ -670,7 +672,6 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
             group.traverse(obj => { if (obj.isMesh) { obj.castShadow = true; obj.receiveShadow = true; } });
             return group;
         }
-
         // Spring coil model: a thin helix that wraps around the right forearm
         function createCoilModel(colorHex) {
             const pts = [];
@@ -686,25 +687,70 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
             mesh.castShadow = true;
             return mesh;
         }
-
+        // Stamper: sword-style ball+rod base (black), dark red head box, "ROBLOX" text.
+        // No swing - always faces forward.
+        function createStamperModel() {
+            const group = new THREE.Group();
+            const blackMat = new THREE.MeshStandardMaterial({ color: 0x1a1a1a, roughness: 0.5 });
+            const rod = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.1, 1.0, 16), blackMat);
+            rod.position.y = 0.5; group.add(rod);
+            const ball = new THREE.Mesh(new THREE.SphereGeometry(0.125, 16, 16), blackMat);
+            ball.position.y = 0; group.add(ball);
+            const head = new THREE.Mesh(new THREE.BoxGeometry(1, 0.25, 0.25), new THREE.MeshStandardMaterial({ color: 0x6e1414, roughness: 0.55 }));
+            head.position.y = 1.0; group.add(head);
+            const c = document.createElement('canvas'); c.width = 256; c.height = 64;
+            const ctx = c.getContext('2d');
+            ctx.fillStyle = '#000'; ctx.font = '700 40px Arial'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+            ctx.fillText('ROBLOX', 128, 32);
+            const tex = new THREE.CanvasTexture(c); tex.colorSpace = THREE.SRGBColorSpace;
+            const textPlate = new THREE.Mesh(new THREE.PlaneGeometry(1, 0.25), new THREE.MeshBasicMaterial({ map: tex, transparent: true, side: THREE.DoubleSide }));
+            textPlate.position.set(0, 1.0, 0.14); group.add(textPlate);
+            group.traverse(o => { if (o.isMesh) { o.castShadow = true; o.receiveShadow = true; } });
+            return group;
+        }
+        // Hammer: vertical handle (black bottom + avatar-yellow top) with half-ball cap,
+        // horizontal head rod with rear cone and front striking cylinder.
+        function createHammerModel() {
+            const group = new THREE.Group();
+            const blackMat = new THREE.MeshStandardMaterial({ color: 0x1a1a1a, roughness: 0.5 });
+            const yellowMat = new THREE.MeshStandardMaterial({ color: THEME.head, roughness: 0.5 });
+            const rodB = new THREE.Mesh(new THREE.CylinderGeometry(0.125, 0.125, 0.625, 16), blackMat);
+            rodB.position.y = 0.3125; group.add(rodB);
+            const rodT = new THREE.Mesh(new THREE.CylinderGeometry(0.125, 0.125, 0.625, 16), yellowMat);
+            rodT.position.y = 0.9375; group.add(rodT);
+            const cap = new THREE.Mesh(new THREE.SphereGeometry(0.125, 16, 8, 0, Math.PI * 2, Math.PI / 2, Math.PI / 2), blackMat);
+            cap.position.y = 0; group.add(cap);
+            const headRod = new THREE.Mesh(new THREE.CylinderGeometry(0.15, 0.15, 0.75, 16), blackMat);
+            headRod.rotation.x = Math.PI / 2; headRod.position.set(0, 1.25, 0); group.add(headRod);
+            const cone = new THREE.Mesh(new THREE.ConeGeometry(0.15, 0.3, 16), blackMat);
+            cone.rotation.x = -Math.PI / 2; cone.position.set(0, 1.25, -0.525); group.add(cone);
+            const face = new THREE.Mesh(new THREE.CylinderGeometry(0.25, 0.25, 0.25, 16), blackMat);
+            face.rotation.x = Math.PI / 2; face.position.set(0, 1.25, 0.5); group.add(face);
+            group.traverse(o => { if (o.isMesh) { o.castShadow = true; o.receiveShadow = true; } });
+            return group;
+        }
         // Single source of truth for what the player is holding
         function applyEquipState(item) {
             heldGearId = item ? item.id : '';
-            isHoldingItem = !!item;
+            // Wiring has no model and does NOT stick the arm out
+            isHoldingItem = !!item && heldGearId !== 'wiring';
             isHoldingSword = heldGearId === 'sword';
             isHoldingSpeedCoil = heldGearId === 'speedcoil';
             isHoldingGravityCoil = heldGearId === 'gravitycoil';
+            isHoldingStamper = heldGearId === 'stamper';
+            isHoldingHammer = heldGearId === 'hammer';
             if (swordModel) swordModel.visible = isHoldingSword;
             if (speedCoilModel) speedCoilModel.visible = isHoldingSpeedCoil;
             if (gravityCoilModel) gravityCoilModel.visible = isHoldingGravityCoil;
+            if (stamperModel) stamperModel.visible = isHoldingStamper;
+            if (hammerModel) hammerModel.visible = isHoldingHammer;
         }
         function playGearEquipSound(itemId) {
             if (itemId === 'sword') playEquipSound();
             else if (itemId === 'speedcoil') playSpeedCoilSound();
             else if (itemId === 'gravitycoil') playGravityCoilSound();
         }
-
-        // ===================== LEADERBOARD (player + Dec + remotes, live K/D) =====================
+        // ===================== LEADERBOARD =====================
         function rebuildLeaderboard() {
             const body = document.getElementById('lb-body');
             if (!body) return;
@@ -739,7 +785,6 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
         }
         function updateLeaderboardName() { rebuildLeaderboard(); }
         function updateLeaderboardStats() { rebuildLeaderboard(); }
-
         // ===================== INIT =====================
         async function init() {
             try {
@@ -778,9 +823,7 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                     moonSprite.visible = false;
                 }
                 buildPlayground();
-                // FIX: a stalled font stylesheet used to hang this await FOREVER -
-                // nothing after it ever ran and the loading screen never closed.
-                // Race the font load against a 1.5s timeout; the game always proceeds.
+                // Font loading must NEVER stall startup: race against a timeout
                 await Promise.race([
                     Promise.all([
                         document.fonts.load('80px Orbitron'),
@@ -820,7 +863,7 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                 isForcefieldActive = true;
                 if (!isForcefieldPermanent) { forcefieldMoveTimer = 0; forcefieldFade = 0; }
                 spawnNPC("ULTIMATE_DECIMATION", spawnPoints[1]); // Dec claims Plot 2
-                plotOwners[0] = { name: playerDisplayName, kind: 'local' };
+                plotOwners[0] = { name: playerUsername || playerDisplayName, kind: 'local' };
                 plotOwners[1] = { name: 'Dec', kind: 'npc' };
                 loadSounds();
                 updateLeaderboardStats();
@@ -872,7 +915,8 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                         document.activeElement.id === 'avatar-name-input' ||
                         document.activeElement.id === 'custom-hex-input' ||
                         document.activeElement.id === 'invite-code-input' ||
-                        document.activeElement.id === 'invite-link-input'
+                        document.activeElement.id === 'invite-link-input' ||
+                        document.activeElement.id === 'build-save-name'
                     )) return;
                     if (e.repeat) return; // Shift rapid-toggle fix
                     if (isMobile && currentInputMode === 'mobile') { switchToPCControls(); return; }
@@ -893,6 +937,12 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                     if (e.key === '`' && !checkPhone()) { e.preventDefault(); toggleInventory(); }
                     if (key === 'q' && !checkPhone()) { showPlotOwners = !showPlotOwners; }
                     if (e.key === '/' && !checkPhone() && document.activeElement.id !== 'chat-input') { e.preventDefault(); toggleChat(true, true); return; }
+                    // Block rotation keys (stamper)
+                    if (isHoldingStamper) {
+                        if (key === 'r') { blockRot.y = (blockRot.y + Math.PI / 2) % (Math.PI * 2); bounceHologram(); }
+                        if (key === 't') { blockRot.x = (blockRot.x + Math.PI / 2) % (Math.PI * 2); bounceHologram(); }
+                        if (key === 'z') { blockRot.z = (blockRot.z + Math.PI / 2) % (Math.PI * 2); bounceHologram(); }
+                    }
                     if (e.key >= '0' && e.key <= '9') {
                         let slotIndex = parseInt(e.key);
                         if (slotIndex === 0) slotIndex = 9; else slotIndex -= 1;
@@ -949,6 +999,17 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                 });
                 window.addEventListener('mousedown', (e) => {
                     if (e.button === 2) { isRightMouseDown = true; checkPointerLockNeeds(); }
+                    // Stamper: place block
+                    if (e.button === 0 && isHoldingStamper && !isMenuOpen && !isAvatarEditorOpen && !isRagdoll && isRunning) {
+                        const uiHit = e.target.closest && e.target.closest('#stamper-menu, #inventory, #top-ui-bar, #roblox-menu-btn, #top-bar-menu, #dropdown-menu, .game-interface, #pause-menu, #avatar-editor-menu, #invite-menu, #player-profile-overlay, .confirmation-panel');
+                        if (!uiHit) tryPlaceBlock();
+                    }
+                    // Hammer: delete block
+                    if (e.button === 0 && isHoldingHammer && !isMenuOpen && !isAvatarEditorOpen && !isRagdoll && isRunning) {
+                        const uiHit = e.target.closest && e.target.closest('#inventory, #top-ui-bar, #roblox-menu-btn, #top-bar-menu, #dropdown-menu, .game-interface, #pause-menu, #avatar-editor-menu, #invite-menu, #player-profile-overlay, .confirmation-panel');
+                        if (!uiHit) tryDeleteBlock();
+                    }
+                    // Sword swing / lunge
                     if (e.button === 0 && isHoldingSword && !isMenuOpen && !isAvatarEditorOpen && !isRagdoll && isRunning) {
                         const uiHit = e.target.closest && e.target.closest('#inventory, #top-ui-bar, #roblox-menu-btn, #top-bar-menu, #dropdown-menu, .game-interface, #pause-menu, #avatar-editor-menu, #avatar-naming-modal, #invite-menu, #player-profile-overlay, .confirmation-panel');
                         if (!uiHit) handleSwordClick();
@@ -968,7 +1029,7 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                 document.addEventListener('touchstart', (e) => {
                     if (isMobile && currentInputMode === 'pc') {
                         const target = e.target;
-                        if (!target.closest('#pause-menu') && !target.closest('#avatar-editor-menu') && !target.closest('#avatar-naming-modal') && !target.closest('#roblox-menu-btn') && !target.closest('.confirmation-panel') && !target.closest('#top-bar-menu') && !target.closest('#dropdown-menu') && !target.closest('#leaderboard') && !target.closest('#inventory') && !target.closest('#chat-container') && !target.closest('#invite-menu') && !target.closest('#player-profile-overlay') && !target.closest('#top-ui-bar')) {
+                        if (!target.closest('#pause-menu') && !target.closest('#avatar-editor-menu') && !target.closest('#avatar-naming-modal') && !target.closest('#roblox-menu-btn') && !target.closest('.confirmation-panel') && !target.closest('#top-bar-menu') && !target.closest('#dropdown-menu') && !target.closest('#leaderboard') && !target.closest('#inventory') && !target.closest('#chat-container') && !target.closest('#invite-menu') && !target.closest('#player-profile-overlay') && !target.closest('#top-ui-bar') && !target.closest('#stamper-menu')) {
                             switchToMobileControls();
                             return;
                         }
@@ -982,7 +1043,7 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                     for (let i = 0; i < e.changedTouches.length; i++) {
                         const t = e.changedTouches[i];
                         const target = t.target;
-                        if (target.closest('#inventory') || target.closest('#chat-container') || target.closest('#leaderboard') || target.closest('#avatar-editor-menu') || target.closest('#pause-menu') || target.closest('.game-interface') || target.closest('#dropdown-menu') || target.closest('#avatar-naming-modal') || target.closest('#invite-menu') || target.closest('#player-profile-overlay') || target.closest('#top-ui-bar')) continue;
+                        if (target.closest('#inventory') || target.closest('#chat-container') || target.closest('#leaderboard') || target.closest('#avatar-editor-menu') || target.closest('#pause-menu') || target.closest('.game-interface') || target.closest('#dropdown-menu') || target.closest('#avatar-naming-modal') || target.closest('#invite-menu') || target.closest('#player-profile-overlay') || target.closest('#top-ui-bar') || target.closest('#stamper-menu')) continue;
                         const isInsideJoystick = (currentMovementMode === 'classic' && t.clientX >= joyRect.left && t.clientX <= joyRect.right && t.clientY >= joyRect.top && t.clientY <= joyRect.bottom);
                         const isInsideDynamicZone = (currentMovementMode === 'dynamic' && t.clientX >= dZoneRect.left && t.clientX <= dZoneRect.right && t.clientY >= dZoneRect.top && t.clientY <= dZoneRect.bottom);
                         const isInsideJump = (t.clientX >= jumpRect.left && t.clientX <= jumpRect.right && t.clientY >= jumpRect.top && t.clientY <= jumpRect.bottom);
@@ -992,6 +1053,7 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                         if (cameraTouches.length < 2) {
                             cameraTouches.push({ id: t.identifier, lastX: t.clientX, lastY: t.clientY });
                             if (cameraTouches.length === 1 && isHoldingSword && !isRagdoll) handleSwordClick();
+                            if (cameraTouches.length === 1 && isHoldingStamper && !isRagdoll) tryPlaceBlock();
                         }
                     }
                     if (cameraTouches.length === 2) {
@@ -1046,7 +1108,7 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                 window.addEventListener('touchstart', (e) => {
                     if (currentMovementMode !== 'tap' || isMenuOpen || isRagdoll || !isRunning || isAvatarEditorOpen) return;
                     const target = e.target;
-                    if (target.closest('#roblox-menu-btn') || target.closest('#pause-menu') || target.closest('#avatar-editor-menu') || target.closest('#avatar-naming-modal') || target.closest('#jump-button') || target.closest('#mobile-shiftlock') || target.closest('#top-bar-menu') || target.closest('#dropdown-menu') || target.closest('#leaderboard') || target.closest('#inventory') || target.closest('#chat-container') || target.closest('.game-interface') || target.closest('#top-ui-bar')) return;
+                    if (target.closest('#roblox-menu-btn') || target.closest('#pause-menu') || target.closest('#avatar-editor-menu') || target.closest('#avatar-naming-modal') || target.closest('#jump-button') || target.closest('#mobile-shiftlock') || target.closest('#top-bar-menu') || target.closest('#dropdown-menu') || target.closest('#leaderboard') || target.closest('#inventory') || target.closest('#chat-container') || target.closest('.game-interface') || target.closest('#top-ui-bar') || target.closest('#stamper-menu')) return;
                     const touch = e.changedTouches[0];
                     const mouse = new THREE.Vector2((touch.clientX / window.innerWidth) * 2 - 1, -(touch.clientY / window.innerHeight) * 2 + 1);
                     const raycaster = new THREE.Raycaster();
@@ -1057,7 +1119,7 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                 window.addEventListener('mousedown', (e) => {
                     if (currentMovementMode !== 'tap' || isMenuOpen || isRagdoll || !isRunning || isAvatarEditorOpen || e.button !== 0) return;
                     const target = e.target;
-                    if (target.closest('#roblox-menu-btn') || target.closest('#pause-menu') || target.closest('#avatar-editor-menu') || target.closest('#avatar-naming-modal') || target.closest('#top-bar-menu') || target.closest('#dropdown-menu') || target.closest('#leaderboard') || target.closest('#inventory') || target.closest('#chat-container') || target.closest('.game-interface') || target.closest('#top-ui-bar')) return;
+                    if (target.closest('#roblox-menu-btn') || target.closest('#pause-menu') || target.closest('#avatar-editor-menu') || target.closest('#avatar-naming-modal') || target.closest('#top-bar-menu') || target.closest('#dropdown-menu') || target.closest('#leaderboard') || target.closest('#inventory') || target.closest('#chat-container') || target.closest('.game-interface') || target.closest('#top-ui-bar') || target.closest('#stamper-menu')) return;
                     const mouse = new THREE.Vector2((e.clientX / window.innerWidth) * 2 - 1, -(e.clientY / window.innerHeight) * 2 + 1);
                     const raycaster = new THREE.Raycaster();
                     raycaster.setFromCamera(mouse, camera);
@@ -1622,8 +1684,6 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                 const shadowSize = (level >= 5) ? 1024 : 512;
                 sun.shadow.mapSize.width = shadowSize;
                 sun.shadow.mapSize.height = shadowSize;
-                // Frustum covers the full 464x464 world + sand rim; far extended because
-                // the Time Cycle orbits the sun at radius 1000 (old far=500 clipped all shadows)
                 const d = 360;
                 sun.shadow.camera.left = -d; sun.shadow.camera.right = d;
                 sun.shadow.camera.top = d; sun.shadow.camera.bottom = -d;
@@ -2074,7 +2134,7 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
             if (msg !== '') {
                 const messages = document.getElementById('chat-messages');
                 const lowerMsg = msg.toLowerCase();
-                // Plot claiming (":claim 1-9"; Plot 2 is permanently Dec's)
+                // Plot claiming (":claim 1-9"; Plot 2 is permanently Dec's; can't steal claimed plots)
                 if (lowerMsg.startsWith(':claim ')) {
                     const parts = lowerMsg.split(' ');
                     if (parts.length === 2) {
@@ -2089,10 +2149,20 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                                 document.getElementById('chat-send').classList.remove('active');
                                 return;
                             }
-                            currentSpawnIndex = plotNum - 1;
-                            // Update plot ownership (local player)
+                            const targetIdx = plotNum - 1;
+                            const existing = plotOwners[targetIdx];
+                            if (existing && existing.kind !== 'local') {
+                                const sysMsgDiv = document.createElement('div');
+                                sysMsgDiv.innerHTML = '<span class="chat-msg-user" style="color: #ff3333;">[System]:</span> Plot ' + plotNum + ' is already claimed by ' + existing.name + '.';
+                                messages.appendChild(sysMsgDiv);
+                                messages.scrollTop = messages.scrollHeight;
+                                input.value = '';
+                                document.getElementById('chat-send').classList.remove('active');
+                                return;
+                            }
+                            currentSpawnIndex = targetIdx;
                             for (let pi = 0; pi < 9; pi++) { if (plotOwners[pi] && plotOwners[pi].kind === 'local') plotOwners[pi] = null; }
-                            plotOwners[currentSpawnIndex] = { name: playerDisplayName, kind: 'local' };
+                            plotOwners[currentSpawnIndex] = { name: playerUsername || playerDisplayName, kind: 'local' };
                             const sp = spawnPoints[currentSpawnIndex];
                             playerPos.set(sp.x, sp.y, sp.z);
                             playerVel.set(0, 0, 0);
@@ -2388,7 +2458,6 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
             df.style.opacity = '1';
             setTimeout(() => { df.style.opacity = '0'; }, 200);
             charGroup.visible = false;
-            // Limb pivots cloned whole - a held sword flies off with the arm
             const limbDefs = [
                 { mesh: charHead, name: 'head', extents: new THREE.Vector3(0.6, 0.6, 0.6), isHead: true },
                 { mesh: charTorso, name: 'torso', extents: new THREE.Vector3(1.0, 1.0, 0.5), isHead: false },
@@ -2556,7 +2625,6 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                 const body = bodies[i];
                 if (!body.mesh) continue;
                 body.vel.y -= debrisGravity * delta;
-                // LATERAL COLLISION: body parts must not clip through blocks
                 const horizVel = new THREE.Vector3(body.vel.x, 0, body.vel.z);
                 const horizSpeed = horizVel.length();
                 if (horizSpeed > 0.01) {
@@ -2841,14 +2909,12 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                 else indices.push(i, i+2, i+1);
             }
             const v = (x, y, z) => new THREE.Vector3(x, y, z);
-            // 6 Main Faces
             addQuad(v(W, -Hc, -Dc), v(W, Hc, -Dc), v(W, Hc, Dc), v(W, -Hc, Dc), new THREE.Vector3(1, 0, 0));
             addQuad(v(-W, -Hc, Dc), v(-W, Hc, Dc), v(-W, Hc, -Dc), v(-W, -Hc, -Dc), new THREE.Vector3(-1, 0, 0));
             addQuad(v(-Wc, H, -Dc), v(Wc, H, -Dc), v(Wc, H, Dc), v(-Wc, H, Dc), new THREE.Vector3(0, 1, 0));
             addQuad(v(-Wc, -H, Dc), v(Wc, -H, Dc), v(Wc, -H, -Dc), v(-Wc, -H, -Dc), new THREE.Vector3(0, -1, 0));
             addQuad(v(-Wc, -Hc, D), v(Wc, -Hc, D), v(Wc, Hc, D), v(-Wc, Hc, D), new THREE.Vector3(0, 0, 1));
             addQuad(v(-Wc, Hc, -D), v(Wc, Hc, -D), v(Wc, -Hc, -D), v(-Wc, -Hc, -D), new THREE.Vector3(0, 0, -1));
-            // 12 Edge Faces
             addQuad(v(-Wc, H, Dc), v(-Wc, Hc, D), v(Wc, Hc, D), v(Wc, H, Dc), new THREE.Vector3(0, 1, 1).normalize());
             addQuad(v(-Wc, Hc, -D), v(-Wc, H, -Dc), v(Wc, H, -Dc), v(Wc, Hc, -D), new THREE.Vector3(0, 1, -1).normalize());
             addQuad(v(-Wc, -H, Dc), v(-Wc, -Hc, D), v(Wc, -Hc, D), v(Wc, -H, Dc), new THREE.Vector3(0, -1, 1).normalize());
@@ -2861,7 +2927,6 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
             addQuad(v(W, -Hc, -Dc), v(Wc, -H, -Dc), v(Wc, -H, Dc), v(W, -Hc, Dc), new THREE.Vector3(1, -1, 0).normalize());
             addQuad(v(-W, Hc, -Dc), v(-Wc, H, -Dc), v(Wc, H, Dc), v(-W, Hc, Dc), new THREE.Vector3(-1, 1, 0).normalize());
             addQuad(v(-W, -Hc, Dc), v(-Wc, -H, Dc), v(-Wc, -H, -Dc), v(-W, -Hc, -Dc), new THREE.Vector3(-1, -1, 0).normalize());
-            // 8 Corner Triangles
             addTriangle(v(W, Hc, Dc), v(Wc, H, Dc), v(Wc, Hc, D), new THREE.Vector3(1, 1, 1).normalize());
             addTriangle(v(W, Hc, -Dc), v(Wc, Hc, -D), v(Wc, H, -Dc), new THREE.Vector3(1, 1, -1).normalize());
             addTriangle(v(W, -Hc, Dc), v(Wc, -H, Dc), v(Wc, -Hc, D), new THREE.Vector3(1, -1, 1).normalize());
@@ -2985,7 +3050,7 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
             return geo;
         }
 
-        // ===================== SKY DOME (day <-> sunset <-> night, fading) =====================
+        // ===================== SKY DOME =====================
         let skyDome = null;
         function createSkyFallbackTexture(top, mid, bottom) {
             const w = 1024, h = 512;
@@ -3193,7 +3258,6 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                         ).normalize();
                         let bestDist = Infinity;
                         let bestIsGround = false;
-                        // Ground plane spans the game's brick base (+-232, top y = 2.0)
                         if (aoState.baseplate && dir.y < -1e-6) {
                             const t = (origin.y - 2.0) / (-dir.y);
                             if (t >= 0) {
@@ -3237,7 +3301,7 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
             aoState.materials.forEach(m => { m.vertexColors = useColor; m.needsUpdate = true; });
         }
 
-        // ===================== CHARACTER (right-hand sword + coils) =====================
+        // ===================== CHARACTER (all 5 tools on the right arm) =====================
         function buildCharacter() {
             charGroup = new THREE.Group();
             const headRadius = 0.6, headHeight = 1.2, headBevel = 0.3;
@@ -3325,6 +3389,20 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
             gravityCoilModel.visible = false;
             gravityCoilModel.userData.templateSkip = true;
             pR_Arm.add(gravityCoilModel);
+            // Stamper tool model
+            stamperModel = createStamperModel();
+            stamperModel.position.y = -1.5;
+            stamperModel.rotation.set(-Math.PI / 2, 0, Math.PI);
+            stamperModel.visible = false;
+            stamperModel.userData.templateSkip = true;
+            pR_Arm.add(stamperModel);
+            // Hammer tool model
+            hammerModel = createHammerModel();
+            hammerModel.position.y = -1.5;
+            hammerModel.rotation.set(Math.PI / 2, 0, 0);
+            hammerModel.visible = false;
+            hammerModel.userData.templateSkip = true;
+            pR_Arm.add(hammerModel);
             // Circular forcefield sprite (spawn protection)
             const ffCanvas = document.createElement('canvas'); ffCanvas.width = 128; ffCanvas.height = 128;
             const ffCtx = ffCanvas.getContext('2d');
@@ -3392,7 +3470,6 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
             npcSword.rotation.set(-Math.PI / 2, 0, Math.PI);
             npcSword.visible = true;
             rightArm.add(npcSword);
-            // Dec's forcefield sprite
             const ffCanvas = document.createElement('canvas'); ffCanvas.width = 128; ffCanvas.height = 128;
             const ffCtx = ffCanvas.getContext('2d');
             const ffGrad = ffCtx.createRadialGradient(64, 64, 40, 64, 64, 64);
@@ -3406,7 +3483,6 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
             const npcFF = new THREE.Sprite(npcFFMat);
             npcFF.scale.set(7, 7, 1); npcFF.position.y = 3; npcFF.renderOrder = 999;
             npcGroup.add(npcFF);
-            // DOM nametag + health bar - same style as multiplayer player names
             decTag = document.createElement('div');
             decTag.className = 'player-nametag';
             decTag.textContent = name;
@@ -3435,7 +3511,7 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
             };
         }
 
-        // ===================== TRUSS (climbable, AO-registered - dormant building hook) =====================
+        // ===================== TRUSS =====================
         function createTruss(color) {
             const trussGroup = new THREE.Group();
             const mat = new THREE.MeshPhongMaterial({ color });
@@ -3493,9 +3569,8 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
             return trussGroup;
         }
 
-        // ===================== WORLD (game map; showcase content removed) =====================
+        // ===================== WORLD =====================
         function buildPlayground() {
-            // Brick base: 116x116 grid of 4-stud instanced bricks (464x464), plot holes cut out
             const brickTexture = new THREE.TextureLoader().load("https://devforum-uploads.s3.dualstack.us-east-2.amazonaws.com/uploads/original/4X/f/0/4/f04a1aabddc808b5cef98214d1a7f4724a7e5c2a.png");
             brickTexture.colorSpace = THREE.SRGBColorSpace;
             const brickMat = new THREE.MeshStandardMaterial({ map: brickTexture, color: 0xffffff, roughness: 0.9 });
@@ -3530,7 +3605,6 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
             scene.add(brickMesh);
             collisionObjs.push(brickMesh);
             aoState.baseplate = brickMesh;
-            // 9 building plots (112x112) with corner spawn platforms
             const plotSize = 112;
             const plotTexture = new THREE.TextureLoader().load("https://devforum-uploads.s3.dualstack.us-east-2.amazonaws.com/uploads/original/4X/b/8/6/b869e84d1e494b69aa91a4c0ae32dfcf7d43e811.png");
             plotTexture.wrapS = THREE.RepeatWrapping;
@@ -3573,7 +3647,6 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                 spawnPoints.push(new THREE.Vector3(spX, 7.6, spZ));
                 plotLabelAnchors.push(new THREE.Vector3(center.x, 10, center.z));
             });
-            // Grass border ring (88 studs wide around the brick base)
             const grassTex = new THREE.TextureLoader().load("https://devforum-uploads.s3.dualstack.us-east-2.amazonaws.com/uploads/optimized/4X/5/6/4/564d55107b215d781458200a8b52afce6e8f3c1c_2_750x750.png");
             grassTex.colorSpace = THREE.SRGBColorSpace;
             const grassColor = 0xb0ffc5;
@@ -3596,7 +3669,6 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
             makeBorderBox(640, 88, 0, -276, grassTex, grassColor);
             makeBorderBox(88, 464, 276, 0, grassTex, grassColor);
             makeBorderBox(88, 464, -276, 0, grassTex, grassColor);
-            // Sand ring
             const sandTex = new THREE.TextureLoader().load("https://devforum-uploads.s3.dualstack.us-east-2.amazonaws.com/uploads/optimized/4X/c/c/7/cc71d084bc4d2c1f364073af2a0db2c94ad06ae5_2_750x750.png");
             sandTex.colorSpace = THREE.SRGBColorSpace;
             sandTex.wrapS = THREE.RepeatWrapping;
@@ -3622,7 +3694,6 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
             makeSandBox(680, 20, 0, -330);
             makeSandBox(20, 640, 330, 0);
             makeSandBox(20, 640, -330, 0);
-            // Sloped lower sand rim (custom geometry down to y = -6)
             const lowerSandGeo = new THREE.BufferGeometry();
             const verts = []; const uvs = [];
             const addTri = (x1, y1, z1, x2, y2, z2, x3, y3, z3) => { verts.push(x1, y1, z1, x2, y2, z2, x3, y3, z3); uvs.push(x1 / 8, z1 / 8, x2 / 8, z2 / 8, x3 / 8, z3 / 8); };
@@ -3656,7 +3727,6 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
             lowerSandMesh.receiveShadow = true;
             scene.add(lowerSandMesh);
             collisionObjs.push(lowerSandMesh);
-            // 4 corner rocks + trees
             const rockTex = new THREE.TextureLoader().load("https://devforum-uploads.s3.dualstack.us-east-2.amazonaws.com/uploads/optimized/4X/9/c/1/9c19526bee88819cc3b732e61d890510b87ed5d4_2_750x750.png");
             const rockMat = new THREE.MeshStandardMaterial({ map: rockTex, color: 0xcccccc, roughness: 0.9 });
             const rockGeo = new THREE.SphereGeometry(12, 16, 12);
@@ -3681,7 +3751,6 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                 const leaf2 = new THREE.Mesh(leafGeo2, leafMat); leaf2.position.set(treeX, 2 + 22, treeZ); leaf2.castShadow = true; leaf2.receiveShadow = true; scene.add(leaf2);
                 const leaf3 = new THREE.Mesh(leafGeo3, leafMat); leaf3.position.set(treeX, 2 + 28, treeZ); leaf3.castShadow = true; leaf3.receiveShadow = true; scene.add(leaf3);
             });
-            // Ocean
             const oceanTex = new THREE.TextureLoader().load("https://devforum-uploads.s3.dualstack.us-east-2.amazonaws.com/uploads/original/4X/8/9/d/89d8a2e68328f6bfa244e7a51420060b74b1f606.png");
             oceanTex.colorSpace = THREE.SRGBColorSpace; oceanTex.wrapS = THREE.RepeatWrapping; oceanTex.wrapT = THREE.RepeatWrapping; oceanTex.repeat.set(250, 250);
             const oceanMat = new THREE.MeshStandardMaterial({ map: oceanTex, color: 0x88ccff, roughness: 0.6, metalness: 0.1 });
@@ -3693,8 +3762,6 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
             scene.add(ocean);
         }
         // ===================== WALL COLLISION =====================
-        // Swept wall test: rays from the CURRENT position with a reach covering the
-        // frame movement plus body radius. Mobile ray-reduction + zero per-ray allocation.
         function hasWallCollision(pos, dir, objs, reach) {
             const yLevels = isMobile ? [pos.y - 3.5] : [pos.y - 0.9, pos.y - 1.5, pos.y - 3.5, pos.y - 5.4];
             const xOffset = dir.z * 0.5;
@@ -3747,7 +3814,6 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                     }
                     const hitObj = hits[0].object;
                     let topY = 2.0;
-                    // Terrain fast-path (instanced bricks/plots/borders carry topY in userData)
                     if (hitObj.userData.topY !== undefined) {
                         topY = hitObj.userData.topY;
                     } else {
@@ -3879,7 +3945,6 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
             const fullDist = fromPos.distanceTo(idealPos);
             if (wallHits.length > 0 && wallHits[0].distance < fullDist) {
                 const pulled = wallHits[0].point.clone().add(cameraRay.ray.direction.clone().multiplyScalar(-1.2));
-                // SHIFT-LOCK EXCEPTION: camera allowed inside blocks (back-face culling)
                 if (isShiftLock && (isPointInsideAnyBlock(idealPos) || isPointInsideAnyBlock(pulled))) {
                     return idealPos;
                 }
@@ -3917,12 +3982,12 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
             let hit = false;
             const checkBody = (bx, bz, bf, bh) => {
                 if (hit) return;
-                if (myFeet >= bh - 0.3 || myHead <= bf + 0.1) return; // head-standing allowed
+                if (myFeet >= bh - 0.3 || myHead <= bf + 0.1) return;
                 const dx = x - bx, dz = z - bz;
                 if (dx * dx + dz * dz < minDistSq) hit = true;
             };
             remotePlayers.forEach(rp => { if (!rp.dead) checkBody(rp.pos.x, rp.pos.z, rp.pos.y, rp.pos.y + PLAYER_HEAD_TOP); });
-            if (npc && !npc.isDead) checkBody(npc.pos.x, npc.pos.z, npc.pos.y - 5.5, npc.pos.y); // Dec
+            if (npc && !npc.isDead) checkBody(npc.pos.x, npc.pos.z, npc.pos.y - 5.5, npc.pos.y);
             return hit;
         }
         function depenetrateFromPlayers(dt) {
@@ -3949,16 +4014,15 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                 }
             };
             remotePlayers.forEach(rp => { if (!rp.dead) pushOff(rp.pos.x, rp.pos.z, rp.pos.y, rp.pos.y + PLAYER_HEAD_TOP); });
-            if (npc && !npc.isDead) pushOff(npc.pos.x, npc.pos.z, npc.pos.y - 5.5, npc.pos.y); // Dec
+            if (npc && !npc.isDead) pushOff(npc.pos.x, npc.pos.z, npc.pos.y - 5.5, npc.pos.y);
         }
-        // World-change hook for future building tools (stamper/hammer)
         function invalidateWorldCaches() {
             solidBlockBoxes = null;
             cameraOcclusionBoxes = null;
             aoState.baked = false;
         }
 
-        // ===================== EMOTE SYSTEM (chat: "/e <name>") =====================
+        // ===================== EMOTE SYSTEM =====================
         const EMOTE_POSE_FIELDS = ['torsoX','torsoZ','torsoY','headX','headZ','headY','lArmX','rArmX','lArmZ','rArmZ','lArmY','rArmY','lLegX','rLegX','lLegZ','rLegZ','lLegY','rLegY','y','lat'];
         const EMOTE_NEUTRAL = {};
         const EMOTES = {
@@ -4079,7 +4143,6 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
         function playEmote(name) {
             const def = EMOTES[name];
             if (!def) return false;
-            // Emotes blocked while holding any gear (poses would fight the held item)
             if (!isRunning || isRagdoll || isFlyMode || isCurrentlyClimbing || !isGrounded || isHoldingItem) return false;
             emoteRecovery = null;
             emoteTotalTime = 0;
@@ -4132,7 +4195,6 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
         }
         function updateEmote(dt) {
             if (!activeEmote) return false;
-            // Equipping gear mid-emote triggers smooth recovery
             if (moveKeys.w || moveKeys.a || moveKeys.s || moveKeys.d || moveKeys.space ||
                 joystickVector.length() > 0 || isWalking || isCurrentlyClimbing || isFlyMode || isHoldingItem) {
                 startEmoteRecovery();
@@ -4170,7 +4232,7 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
             }
             return true;
         }
-        // --- Remote emote replication (deterministic: same pose on every client) ---
+        // --- Remote emote replication ---
         function computeRemoteEmotePose(def, t) {
             if (def.type === 'loop') {
                 let k = Math.min(t / 0.35, 1);
@@ -4348,8 +4410,7 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                         rp.lLeg.rotation.x = 0; rp.rLeg.rotation.x = 0;
                     }
                 }
-                // Held gear: model visibility + right arm sticks out (AFTER pose branches,
-                // so the walk/climb poses can never overwrite the hold pose)
+                // Held gear: model visibility + right arm sticks out (AFTER pose branches)
                 if (rp.sword) rp.sword.visible = (st.hi === 'sword');
                 if (rp.speedCoil) rp.speedCoil.visible = (st.hi === 'speedcoil');
                 if (rp.gravCoil) rp.gravCoil.visible = (st.hi === 'gravitycoil');
@@ -4367,10 +4428,15 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                         rp.rArm.rotation.x = -Math.PI / 2;
                     }
                 }
+                // Remote forcefield visibility
+                if (rp.forcefield) {
+                    const ffTarget = st.ff ? 0.8 : 0;
+                    rp.forcefield.material.opacity += (ffTarget - rp.forcefield.material.opacity) * Math.min(1, dt * 6);
+                }
             });
         }
 
-        // ===================== OVERHEAD UI (names + health bars) =====================
+        // ===================== OVERHEAD UI =====================
         function hpBarColor(hp) {
             const p = Math.max(0, Math.min(1, hp / 100));
             const c = new THREE.Color();
@@ -4425,7 +4491,6 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                     by -= 30;
                 }
             });
-            // Dec: same DOM name + health bar style as players
             if (npc && decTag && decHpBar) {
                 if (npc.isDead) {
                     decTag.style.display = 'none';
@@ -4450,7 +4515,7 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
             }
         }
 
-        // ===================== PLOT OWNER LABELS (Q key, Fredoka) =====================
+        // ===================== PLOT OWNER LABELS (Q key) =====================
         function ensurePlotLabels() {
             if (plotLabelEls.length) return;
             for (let i = 0; i < 9; i++) {
@@ -4479,14 +4544,10 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                 el.style.left = ((_plotLabelV.x * 0.5 + 0.5) * window.innerWidth) + 'px';
                 el.style.top = ((-_plotLabelV.y * 0.5 + 0.5) * window.innerHeight) + 'px';
                 const owner = plotOwners[i];
-                el.textContent = owner ? ('Plot ' + (i + 1) + ': ' + owner.name) : ('Plot ' + (i + 1));
+                el.textContent = 'Plot ' + (i + 1) + ': ' + (owner ? owner.name : 'No one!');
             }
         }
-        // ===================== MULTIPLAYER (engine, PeerJS star topology) =====================
-        // Host owns a Peer whose id encodes a 6-digit game code; clients connect from
-        // anywhere. All traffic is relayed by the host. Dec is HOST-SIMULATED and
-        // broadcast at 10Hz so every client sees identical bot movement. Joiners are
-        // assigned the LOWEST UNCLAIMED PLOT by the host.
+        // ===================== MULTIPLAYER =====================
         function addSystemChat(msg) {
             const messages = document.getElementById('chat-messages');
             const div = document.createElement('div');
@@ -4521,7 +4582,6 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
         function createRemotePlayer(id, info) {
             if (!id || remotePlayers.has(id) || id === myNetId() || !templateChar) return;
             const g = templateChar.clone(true);
-            // children order matches buildCharacter: head, torso, armL, armR, legL, legR
             const head = g.children[0], torso = g.children[1];
             const lArm = g.children[2], rArm = g.children[3], lLeg = g.children[4], rLeg = g.children[5];
             const matMap = new Map();
@@ -4550,11 +4610,14 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
             rGravCoil.position.y = 0.35;
             rGravCoil.visible = false;
             rArm.add(rGravCoil);
+            // Remote forcefield sprite
+            const rFF = new THREE.Sprite(new THREE.SpriteMaterial({ map: getForcefieldTexture(), transparent: true, opacity: 0, depthTest: false }));
+            rFF.scale.set(7, 7, 1); rFF.position.y = 3; rFF.renderOrder = 999;
+            g.add(rFF);
             const tag = document.createElement('div');
             tag.className = 'player-nametag';
             tag.textContent = info.name;
             document.body.appendChild(tag);
-            // Overhead health bar (DOM, shown only when damaged)
             const hpBar = document.createElement('div');
             hpBar.className = 'player-healthbar';
             const hpFill = document.createElement('div');
@@ -4566,7 +4629,7 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                 chatColor: info.color || '#FD2943', skinMap: info.skinMap,
                 group: g, head: head, torso: torso,
                 lArm: lArm, rArm: rArm, lLeg: lLeg, rLeg: rLeg,
-                sword: rSword, speedCoil: rSpeedCoil, gravCoil: rGravCoil,
+                sword: rSword, speedCoil: rSpeedCoil, gravCoil: rGravCoil, forcefield: rFF,
                 swingType: '', swingTime: 0, swingDur: 0.3,
                 mats: {
                     head: head.material, torso: torso.material,
@@ -4578,12 +4641,26 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                 ry: 0, try_: 0,
                 netVel: new THREE.Vector3(), lastNetPos: new THREE.Vector3(0, 2, 10),
                 dead: false, debris: [],
-                st: { p: [0, 2, 10], ry: 0, w: false, c: false, g: true, d: false, em: '', et: 0, at: 0, hp: 100, h: false, hi: '', k: 0, dd: 0 }
+                st: { p: [0, 2, 10], ry: 0, w: false, c: false, g: true, d: false, em: '', et: 0, at: 0, hp: 100, h: false, hi: '', k: 0, dd: 0, ff: false }
             };
             remotePlayers.set(id, rp);
             applyRemoteSkin(rp, info.skinMap);
             rebuildLeaderboard();
             buildPeopleGrid();
+        }
+        let _ffTex = null;
+        function getForcefieldTexture() {
+            if (_ffTex) return _ffTex;
+            const c = document.createElement('canvas'); c.width = 128; c.height = 128;
+            const ctx = c.getContext('2d');
+            const grad = ctx.createRadialGradient(64, 64, 40, 64, 64, 64);
+            grad.addColorStop(0, 'rgba(173, 216, 230, 0.2)');
+            grad.addColorStop(0.8, 'rgba(173, 216, 230, 0.2)');
+            grad.addColorStop(1, 'rgba(173, 216, 230, 0.6)');
+            ctx.fillStyle = grad;
+            ctx.beginPath(); ctx.arc(64, 64, 64, 0, Math.PI * 2); ctx.fill();
+            _ffTex = new THREE.CanvasTexture(c);
+            return _ffTex;
         }
         function applyRemoteSkin(rp, skinMap) {
             if (!skinMap) return;
@@ -4635,10 +4712,9 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
             const id = conn.peer;
             if (d.t === 'hello') {
                 createRemotePlayer(id, d);
-                // Assign the lowest unclaimed plot to the joining player
                 let plotIdx = plotOwners.findIndex(o => o === null);
-                if (plotIdx === -1) plotIdx = 8; // full server: share the last plot
-                plotOwners[plotIdx] = { name: d.name || 'Player', kind: 'remote', id: id };
+                if (plotIdx === -1) plotIdx = 8;
+                plotOwners[plotIdx] = { name: d.username || d.name || 'Player', kind: 'remote', id: id };
                 const rpNew = remotePlayers.get(id);
                 if (rpNew) rpNew.plot = plotIdx + 1;
                 const list = [{ id: myNetId(), name: playerDisplayName, username: playerUsername, color: chatTagColor, skinMap: skinPartsHexMemory, plot: currentSpawnIndex + 1 }];
@@ -4654,7 +4730,6 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                     rp.st = d.s;
                     rp.tpos.set(d.s.p[0], d.s.p[1], d.s.p[2]);
                     rp.try_ = d.s.ry;
-                    // Velocity estimate for Dec's mirror-AI (state arrives ~15Hz)
                     rp.netVel.set((d.s.p[0] - rp.lastNetPos.x) * 15, 0, (d.s.p[2] - rp.lastNetPos.z) * 15);
                     rp.lastNetPos.set(d.s.p[0], d.s.p[1], d.s.p[2]);
                 }
@@ -4671,7 +4746,7 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                 if (d.target === myNetId()) {
                     applyLocalDamage(d.dmg, d.by === 'dec' ? 'npc' : 'remote', d.by);
                 } else {
-                    broadcast(d, conn); // relay to the victim
+                    broadcast(d, conn);
                 }
             } else if (d.t === 'npdmg') {
                 if (npc && !npc.isDead && !npc.forcefieldActive) {
@@ -4680,6 +4755,13 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                 }
             } else if (d.t === 'kill') {
                 if (d.by === myNetId()) { playerKills += 1; rebuildLeaderboard(); }
+                broadcast(d, conn);
+            } else if (d.t === 'ping') {
+                try { conn.send({ t: 'pong', ts: d.ts }); } catch (e) {}
+            } else if (d.t === 'pong') {
+                netPingMs = performance.now() - d.ts;
+            } else if (d.t === 'block') {
+                handleBlockMsg(d, id);
                 broadcast(d, conn);
             }
         }
@@ -4690,20 +4772,19 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                 d.list.forEach(p => {
                     createRemotePlayer(p.id, p);
                     const rp = remotePlayers.get(p.id);
-                    if (rp && p.plot) { rp.plot = p.plot; plotOwners[p.plot - 1] = { name: rp.name, kind: 'remote', id: p.id }; }
+                    if (rp && p.plot) { rp.plot = p.plot; plotOwners[p.plot - 1] = { name: rp.username || rp.name, kind: 'remote', id: p.id }; }
                 });
                 if (d.plot) {
-                    // My assigned plot: spawn there and claim it locally
                     currentSpawnIndex = d.plot - 1;
                     for (let pi = 0; pi < 9; pi++) { if (plotOwners[pi] && plotOwners[pi].kind === 'local') plotOwners[pi] = null; }
-                    plotOwners[currentSpawnIndex] = { name: playerDisplayName, kind: 'local' };
+                    plotOwners[currentSpawnIndex] = { name: playerUsername || playerDisplayName, kind: 'local' };
                     if (spawnPoints[currentSpawnIndex]) playerPos.copy(spawnPoints[currentSpawnIndex]);
                 }
             } else if (d.t === 'join') {
                 if (d.id === myNetId()) return;
                 createRemotePlayer(d.id, d);
                 const rp = remotePlayers.get(d.id);
-                if (rp && d.plot) { rp.plot = d.plot; plotOwners[d.plot - 1] = { name: rp.name, kind: 'remote', id: d.id }; }
+                if (rp && d.plot) { rp.plot = d.plot; plotOwners[d.plot - 1] = { name: rp.username || rp.name, kind: 'remote', id: d.id }; }
                 addSystemChat('Your friend ' + d.name + ' has joined the game.');
             } else if (d.t === 'state') {
                 if (d.id === myNetId()) return;
@@ -4730,6 +4811,12 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                 const rp = remotePlayers.get(d.id);
                 if (rp) addSystemChat(rp.name + ' has left the game');
                 removeRemotePlayer(d.id);
+            } else if (d.t === 'ping') {
+                if (netConns[0]) { try { netConns[0].send({ t: 'pong', ts: d.ts }); } catch (e) {} }
+            } else if (d.t === 'pong') {
+                netPingMs = performance.now() - d.ts;
+            } else if (d.t === 'block') {
+                handleBlockMsg(d, d.from);
             } else if (d.t === 'dec') {
                 const s = d.s;
                 if (!decNet) decNet = { tpos: new THREE.Vector3(), try_: 0, hp: 100, d: false, ff: true, sw: '', swt: 0, at: 0, w: false, nk: 0, nd: 0 };
@@ -4785,7 +4872,6 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                     netJoined = true;
                     if (netJoinTimeout) { clearTimeout(netJoinTimeout); netJoinTimeout = null; }
                     hideLoadingScreen();
-                    // Joining player spawns at their plot platform (host assigns the plot)
                     activeDebris.forEach(item => scene.remove(item.mesh));
                     activeDebris = [];
                     charGroup.visible = true;
@@ -4853,7 +4939,7 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
             document.getElementById('invite-join-btn').addEventListener('click', joinGame);
         }
 
-        // ===================== DEC'S AI (closest-target, body-blocked, right-hand sword) =====================
+        // ===================== DEC'S AI (speed cap 16, auto-jump, block collision) =====================
         const _zeroVel = new THREE.Vector3();
         function updateNPC(dt) {
             if (!npc) return;
@@ -4864,7 +4950,6 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                 return;
             }
             npc.group.updateMatrixWorld(true);
-            // Target selection: the CLOSEST player (local + remotes)
             let targetPos = charGroup.position;
             let targetVel = playerHorizontalVel;
             let targetRp = null;
@@ -4886,7 +4971,6 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
             const playerStanding = targetVel.length() < 0.1;
             const SAFE_DIST = 10.0;
             const ATTACK_DIST = 5.0;
-            // Body-blocked movement: Dec never walks into a player's body column
             const _npcBlocked = (nx, nz) => {
                 const feet = npc.pos.y - 5.5, head = npc.pos.y;
                 const minDistSq = (2 * PLAYER_BODY_RADIUS) * (2 * PLAYER_BODY_RADIUS);
@@ -4898,9 +4982,25 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                 return blocked;
             };
             const npcApplyMove = () => {
-                const nx = npc.pos.x + npc.horizontalVel.x * dt;
-                const nz = npc.pos.z + npc.horizontalVel.z * dt;
-                if (!_npcBlocked(nx, nz)) { npc.pos.x = nx; npc.pos.z = nz; }
+                let hv = npc.horizontalVel.clone();
+                if (hv.length() > 16) hv.setLength(16); // Dec max speed: 16 studs/s
+                const nx = npc.pos.x + hv.x * dt;
+                const nz = npc.pos.z + hv.z * dt;
+                if (!_npcBlocked(nx, nz)) {
+                    // Blocks stop Dec; auto-jump obstacles under 10 studs tall
+                    const mdir = hv.lengthSq() > 0.01 ? hv.clone().normalize() : dirToPlayer;
+                    if (hasWallCollision(new THREE.Vector3(npc.pos.x, npc.pos.y, npc.pos.z), mdir, collisionObjs, 1.2)) {
+                        const stepY = tryStepUp({ x: npc.pos.x, y: npc.pos.y, z: npc.pos.z }, mdir, collisionObjs);
+                        const obstacleTop = stepY !== null ? stepY - 5.5 : -1;
+                        const jumpHeight = obstacleTop - (npc.pos.y - 5.5);
+                        if (jumpHeight > 0 && jumpHeight < 10 && npc.isGrounded) {
+                            npc.vel.y = Math.sqrt(2 * GRAVITY * (jumpHeight + 1.5));
+                            npc.isGrounded = false;
+                        }
+                    } else {
+                        npc.pos.x = nx; npc.pos.z = nz;
+                    }
+                }
             };
             if (npc.state === 'FOLLOW') {
                 if (distToPlayer < 10) {
@@ -4923,7 +5023,8 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                     }
                 } else {
                     npc.stateTimer -= dt;
-                    npc.horizontalVel.copy(targetVel); // mirror the target's velocity
+                    npc.horizontalVel.copy(targetVel);
+                    if (npc.horizontalVel.length() > 16) npc.horizontalVel.setLength(16); // mirror capped at 16
                     npcApplyMove();
                     if (targetVel.dot(dirToPlayer) > 0.5) npc.chooseData.towards = true;
                     if (targetVel.dot(targetRightVec) > 0.5) npc.chooseData.right = true;
@@ -4952,13 +5053,13 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                         npc.swordSwingType = 'double';
                         npc.swordSwingDuration = 0.5;
                         npc.swordSwingTime = 0.5;
-                        npc.swingId++; // new swing re-arms his damage
+                        npc.swingId++;
                         npc.lungeTimer = 0.75;
                         playLungeSound();
                     }
                     let moveDir = new THREE.Vector3();
                     if (distToPlayer < ATTACK_DIST) moveDir.copy(dirToPlayer).negate();
-                    else if (swordSwingTime > 0 && distToPlayer < ATTACK_DIST + 1.5) moveDir.copy(dirToPlayer).negate(); // target swinging - back off
+                    else if (swordSwingTime > 0 && distToPlayer < ATTACK_DIST + 1.5) moveDir.copy(dirToPlayer).negate();
                     else if (distToPlayer > ATTACK_DIST) moveDir.copy(dirToPlayer);
                     if (moveDir.length() > 0) moveDir.normalize();
                     npc.horizontalVel.copy(moveDir).multiplyScalar(16);
@@ -4970,21 +5071,18 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                     npc.yaw = aimYaw + flickAmount;
                 }
             }
-            // Forcefield countdown (never infinite)
             if (npc.forcefieldActive) {
                 npc.forcefieldFade = Math.min(1, npc.forcefieldFade + dt * 2);
                 npc.forcefieldMoveTimer += dt;
                 if (npc.forcefieldMoveTimer >= 5) npc.forcefieldActive = false;
             } else npc.forcefieldFade = Math.max(0, npc.forcefieldFade - dt * 2);
             npc.forcefield.material.opacity = npc.forcefieldFade * 0.8;
-            // Gravity + ground snap
             npc.vel.y -= GRAVITY * dt; npc.pos.y += npc.vel.y * dt;
             const npcRayOrigin = new THREE.Vector3(npc.pos.x, npc.pos.y - 2, npc.pos.z);
             floorRay.set(npcRayOrigin, new THREE.Vector3(0, -1, 0)); floorRay.far = 4.0;
             const fHits = floorRay.intersectObjects(collisionObjs);
             if (fHits.length > 0 && fHits[0].distance < 4.0) { npc.pos.y = fHits[0].point.y + 5.5; npc.vel.y = 0; npc.isGrounded = true; } else npc.isGrounded = false;
             npc.group.position.set(npc.pos.x, npc.pos.y - 5.5, npc.pos.z); npc.group.rotation.y = npc.yaw;
-            // Sword swing poses (RIGHT hand)
             if (npc.swordSwingTime > 0) {
                 npc.swordSwingTime -= dt;
                 let progress = 1.0 - (npc.swordSwingTime / npc.swordSwingDuration);
@@ -4998,7 +5096,6 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                 }
             }
             else { npc.rightArm.rotation.x = -Math.PI / 2; npc.sword.rotation.set(-Math.PI / 2, 0, Math.PI); }
-            // Walk / idle (LEFT arm swings - the right holds the sword)
             if (npc.horizontalVel.length() > 0.1) {
                 npc.animTimer += dt * 11;
                 const sw = Math.sin(npc.animTimer);
@@ -5018,7 +5115,7 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
             }
         }
 
-        // Client-side Dec rendering from host sync (no AI, no damage - host owns both)
+        // Client-side Dec rendering from host sync
         function updateDecClient(dt) {
             if (!npc || !decNet) return;
             if (decNet.d) {
@@ -5044,7 +5141,6 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
             npc.group.position.set(npc.pos.x, npc.pos.y - 5.5, npc.pos.z);
             npc.group.rotation.y = npc.yaw;
             npc.animTimer = decNet.at;
-            // Swing poses (right hand), driven by synced swing state
             if (decNet.swt > 0) {
                 decNet.swt = Math.max(0, decNet.swt - dt);
                 let progress = 1.0 - (decNet.swt / (decNet.sw === 'double' ? 0.5 : 0.3));
@@ -5060,7 +5156,6 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                 npc.rightArm.rotation.x = -Math.PI / 2;
                 npc.sword.rotation.set(-Math.PI / 2, 0, Math.PI);
             }
-            // Walk anim (left arm swings)
             if (decNet.w) {
                 const sw = Math.sin(npc.animTimer);
                 const legMid = THREE.MathUtils.degToRad(12.5), legAmp = THREE.MathUtils.degToRad(42.5);
@@ -5075,17 +5170,12 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                 npc.rightLeg.rotation.x *= 0.85;
                 npc.torso.rotation.y = THREE.MathUtils.lerp(npc.torso.rotation.y, 0, 0.2);
             }
-            // Forcefield visual
             if (decNet.ff) npc.forcefieldFade = Math.min(1, npc.forcefieldFade + dt * 2);
             else npc.forcefieldFade = Math.max(0, npc.forcefieldFade - dt * 2);
             npc.forcefield.material.opacity = npc.forcefieldFade * 0.8;
         }
 
-        // ===================== SWORD DAMAGE (entry-hit + movement re-hit) =====================
-        // Damage ONCE on entering a hitbox. Re-armed by (a) a NEW swing (lunge ->
-        // recover -> slash/lunge again) or (b) the sword MOVING inside the hitbox
-        // (flick rotation, or either body moving through the other) - (b) has a
-        // 0.25s damage cooldown. Leaving the hitbox re-arms.
+        // ===================== SWORD DAMAGE =====================
         const SWORD_HIT_RADIUS = 2.0;
         const SWORD_MOVE_THRESHOLD = 0.3;
         const SWORD_MOVE_COOLDOWN = 0.25;
@@ -5150,7 +5240,6 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
         function updateSwordCombat(now) {
             if (isRagdoll) return;
             const decLocal = !(netJoined && !isHost);
-            // MY sword vs Dec
             if (npc && !npc.isDead && isHoldingSword && swordModel && swordModel.visible) {
                 const st = stateFor(playerSwordStates, 'dec');
                 swordDamageCheck(swordModel, playerSwingId, st, npc.torso, npc.forcefieldActive, now, () => {
@@ -5163,7 +5252,6 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                     }
                 });
             }
-            // MY sword vs remote players (victim applies the damage themselves)
             if (netJoined && isHoldingSword && swordModel && swordModel.visible) {
                 remotePlayers.forEach(rp => {
                     if (rp.dead) return;
@@ -5175,8 +5263,8 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                     });
                 });
             }
-            // DEC's sword vs everyone (host / singleplayer only)
-            if (decLocal && npc && !npc.isDead && npc.sword && npc.sword.visible) {
+            // Dec's sword vs everyone - blocked while Dec is forcefielded
+            if (decLocal && npc && !npc.isDead && npc.sword && npc.sword.visible && !npc.forcefieldActive) {
                 const stMe = stateFor(decSwordStates, 'me');
                 swordDamageCheck(npc.sword, npc.swingId, stMe, charTorso, isForcefieldActive, now, () => {
                     applyLocalDamage(swingDamage(npc.swordSwingType), 'npc');
@@ -5196,12 +5284,22 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
         function dropItem() {
             if (equippedSlot === -1 || !playerInventory[equippedSlot]) return;
             const item = playerInventory[equippedSlot];
-            if (item.id === 'sword') {
-                const dropModel = swordModel.clone(); dropModel.visible = true;
+            if (item.id === 'sword' || item.id === 'speedcoil' || item.id === 'gravitycoil' || item.id === 'stamper' || item.id === 'hammer') {
+                let dropModel = null;
+                if (item.id === 'sword') dropModel = swordModel.clone();
+                else if (item.id === 'speedcoil') dropModel = speedCoilModel.clone();
+                else if (item.id === 'gravitycoil') dropModel = gravityCoilModel.clone();
+                else if (item.id === 'stamper') dropModel = stamperModel.clone();
+                else if (item.id === 'hammer') dropModel = hammerModel.clone();
+                dropModel.visible = true;
                 const forward = new THREE.Vector3(0, 0, 1).applyEuler(new THREE.Euler(0, charGroup.rotation.y, 0));
                 dropModel.position.copy(charGroup.position); dropModel.position.addScaledVector(forward, 4); dropModel.position.y += 3;
                 dropModel.rotation.set(-Math.PI / 2, 0, Math.PI); scene.add(dropModel);
-                droppedItems.push({ mesh: dropModel, item: item, vel: new THREE.Vector3((Math.random()-0.5)*2, 5, (Math.random()-0.5)*2), rotVel: new THREE.Vector3((Math.random()-0.5)*5, (Math.random()-0.5)*5, (Math.random()-0.5)*5) });
+                const dropExtents = (item.id === 'speedcoil' || item.id === 'gravitycoil') ? new THREE.Vector3(0.65, 0.35, 0.65)
+                    : (item.id === 'hammer') ? new THREE.Vector3(0.5, 0.6, 0.5)
+                    : (item.id === 'stamper') ? new THREE.Vector3(0.55, 0.55, 0.15)
+                    : new THREE.Vector3(0.3, 1.8, 0.1);
+                droppedItems.push({ mesh: dropModel, item: item, extents: dropExtents, vel: new THREE.Vector3((Math.random()-0.5)*2, 5, (Math.random()-0.5)*2), rotVel: new THREE.Vector3((Math.random()-0.5)*5, (Math.random()-0.5)*5, (Math.random()-0.5)*5) });
             }
             playerInventory[equippedSlot] = null; equippedSlot = -1; applyEquipState(null); buildInventoryUI();
         }
@@ -5211,7 +5309,7 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
             if (isDouble && lungeCooldownTimer <= 0) { swordSwingType = 'double'; swordSwingDuration = 0.5; swordSwingTime = 0.5; lungeCooldownTimer = 0.3; playLungeSound(); }
             else if (!isDouble) { swordSwingType = 'single'; swordSwingDuration = 0.3; swordSwingTime = 0.3; playSlashSound(); }
             else { lastClickTime = now; return; }
-            playerSwingId++; // re-arms the damage system for this new swing
+            playerSwingId++;
             if (netJoined && netConns.length > 0) {
                 const msg = { t: 'swing', type: swordSwingType };
                 if (isHost) msg.id = myNetId();
@@ -5219,6 +5317,345 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
             }
             lastClickTime = now;
         }
+        // ===================== BUILDING SYSTEM =====================
+        const BLOCK_TYPES = [
+            { id: 'brick', name: 'Brick', size: [4, 4, 4] },
+            { id: 'cornerSlope', name: 'Brick Corner Slope', size: [4, 4, 4] },
+            { id: 'cornerStairs', name: 'Brick Corner Stairs', size: [4, 4, 4] },
+            { id: 'longSlope', name: 'Brick Long Slope', size: [8, 4, 4] },
+            { id: 'longTriangle', name: 'Brick Long Triangle', size: [8, 4, 4] },
+            { id: 'slab', name: 'Brick Slab', size: [4, 2, 4] },
+            { id: 'slope', name: 'Brick Slope', size: [4, 4, 4] },
+            { id: 'stairs', name: 'Brick Stairs', size: [4, 4, 4] },
+            { id: 'triangle', name: 'Brick Triangle', size: [4, 4, 4] }
+        ];
+        const blockGeoCache = new Map();
+        function getBlockGeometry(typeId) {
+            if (blockGeoCache.has(typeId)) return blockGeoCache.get(typeId);
+            const pos = [], uvs = [], idx = [];
+            const tri = (a, b, c) => {
+                const n = new THREE.Vector3().subVectors(b, a).cross(new THREE.Vector3().subVectors(c, a));
+                if (n.lengthSq() < 1e-9) return;
+                n.normalize();
+                const proj = (v) => {
+                    if (Math.abs(n.y) >= Math.abs(n.x) && Math.abs(n.y) >= Math.abs(n.z)) return [v[0] / 8, v[2] / 8];
+                    if (Math.abs(n.x) >= Math.abs(n.z)) return [v[2] / 8, v[1] / 8];
+                    return [v[0] / 8, v[1] / 8];
+                };
+                const i0 = pos.length / 3;
+                [a, b, c].forEach(v => { pos.push(v[0], v[1], v[2]); const uv = proj(v); uvs.push(uv[0], uv[1]); });
+                if (new THREE.Vector3().subVectors(b, a).cross(new THREE.Vector3().subVectors(c, a)).dot(n) >= 0) idx.push(i0, i0 + 1, i0 + 2);
+                else idx.push(i0, i0 + 2, i0 + 1);
+            };
+            const quad = (a, b, c, d) => { tri(a, b, c); tri(a, c, d); };
+            const box = (x0, x1, y0, y1, z0, z1) => {
+                const A = [x0, y0, z0], B = [x1, y0, z0], C = [x1, y0, z1], D = [x0, y0, z1];
+                const E = [x0, y1, z0], F = [x1, y1, z0], G = [x1, y1, z1], H = [x0, y1, z1];
+                quad(A, B, C, D); quad(E, F, G, H); quad(B, F, G, C); quad(A, E, H, D); quad(A, E, F, B); quad(D, H, G, C);
+            };
+            const t = BLOCK_TYPES.find(b => b.id === typeId);
+            if (typeId === 'brick') box(0, 4, 0, 4, 0, 4);
+            else if (typeId === 'slab') box(0, 4, 0, 2, 0, 4);
+            else if (typeId === 'cornerSlope') {
+                const A = [0,0,0], B = [4,0,0], C = [4,0,4], D = [0,0,4], E = [4,4,4];
+                quad(A, B, C, D); tri(B, C, E); tri(D, C, E); tri(A, B, E); tri(A, D, E);
+            }
+            else if (typeId === 'slope') {
+                const A = [0,0,0], B = [4,0,0], C = [4,0,4], D = [0,0,4], E = [4,4,0], F = [4,4,4];
+                quad(A, B, C, D); quad(B, C, F, E); tri(A, B, E); tri(D, C, F); quad(A, D, F, E);
+            }
+            else if (typeId === 'longSlope') {
+                const A = [0,0,0], B = [8,0,0], C = [8,0,4], D = [0,0,4], E = [8,4,0], F = [8,4,4];
+                quad(A, B, C, D); quad(B, C, F, E); tri(A, B, E); tri(D, C, F); quad(A, D, F, E);
+            }
+            else if (typeId === 'longTriangle') {
+                const A = [0,0,0], B = [8,0,0], C = [8,0,4], T = [8,4,4];
+                tri(A, B, C); tri(B, C, T); tri(A, B, T); tri(A, C, T);
+            }
+            else if (typeId === 'triangle') {
+                const A = [0,0,0], B = [4,0,0], C = [4,0,4], D = [0,0,4], P = [2,4,2];
+                quad(A, B, C, D); tri(A, B, P); tri(B, C, P); tri(C, D, P); tri(D, A, P);
+            }
+            else if (typeId === 'stairs') {
+                box(0, 4, 0, 1, 0, 4); box(1, 4, 1, 2, 0, 4); box(2, 4, 2, 3, 0, 4); box(3, 4, 3, 4, 0, 4);
+            }
+            else if (typeId === 'cornerStairs') {
+                box(0, 4, 0, 1, 0, 4); box(1, 4, 1, 2, 1, 4); box(2, 4, 2, 3, 2, 4); box(3, 4, 3, 4, 3, 4);
+            }
+            const geo = new THREE.BufferGeometry();
+            geo.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3));
+            geo.setAttribute('uv', new THREE.Float32BufferAttribute(uvs, 2));
+            geo.setIndex(idx);
+            geo.computeVertexNormals();
+            geo.translate(-t.size[0] / 2, 0, -t.size[2] / 2);
+            blockGeoCache.set(typeId, geo);
+            return geo;
+        }
+        let blockMaterial = null;
+        function getBlockMaterial() {
+            if (blockMaterial) return blockMaterial;
+            const tex = new THREE.TextureLoader().load("https://devforum-uploads.s3.dualstack.us-east-2.amazonaws.com/uploads/original/4X/f/0/4/f04a1aabddc808b5cef98214d1a7f4724a7e5c2a.png");
+            tex.colorSpace = THREE.SRGBColorSpace;
+            tex.wrapS = THREE.RepeatWrapping; tex.wrapT = THREE.RepeatWrapping;
+            blockMaterial = new THREE.MeshStandardMaterial({ map: tex, color: BRICK_COLOR, roughness: 0.9 });
+            attachAOShader(blockMaterial);
+            return blockMaterial;
+        }
+        let placedBlocks = [];
+        function spawnBlockWorld(typeId, px, py, pz, ry, rx, rz, fromNet) {
+            const type = BLOCK_TYPES.find(b => b.id === typeId);
+            if (!type) return null;
+            const mesh = new THREE.Mesh(getBlockGeometry(typeId), getBlockMaterial());
+            mesh.position.set(px, py, pz);
+            mesh.rotation.set(rx || 0, ry || 0, rz || 0);
+            mesh.castShadow = true; mesh.receiveShadow = true;
+            scene.add(mesh);
+            collisionObjs.push(mesh);
+            aoState.receivers.push(mesh);
+            aoState.occluders.push(mesh);
+            const rec = { id: 'blk-' + Date.now() + '-' + Math.floor(Math.random() * 99999), typeId: typeId, mesh: mesh };
+            placedBlocks.push(rec);
+            invalidateWorldCaches();
+            aoState.materials = [...new Set([...aoState.materials, getBlockMaterial()])];
+            const lvl = (currentGraphicsMode === 'auto') ? getAutoGraphicsLevel() : graphicsQuality;
+            applyRenderGraphicsSettings(lvl);
+            if (!fromNet && netJoined && netConns.length > 0) {
+                const msg = { t: 'block', op: 'add', id: rec.id, type: typeId, p: [px, py, pz], r: [rx || 0, ry || 0, rz || 0] };
+                if (isHost) msg.from = myNetId();
+                broadcast(msg);
+            }
+            return rec;
+        }
+        function removeBlockRecord(rec, fromNet) {
+            scene.remove(rec.mesh);
+            let i = collisionObjs.indexOf(rec.mesh); if (i !== -1) collisionObjs.splice(i, 1);
+            i = aoState.receivers.indexOf(rec.mesh); if (i !== -1) aoState.receivers.splice(i, 1);
+            i = aoState.occluders.indexOf(rec.mesh); if (i !== -1) aoState.occluders.splice(i, 1);
+            i = placedBlocks.indexOf(rec); if (i !== -1) placedBlocks.splice(i, 1);
+            invalidateWorldCaches();
+            if (!fromNet && netJoined && netConns.length > 0) {
+                const msg = { t: 'block', op: 'del', id: rec.id };
+                if (isHost) msg.from = myNetId();
+                broadcast(msg);
+            }
+        }
+        // ----- Stamper placement state -----
+        let selectedBlockType = null;
+        let hologram = null, hologramTypeId = null;
+        let blockRot = { x: 0, y: 0, z: 0 };
+        let hologramBounce = 0;
+        let hammerHover = null, hammerOutline = null, hammerLine = null;
+        function plotCenterOf(idx) { const c = [ {x:144,z:-144},{x:144,z:0},{x:144,z:144},{x:0,z:-144},{x:0,z:0},{x:0,z:144},{x:-144,z:-144},{x:-144,z:0},{x:-144,z:144} ]; return c[idx] || c[0]; }
+        function isInsidePlot(px, pz, idx) { const c = plotCenterOf(idx); return Math.abs(px - c.x) <= 56 && Math.abs(pz - c.z) <= 56; }
+        function updateHologram() {
+            if (!isHoldingStamper || !selectedBlockType || isRagdoll || isMenuOpen) { hideHologram(); return; }
+            const type = BLOCK_TYPES.find(b => b.id === selectedBlockType);
+            cameraRay.setFromCamera({ x: 0, y: 0 }, camera);
+            const hits = cameraRay.intersectObjects(collisionObjs);
+            let hx, hy, hz;
+            if (hits.length > 0 && hits[0].distance < 60) {
+                const p = hits[0].point;
+                const nrm = hits[0].face ? hits[0].face.normal.clone().transformDirection(hits[0].object.matrixWorld) : new THREE.Vector3(0, 1, 0);
+                const lift = nrm.y > 0.7 ? 0.05 : 0;
+                hx = p.x + nrm.x * 0.05; hy = p.y + lift; hz = p.z + nrm.z * 0.05;
+            } else {
+                const fwd = new THREE.Vector3(0, 0, 1).applyEuler(new THREE.Euler(0, charGroup.rotation.y, 0));
+                hx = playerPos.x + fwd.x * 8; hz = playerPos.z + fwd.z * 8; hy = 2.05;
+            }
+            const ySnap = type.size[1] === 2 ? 2 : 4;
+            const sx = Math.round((hx - type.size[0] / 2) / 4) * 4 + type.size[0] / 2;
+            const sz = Math.round((hz - type.size[2] / 2) / 4) * 4 + type.size[2] / 2;
+            const sy = Math.ceil((hy - 2.0) / ySnap) * ySnap + 2.0;
+            if (!hologram || hologramTypeId !== selectedBlockType) {
+                hideHologram();
+                hologram = new THREE.Mesh(getBlockGeometry(selectedBlockType), new THREE.MeshBasicMaterial({ color: 0x7fd4ff, transparent: true, opacity: 0.45, depthWrite: false }));
+                hologram.renderOrder = 998;
+                scene.add(hologram);
+                hologramTypeId = selectedBlockType;
+            }
+            hologram.visible = true;
+            hologram.position.set(sx, sy, sz);
+            hologramBounce = Math.max(0, hologramBounce - 0.1);
+            const bounce = 1 + Math.sin(hologramBounce * Math.PI) * 0.25;
+            hologram.rotation.set(blockRot.x, blockRot.y, blockRot.z);
+            hologram.scale.set(bounce, 1 / bounce, bounce);
+            hologram.userData.placePos = [sx, sy, sz];
+        }
+        function hideHologram() { if (hologram) { scene.remove(hologram); hologram = null; hologramTypeId = null; } }
+        function bounceHologram() { hologramBounce = 1; }
+        function tryPlaceBlock() {
+            if (!isHoldingStamper || !selectedBlockType || !hologram || !hologram.userData.placePos) return;
+            const [px, py, pz] = hologram.userData.placePos;
+            if (!isInsidePlot(px, pz, currentSpawnIndex)) return;
+            const rec = spawnBlockWorld(selectedBlockType, px, py, pz, blockRot.y, blockRot.x, blockRot.z, false);
+            if (rec) playEquipSound();
+        }
+        // ----- Hammer deletion -----
+        function updateHammerHover() {
+            if (hammerOutline) { scene.remove(hammerOutline); hammerOutline = null; }
+            if (hammerLine) { scene.remove(hammerLine); hammerLine = null; }
+            hammerHover = null;
+            if (!isHoldingHammer || isRagdoll || isMenuOpen) return;
+            cameraRay.setFromCamera({ x: 0, y: 0 }, camera);
+            const meshes = placedBlocks.map(b => b.mesh);
+            const hits = cameraRay.intersectObjects(meshes);
+            if (hits.length > 0 && hits[0].distance < 60) {
+                const rec = placedBlocks.find(b => b.mesh === hits[0].object);
+                if (!rec) return;
+                hammerHover = rec;
+                const bb = new THREE.Box3().setFromObject(rec.mesh);
+                hammerOutline = new THREE.Box3Helper(bb, 0xff0000);
+                scene.add(hammerOutline);
+                const headPos = new THREE.Vector3();
+                hammerModel.getWorldPosition(headPos);
+                const c = bb.getCenter(new THREE.Vector3());
+                const geo = new THREE.BufferGeometry().setFromPoints([headPos, c]);
+                hammerLine = new THREE.Line(geo, new THREE.LineBasicMaterial({ color: 0xff0000 }));
+                scene.add(hammerLine);
+            }
+        }
+        function tryDeleteBlock() {
+            if (!isHoldingHammer || !hammerHover) return;
+            removeBlockRecord(hammerHover, false);
+            hammerHover = null;
+            if (hammerOutline) { scene.remove(hammerOutline); hammerOutline = null; }
+            if (hammerLine) { scene.remove(hammerLine); hammerLine = null; }
+            playSlashSound();
+        }
+        // ----- Block previews -----
+        let blockPreviewRenderer = null, blockPreviewScene = null, blockPreviewCamera = null, blockPreviewMesh = null, blockPreviewSpin = 0;
+        function ensureBlockPreview() {
+            if (blockPreviewRenderer) return;
+            blockPreviewScene = new THREE.Scene();
+            blockPreviewCamera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
+            blockPreviewScene.add(new THREE.AmbientLight(0xffffff, 0.9));
+            const dl = new THREE.DirectionalLight(0xffffff, 0.9); dl.position.set(4, 8, 6); blockPreviewScene.add(dl);
+            blockPreviewRenderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, preserveDrawingBuffer: true });
+            blockPreviewRenderer.setClearColor(0x000000, 0);
+        }
+        function renderBlockThumb(typeId, px) {
+            ensureBlockPreview();
+            const type = BLOCK_TYPES.find(b => b.id === typeId);
+            const m = new THREE.Mesh(getBlockGeometry(typeId), getBlockMaterial());
+            blockPreviewScene.add(m);
+            const maxDim = Math.max(type.size[0], type.size[1], type.size[2]);
+            const d = maxDim * 1.9;
+            blockPreviewCamera.position.set(d * 0.7, d * 0.75, d * 0.7);
+            blockPreviewCamera.lookAt(0, type.size[1] / 2, 0);
+            blockPreviewRenderer.setSize(px, px, false);
+            blockPreviewCamera.aspect = 1; blockPreviewCamera.updateProjectionMatrix();
+            blockPreviewRenderer.render(blockPreviewScene, blockPreviewCamera);
+            blockPreviewScene.remove(m);
+            return blockPreviewRenderer.domElement.toDataURL('image/png');
+        }
+        // ----- Stamper UI -----
+        function buildStamperMenu() {
+            const menu = document.getElementById('stamper-menu');
+            if (!menu || menu.dataset.built) return;
+            menu.dataset.built = '1';
+            const grid = document.getElementById('stamper-grid');
+            grid.innerHTML = '';
+            BLOCK_TYPES.forEach(bt => {
+                const card = document.createElement('div');
+                card.className = 'stamper-card';
+                card.innerHTML = `<img class="stamper-thumb" alt=""><div class="stamper-card-name">${bt.name}</div>`;
+                card.querySelector('img').src = renderBlockThumb(bt.id, 96);
+                card.onclick = () => openBlockDetail(bt.id);
+                grid.appendChild(card);
+            });
+        }
+        function openStamperMenu() {
+            buildStamperMenu();
+            document.getElementById('stamper-detail').style.display = 'none';
+            document.getElementById('stamper-grid').style.display = 'grid';
+            document.getElementById('stamper-menu').style.display = 'flex';
+        }
+        function closeStamperMenu() {
+            document.getElementById('stamper-menu').style.display = 'none';
+            selectedBlockType = null;
+            hideHologram();
+        }
+        function openBlockDetail(typeId) {
+            selectedBlockType = typeId;
+            const bt = BLOCK_TYPES.find(b => b.id === typeId);
+            document.getElementById('stamper-grid').style.display = 'none';
+            const det = document.getElementById('stamper-detail');
+            det.style.display = 'flex';
+            document.getElementById('stamper-detail-name').textContent = bt.name;
+            ensureBlockPreview();
+            if (blockPreviewMesh) blockPreviewScene.remove(blockPreviewMesh);
+            blockPreviewMesh = new THREE.Mesh(getBlockGeometry(typeId), getBlockMaterial());
+            blockPreviewScene.add(blockPreviewMesh);
+            const maxDim = Math.max(bt.size[0], bt.size[1], bt.size[2]);
+            blockPreviewCamera.position.set(maxDim * 1.6, maxDim * 1.7, maxDim * 1.6);
+            blockPreviewCamera.lookAt(0, bt.size[1] / 2, 0);
+            const canvas = document.getElementById('stamper-detail-canvas');
+            blockPreviewRenderer.setSize(canvas.clientWidth, canvas.clientHeight, false);
+            blockPreviewCamera.aspect = canvas.clientWidth / Math.max(1, canvas.clientHeight);
+            blockPreviewCamera.updateProjectionMatrix();
+            if (!blockPreviewRenderer.domElement.parentNode) canvas.appendChild(blockPreviewRenderer.domElement);
+        }
+        function closeBlockDetail() {
+            selectedBlockType = null;
+            hideHologram();
+            document.getElementById('stamper-detail').style.display = 'none';
+            document.getElementById('stamper-grid').style.display = 'grid';
+        }
+        function updateStamperSystems(dt) {
+            const menu = document.getElementById('stamper-menu');
+            if (menu) {
+                if (isHoldingStamper && !isRagdoll && !isMenuOpen && isRunning) { if (menu.style.display === 'none' || menu.style.display === '') openStamperMenu(); }
+                else if (!isHoldingStamper && menu.style.display === 'flex') closeStamperMenu();
+            }
+            updateHologram();
+            updateHammerHover();
+            if (blockPreviewMesh && document.getElementById('stamper-detail').style.display === 'flex') {
+                blockPreviewSpin += dt;
+                blockPreviewMesh.rotation.y = blockPreviewSpin * 1.2;
+                blockPreviewMesh.position.y = Math.sin(blockPreviewSpin * 2) * 0.15;
+                blockPreviewRenderer.render(blockPreviewScene, blockPreviewCamera);
+            }
+        }
+        // ----- Save / Load / Rotate 90 -----
+        function blocksOnMyPlot() {
+            return placedBlocks.filter(rec => {
+                const p = rec.mesh.position;
+                return isInsidePlot(p.x, p.z, currentSpawnIndex);
+            });
+        }
+        function saveMyBuild() {
+            const nameInput = document.getElementById('build-save-name');
+            const name = (nameInput.value.trim() || 'My Build');
+            const blocks = blocksOnMyPlot().map(rec => ({ type: rec.typeId, p: rec.mesh.position.toArray(), r: [rec.mesh.rotation.x, rec.mesh.rotation.y, rec.mesh.rotation.z] }));
+            localStorage.setItem('toh_build_' + name, JSON.stringify({ plot: currentSpawnIndex, blocks: blocks }));
+            addSystemChat('Build saved as "' + name + '" (' + blocks.length + ' blocks)');
+        }
+        function loadMyBuild() {
+            const name = (document.getElementById('build-save-name').value.trim() || 'My Build');
+            const raw = localStorage.getItem('toh_build_' + name);
+            if (!raw) { addSystemChat('No saved build named "' + name + '"'); return; }
+            const data = JSON.parse(raw);
+            blocksOnMyPlot().slice().forEach(rec => removeBlockRecord(rec, false));
+            data.blocks.forEach(b => spawnBlockWorld(b.type, b.p[0], b.p[1], b.p[2], b.r[1], b.r[0], b.r[2], false));
+            addSystemChat('Build "' + name + '" loaded (' + data.blocks.length + ' blocks)');
+        }
+        function rotateMyBuild() {
+            const mine = blocksOnMyPlot().map(rec => ({ type: rec.typeId, p: rec.mesh.position.toArray(), r: [rec.mesh.rotation.x, rec.mesh.rotation.y, rec.mesh.rotation.z] }));
+            if (mine.length === 0) { addSystemChat('Nothing to rotate'); return; }
+            blocksOnMyPlot().slice().forEach(rec => removeBlockRecord(rec, false));
+            const c = plotCenterOf(currentSpawnIndex);
+            mine.forEach(b => {
+                const relX = b.p[0] - c.x, relZ = b.p[2] - c.z;
+                const nx = c.x + relZ, nz = c.z - relX;
+                spawnBlockWorld(b.type, Math.round(nx / 2) * 2, b.p[1], Math.round(nz / 2) * 2, b.r[1] + Math.PI / 2, b.r[0], b.r[2], false);
+            });
+            addSystemChat('Build rotated 90 degrees (' + mine.length + ' blocks)');
+        }
+        function handleBlockMsg(d, fromId) {
+            if (d.op === 'add') spawnBlockWorld(d.type, d.p[0], d.p[1], d.p[2], d.r[1], d.r[0], d.r[2], true);
+            else if (d.op === 'del') { const rec = placedBlocks.find(b => b.id === d.id); if (rec) removeBlockRecord(rec, true); }
+        }
+
         // ===================== MAIN SIMULATION STEP =====================
         function simulateStep(dt) {
             gameTime += dt;
@@ -5228,8 +5665,6 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
             if (zoomOutKey) { camDist = Math.min(80, camDist + 40 * dt); checkPointerLockNeeds(); }
             if (camLeftKey) camYaw += 1.5 * dt;
             if (camRightKey) camYaw -= 1.5 * dt;
-
-            // --- RAGDOLL: debris, respawn timer, death camera ---
             if (isRagdoll) {
                 updateDebrisPhysics(dt);
                 respawnTimer -= dt;
@@ -5246,21 +5681,14 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                 camera.position.copy(resolveCameraOcclusion(focusTarget, ideal));
                 camera.lookAt(focusTarget.clone().add(camOffset));
             }
-
-            // --- KILLBARS (spawn protection blocks them too) ---
             spinningObstacles.forEach(obs => {
                 if (obs.speed > 0) obs.mesh.rotation.y += dt * obs.speed;
                 if (!isRagdoll && !isInvincible && !isForcefieldActive && (obs.type === 'killbar' || obs.type === 'static_killbar')) {
                     const playerFeet = playerPos.y - 5.5;
                     const playerHead = playerPos.y;
                     let kbBottom, kbTop;
-                    if (obs.type === 'static_killbar') {
-                        kbBottom = obs.y - (obs.halfHeight || 0.5);
-                        kbTop = obs.y + (obs.halfHeight || 0.5);
-                    } else {
-                        kbBottom = obs.y - 1.0;
-                        kbTop = obs.y + 1.0;
-                    }
+                    if (obs.type === 'static_killbar') { kbBottom = obs.y - (obs.halfHeight || 0.5); kbTop = obs.y + (obs.halfHeight || 0.5); }
+                    else { kbBottom = obs.y - 1.0; kbTop = obs.y + 1.0; }
                     if (playerHead > kbBottom && playerFeet < kbTop) {
                         const dx = playerPos.x - obs.x;
                         const dz = playerPos.z - obs.z;
@@ -5277,8 +5705,6 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                     }
                 }
             });
-
-            // --- DROPPED ITEMS (pickup slot bug fixed) ---
             for (let i = droppedItems.length - 1; i >= 0; i--) {
                 const drop = droppedItems[i];
                 drop.mesh.updateMatrixWorld(true);
@@ -5291,7 +5717,7 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                 const ux = new THREE.Vector3(1,0,0).applyMatrix4(rotMat);
                 const uy = new THREE.Vector3(0,1,0).applyMatrix4(rotMat);
                 const uz = new THREE.Vector3(0,0,1).applyMatrix4(rotMat);
-                const extents = new THREE.Vector3(0.3, 1.8, 0.1);
+                const extents = drop.extents || new THREE.Vector3(0.3, 1.8, 0.1);
                 const verticalHalfExtent = Math.abs(ux.y) * extents.x + Math.abs(uy.y) * extents.y + Math.abs(uz.y) * extents.z;
                 debrisRay.set(drop.mesh.position, new THREE.Vector3(0, -1, 0)); debrisRay.far = 1000;
                 const intersects = debrisRay.intersectObjects(collisionObjs);
@@ -5329,8 +5755,6 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                     }
                 }
             }
-
-            // --- TIME CYCLE: fading day/sunset/night skyboxes + lighting ---
             if (isTimeCycleActive) {
                 timeCycleTime += dt * (2 * Math.PI / 300);
                 const sunY = Math.cos(timeCycleTime) * 1000;
@@ -5346,17 +5770,12 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                     skyDome.material.uniforms.uSunsetW.value = sunsetW;
                     skyDome.material.uniforms.uNightW.value = nightW;
                 }
-                if (sunSprite) {
-                    sunSprite.visible = sunY > -150;
-                    moonSprite.visible = sunY < 150;
-                }
+                if (sunSprite) { sunSprite.visible = sunY > -150; moonSprite.visible = sunY < 150; }
                 if (sunHeight > 0.2) { sun.intensity = 1.0; ambientLight.intensity = 0.8; }
                 else if (sunHeight < -0.2) { sun.intensity = 0.0; ambientLight.intensity = 0.3; }
                 else if (sunHeight > 0) { const t = sunHeight / 0.2; sun.intensity = 0.5 + 0.5 * t; ambientLight.intensity = 0.5 + 0.3 * t; }
                 else { const t = (sunHeight + 0.2) / 0.2; sun.intensity = 0.5 * t; ambientLight.intensity = 0.3 + 0.2 * t; }
             }
-
-            // --- HEALTH REGEN + BAR ---
             const playerHealthContainer = document.getElementById('player-health-bar-container');
             const playerHealthFill = document.getElementById('player-health-bar-fill');
             if (playerHealth < 100 && !isRagdoll) {
@@ -5372,15 +5791,7 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                 else color.lerpColors(red, yellow, hpPercent / 0.5);
                 playerHealthFill.style.backgroundColor = '#' + color.getHexString();
             } else playerHealthContainer.style.display = 'none';
-
-            // --- DEC (host/singleplayer simulates; clients render from network sync) ---
-            if (netJoined && !isHost) {
-                updateDecClient(dt);
-            } else {
-                updateNPC(dt);
-            }
-
-            // --- MOVEMENT ---
+            if (netJoined && !isHost) { updateDecClient(dt); } else { updateNPC(dt); }
             if (isRunning && !isRagdoll && !isAvatarEditorOpen) {
                 const isFirstPerson = camDist <= FIRST_PERSON_DIST;
                 if (isFlyMode) {
@@ -5438,13 +5849,11 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                             const localDir = worldDir.clone().applyAxisAngle(new THREE.Vector3(0, 1, 0), -camYaw);
                             d.x = localDir.x;
                             d.z = localDir.z;
-                        } else {
-                            tapTargetPos = null;
-                        }
+                        } else { tapTargetPos = null; }
                     }
                     let moveDir = d.clone().applyAxisAngle(new THREE.Vector3(0,1,0), camYaw).normalize();
-                    const moveSpeed = isHoldingSpeedCoil ? 32 : 16;       // Speed Coil: 2x speed
-                    const gravityScale = isHoldingGravityCoil ? 0.25 : 1;  // Gravity Coil: 75% less gravity
+                    const moveSpeed = isHoldingSpeedCoil ? 32 : 16;
+                    const gravityScale = isHoldingGravityCoil ? 0.25 : 1;
                     let moveDelta = moveDir.clone().multiplyScalar(moveSpeed * dt);
                     updateWallhopEmbedState();
                     let climbTopY = 0;
@@ -5467,11 +5876,7 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                                 const bb = new THREE.Box3().setFromObject(hitObj);
                                 const topY = bb.max.y;
                                 const isClimbable = ladderObjs.includes(hitObj);
-                                if (isClimbable && playerPos.y - 5.5 < topY - 0.1) {
-                                    stillClimbing = true;
-                                    climbTopY = topY;
-                                    break;
-                                }
+                                if (isClimbable && playerPos.y - 5.5 < topY - 0.1) { stillClimbing = true; climbTopY = topY; break; }
                             }
                         }
                         isCurrentlyClimbing = stillClimbing;
@@ -5511,21 +5916,13 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                                         stopClimbSound();
                                     }
                                 }
-                                if (climbDelta !== 0) {
-                                    animTimer += dt * 6;
-                                    playClimbSound();
-                                } else {
-                                    stopClimbSound();
-                                }
+                                if (climbDelta !== 0) { animTimer += dt * 6; playClimbSound(); }
+                                else { stopClimbSound(); }
                                 playerPos.y += climbDelta;
-                                if (isCurrentlyClimbing) {
-                                    isGrounded = false; lastGroundedTime = now;
-                                }
+                                if (isCurrentlyClimbing) { isGrounded = false; lastGroundedTime = now; }
                                 moveDelta.set(0, 0, 0);
                             }
-                        } else {
-                            playerVel.y -= GRAVITY * gravityScale * dt;
-                        }
+                        } else { playerVel.y -= GRAVITY * gravityScale * dt; }
                     } else {
                         const climbCheckDir = moveDir.length() > 0 ? moveDir : new THREE.Vector3(0,0,1).applyAxisAngle(new THREE.Vector3(0,1,0), camYaw);
                         const yLevels = [playerPos.y - 1.5, playerPos.y - 3.0, playerPos.y - 4.5];
@@ -5549,11 +5946,7 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                                     wallRay.set(originStep, climbCheckDir);
                                     wallRay.far = 1.2;
                                     const hitsStep = wallRay.intersectObjects(collisionObjs);
-                                    if (hitsStep.length > 0) {
-                                        isCurrentlyClimbing = true;
-                                        currentClimbDir.copy(climbCheckDir);
-                                        break;
-                                    }
+                                    if (hitsStep.length > 0) { isCurrentlyClimbing = true; currentClimbDir.copy(climbCheckDir); break; }
                                 }
                             }
                         }
@@ -5562,7 +5955,6 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                             depenetrateFromPlayers(dt);
                             const hasMoveInput = moveKeys.w || moveKeys.a || moveKeys.s || moveKeys.d || joystickVector.length() > 0;
                             if (isGrounded) {
-                                // GROUNDED: direct control
                                 if (moveDelta.x !== 0) {
                                     let dirX = new THREE.Vector3(Math.sign(moveDelta.x), 0, 0);
                                     if (!hasWallCollision(playerPos, dirX, collisionObjs, Math.abs(moveDelta.x) + 0.5) && !playerBodyOverlaps(playerPos.x + moveDelta.x, playerPos.z)) {
@@ -5581,7 +5973,6 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                                         if (stepY !== null) { playerPos.y = stepY; playerPos.z += moveDelta.z; isWalking = true; }
                                     }
                                 }
-                                // Sync airborne momentum to the ground state
                                 if (isWalking) airHorizontalVel.copy(moveDir).multiplyScalar(moveSpeed);
                                 else airHorizontalVel.set(0, 0, 0);
                                 if (isWalking) {
@@ -5595,8 +5986,6 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                                     if (isShiftLock || isFirstPerson) charGroup.rotation.y = camYaw + Math.PI;
                                 }
                             } else {
-                                // AIRBORNE: momentum - carried velocity must decelerate before
-                                // reversing (turns stay responsive; brake time grows with speed)
                                 const desired = hasMoveInput ? moveDir.clone().multiplyScalar(moveSpeed) : null;
                                 if (desired) {
                                     const curSp = airHorizontalVel.length();
@@ -5625,9 +6014,8 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                                     if (!hasWallCollision(playerPos, dirZ, collisionObjs, Math.abs(hdtZ) + 0.5) && !playerBodyOverlaps(playerPos.x, playerPos.z + hdtZ)) playerPos.z += hdtZ;
                                     else airHorizontalVel.z = 0;
                                 }
-                                if (isShiftLock || isFirstPerson) {
-                                    charGroup.rotation.y = camYaw + Math.PI;
-                                } else {
+                                if (isShiftLock || isFirstPerson) { charGroup.rotation.y = camYaw + Math.PI; }
+                                else {
                                     const faceDir = hasMoveInput ? moveDir : (airHorizontalVel.lengthSq() > 4 ? airHorizontalVel : null);
                                     if (faceDir) {
                                         let targetRot = Math.atan2(faceDir.x, faceDir.z);
@@ -5638,12 +6026,10 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                             }
                         }
                     }
-                    // Horizontal velocity tracking (Dec's AI reads this; airborne launches count)
                     if (isCurrentlyClimbing) playerHorizontalVel.set(0, 0, 0);
                     else if (isWalking) playerHorizontalVel.copy(moveDir).multiplyScalar(moveSpeed);
                     else if (!isGrounded) playerHorizontalVel.copy(airHorizontalVel);
                     else playerHorizontalVel.set(0, 0, 0);
-                    // Spawn-protection forcefield
                     if (isForcefieldPermanent) forcefieldFade = Math.min(1, forcefieldFade + dt * 2);
                     else if (isForcefieldActive) {
                         forcefieldFade = Math.min(1, forcefieldFade + dt * 2);
@@ -5651,13 +6037,10 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                         if (forcefieldMoveTimer >= 5) { isForcefieldActive = false; forcefieldFade = 0; }
                     } else forcefieldFade = 0;
                     if (forcefieldMesh) forcefieldMesh.material.opacity = forcefieldFade * 0.8;
-
-                    // === ANIMATION OVERHAUL ===
                     if (!isCurrentlyClimbing) stopClimbSound();
                     if (isCurrentlyClimbing) {
                         stopWalkSound();
-                        pL_Arm.position.y = 3.5;
-                        pR_Arm.position.y = 3.5;
+                        pL_Arm.position.y = 3.5; pR_Arm.position.y = 3.5;
                         charGroup.rotation.y = Math.atan2(currentClimbDir.x, currentClimbDir.z);
                         charTorso.position.set(0, 3, -0.5);
                         charHead.position.set(0, 4.5, -0.5);
@@ -5666,8 +6049,7 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                         pR_Arm.rotation.x = -Math.PI / 2 - Math.sin(animTimer) * (Math.PI / 4);
                         pL_Arm.rotation.z = -5 * (Math.PI / 180);
                         pR_Arm.rotation.z = 5 * (Math.PI / 180);
-                        pL_Leg.position.x = 0.65;
-                        pR_Leg.position.x = -0.65;
+                        pL_Leg.position.x = 0.65; pR_Leg.position.x = -0.65;
                         let legVal = Math.sin(animTimer);
                         let legSwing = -Math.cos(animTimer);
                         let rightLegVal = Math.sin(animTimer + Math.PI);
@@ -5701,12 +6083,7 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                                 pL_Leg_z_rot: pL_Leg.rotation.z, pR_Leg_z_rot: pR_Leg.rotation.z
                             };
                         }
-                        if (isGrounded) {
-                            isJumpingAnim = false;
-                            isFallingAnim = false;
-                            jumpVelCaptured = false;
-                            jumpStartVelY = 53.15;
-                        }
+                        if (isGrounded) { isJumpingAnim = false; isFallingAnim = false; jumpVelCaptured = false; jumpStartVelY = 53.15; }
                         if (updateEmote(dt)) {
                             stopWalkSound();
                             standingStillState = 0; standingStillTimer = 0;
@@ -5729,11 +6106,7 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                             pR_Leg.position.z = THREE.MathUtils.lerp(jumpStartRot.pR_Leg_z_pos, 0, easeT);
                             pL_Leg.rotation.z = THREE.MathUtils.lerp(jumpStartRot.pL_Leg_z_rot, 0, easeT);
                             pR_Leg.rotation.z = THREE.MathUtils.lerp(jumpStartRot.pR_Leg_z_rot, 0, easeT);
-                            if (jumpAnimTimer > jumpDuration) {
-                                isJumpingAnim = false;
-                                isFallingAnim = true;
-                                fallAnimTimer = 0;
-                            }
+                            if (jumpAnimTimer > jumpDuration) { isJumpingAnim = false; isFallingAnim = true; fallAnimTimer = 0; }
                             stopWalkSound();
                             standingStillState = 0; standingStillTimer = 0;
                         } else if (isFallingAnim) {
@@ -5758,7 +6131,7 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                             standingStillState = 0; standingStillTimer = 0;
                         } else if (isWalking) {
                             playWalkSound();
-                            animTimer += dt * 11;
+                            animTimer += dt * (isHoldingSpeedCoil ? 22 : 11);
                             const sw = Math.sin(animTimer);
                             const legMid = THREE.MathUtils.degToRad(12.5);
                             const legAmp = THREE.MathUtils.degToRad(42.5);
@@ -5783,7 +6156,6 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                             pL_Leg.rotation.z = THREE.MathUtils.lerp(pL_Leg.rotation.z, 0, 0.2);
                             pR_Leg.rotation.z = THREE.MathUtils.lerp(pR_Leg.rotation.z, 0, 0.2);
                         } else {
-                            // Idle & Standing Still Animation
                             stopWalkSound();
                             pL_Arm.position.z = THREE.MathUtils.lerp(pL_Arm.position.z, 0, 0.2);
                             pR_Arm.position.z = THREE.MathUtils.lerp(pR_Arm.position.z, 0, 0.2);
@@ -5817,61 +6189,30 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                                 standingStillTimer += dt;
                                 const target = 20 * (Math.PI / 180);
                                 let p = Math.min(standingStillTimer / 0.75, 1.0);
-                                if (standingStillState == 1) {
-                                    pL_Arm.rotation.x = -p * target;
-                                    pR_Arm.rotation.x = -p * target;
-                                    pL_Leg.rotation.z = p * target;
-                                } else if (standingStillState == 2) {
-                                    let pp = 1.0 - p;
-                                    pL_Arm.rotation.x = -pp * target;
-                                    pR_Arm.rotation.x = -pp * target;
-                                    pL_Leg.rotation.z = pp * target;
-                                } else if (standingStillState == 3) {
-                                    pL_Arm.rotation.x = p * target;
-                                    pR_Arm.rotation.x = p * target;
-                                } else if (standingStillState == 4) {
-                                    let pp = 1.0 - p;
-                                    pL_Arm.rotation.x = pp * target;
-                                    pR_Arm.rotation.x = pp * target;
-                                }
+                                if (standingStillState == 1) { pL_Arm.rotation.x = -p * target; pR_Arm.rotation.x = -p * target; pL_Leg.rotation.z = p * target; }
+                                else if (standingStillState == 2) { let pp = 1.0 - p; pL_Arm.rotation.x = -pp * target; pR_Arm.rotation.x = -pp * target; pL_Leg.rotation.z = pp * target; }
+                                else if (standingStillState == 3) { pL_Arm.rotation.x = p * target; pR_Arm.rotation.x = p * target; }
+                                else if (standingStillState == 4) { let pp = 1.0 - p; pL_Arm.rotation.x = pp * target; pR_Arm.rotation.x = pp * target; }
                                 if (standingStillTimer >= 0.75) {
                                     standingStillTimer = 0;
                                     if (standingStillState == 4) {
-                                        if (standingStillRepeatsLeft > 0) {
-                                            standingStillRepeatsLeft--;
-                                            standingStillState = 1;
-                                        } else {
-                                            standingStillState = 0;
-                                        }
-                                    } else {
-                                        standingStillState++;
-                                    }
+                                        if (standingStillRepeatsLeft > 0) { standingStillRepeatsLeft--; standingStillState = 1; }
+                                        else { standingStillState = 0; }
+                                    } else { standingStillState++; }
                                 }
                             } else {
                                 standingStillTimer += dt;
-                                if (standingStillTimer >= 7.0) {
-                                    standingStillState = 1;
-                                    standingStillTimer = 0;
-                                    standingStillRepeatsLeft = Math.random() < 0.5 ? 1 : 0;
-                                }
+                                if (standingStillTimer >= 7.0) { standingStillState = 1; standingStillTimer = 0; standingStillRepeatsLeft = Math.random() < 0.5 ? 1 : 0; }
                             }
                         }
                     }
-
-                    // === SWORD SWING POSES (right hand; after the overhaul so the armed
-                    // RIGHT arm always resolves to the sword pose) ===
                     if (isHoldingSword) {
                         if (swordSwingTime > 0) {
                             swordSwingTime -= dt;
                             let progress = 1.0 - (swordSwingTime / swordSwingDuration);
                             if (swordSwingType === 'single') {
-                                if (progress < 0.5) {
-                                    let p = progress / 0.5;
-                                    pR_Arm.rotation.x = THREE.MathUtils.lerp(-Math.PI / 2, 0, p);
-                                } else {
-                                    let p = (progress - 0.5) / 0.5;
-                                    pR_Arm.rotation.x = THREE.MathUtils.lerp(0, -Math.PI / 2, p);
-                                }
+                                if (progress < 0.5) { let p = progress / 0.5; pR_Arm.rotation.x = THREE.MathUtils.lerp(-Math.PI / 2, 0, p); }
+                                else { let p = (progress - 0.5) / 0.5; pR_Arm.rotation.x = THREE.MathUtils.lerp(0, -Math.PI / 2, p); }
                                 if (swordModel) swordModel.rotation.set(-Math.PI / 2, 0, Math.PI);
                             } else if (swordSwingType === 'double') {
                                 pR_Arm.rotation.x = -Math.PI / 2;
@@ -5883,12 +6224,9 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                             if (lungeCooldownTimer > 0) lungeCooldownTimer -= dt;
                         }
                     }
-                    // Coil hold pose: right arm sticks out to hold the spring
-                    if (isHoldingSpeedCoil || isHoldingGravityCoil) {
+                    if (isHoldingSpeedCoil || isHoldingGravityCoil || isHoldingStamper || isHoldingHammer) {
                         pR_Arm.rotation.x = -Math.PI / 2;
                     }
-
-                    // === JUMP INPUT (solved heights + wall jump + climb launch) ===
                     if (moveKeys.space) {
                         if (isCurrentlyClimbing) {
                             playerVel.y = 62.6;
@@ -5897,15 +6235,12 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                             const backDir = currentClimbDir.clone().negate();
                             playerPos.x += backDir.x * 2.0;
                             playerPos.z += backDir.z * 2.0;
-                            // Ballistic launch: cover 13 studs total from the ladder
                             floorRay.set(new THREE.Vector3(playerPos.x, playerPos.y - 2, playerPos.z), new THREE.Vector3(0, -1, 0));
                             const landHits = floorRay.intersectObjects(collisionObjs);
                             let flightTime = 2 * 62.6 / (GRAVITY * gravityScale);
                             if (landHits.length > 0 && landHits[0].distance < 300) {
                                 const dropY = playerPos.y - (landHits[0].point.y + 5.5);
-                                if (dropY > 0) {
-                                    flightTime = (62.6 + Math.sqrt(62.6 * 62.6 + 2 * GRAVITY * gravityScale * dropY)) / (GRAVITY * gravityScale);
-                                }
+                                if (dropY > 0) { flightTime = (62.6 + Math.sqrt(62.6 * 62.6 + 2 * GRAVITY * gravityScale * dropY)) / (GRAVITY * gravityScale); }
                             }
                             const launchSpeed = (13 - 2) / flightTime;
                             playerVel.x = 0; playerVel.z = 0;
@@ -5914,7 +6249,7 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                             lastGroundedTime = 0;
                             playJumpSound();
                         } else if (now - lastGroundedTime < COYOTE_DURATION) {
-                            let jumpStuds = 7.2;
+                            let jumpStuds = isHoldingGravityCoil ? 29 : 7.2;
                             wallJumpHugging = false;
                             const pressingMove = moveKeys.w || moveKeys.a || moveKeys.s || moveKeys.d || joystickVector.length() > 0;
                             if (pressingMove && (isHuggingWall(moveDir) || isWallhopEmbedded)) {
@@ -5931,32 +6266,24 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                             playJumpSound();
                         }
                     }
-                    // Camera-flick wall-jump upgrade (10 -> 12 studs)
                     if (wallJumpHugging && playerVel.y > 0 && !isCurrentlyClimbing) {
                         const pressingMove = moveKeys.w || moveKeys.a || moveKeys.s || moveKeys.d || joystickVector.length() > 0;
                         let stillHugging = pressingMove && (isHuggingWall(moveDir) || isWallhopEmbedded);
-                        if (stillHugging && wallJumpHeightGoal < 12 && hasRecentCameraFlick()) {
-                            wallJumpHeightGoal = 12;
-                        }
+                        if (stillHugging && wallJumpHeightGoal < 12 && hasRecentCameraFlick()) { wallJumpHeightGoal = 12; }
                         if (wallJumpHeightGoal > 10) {
                             const climbed = playerPos.y - wallJumpStartY;
                             const remaining = Math.max(0, wallJumpHeightGoal - climbed);
                             const targetVel = Math.sqrt(2 * GRAVITY * gravityScale * remaining);
-                            if (playerVel.y < targetVel) {
-                                playerVel.y = Math.min(targetVel, playerVel.y + 260 * dt);
-                            }
+                            if (playerVel.y < targetVel) { playerVel.y = Math.min(targetVel, playerVel.y + 260 * dt); }
                         }
                     }
                     if (playerVel.y <= 0) wallJumpHugging = false;
-
                     playerPos.y += playerVel.y * dt;
-
                     if (playerVel.y > 0) {
                         ceilingRay.set(new THREE.Vector3(playerPos.x, playerPos.y - 0.2, playerPos.z), new THREE.Vector3(0, 1, 0));
                         const cHHits = ceilingRay.intersectObjects(collisionObjs);
                         if (cHHits.length > 0 && cHHits[0].distance < 0.9) playerVel.y = 0;
                     }
-
                     if (!isCurrentlyClimbing) {
                         isGrounded = false;
                         const rayOriginY = playerPos.y - 2;
@@ -5967,9 +6294,7 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                             floorRay.set(new THREE.Vector3(supportPts[i].x, rayOriginY, supportPts[i].z), new THREE.Vector3(0,-1,0));
                             const fHits = floorRay.intersectObjects(collisionObjs);
                             if (fHits.length > 0 && fHits[0].distance < 4.0) {
-                                if (!highestPoint || fHits[0].point.y > highestPoint.y) {
-                                    highestPoint = fHits[0].point;
-                                }
+                                if (!highestPoint || fHits[0].point.y > highestPoint.y) { highestPoint = fHits[0].point; }
                                 if (isWallhopEmbedded && !hasExposedSupport) {
                                     const gp = fHits[0].point;
                                     const boxes = getSolidBlockBoxes();
@@ -5977,15 +6302,12 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                                         const box = boxes[b];
                                         if (supportPts[i].x > box.min.x && supportPts[i].x < box.max.x &&
                                             gp.y + 0.15 > box.min.y && gp.y + 0.15 < box.max.y &&
-                                            supportPts[i].z > box.min.z && supportPts[i].z < box.max.z) {
-                                            break;
-                                        }
+                                            supportPts[i].z > box.min.z && supportPts[i].z < box.max.z) { break; }
                                         if (b === boxes.length - 1) hasExposedSupport = true;
                                     }
                                 }
                             }
                         }
-                        // PLAYER HEADS as stand-on surfaces
                         remotePlayers.forEach(rp => {
                             if (rp.dead) return;
                             const headTop = rp.pos.y + PLAYER_HEAD_TOP;
@@ -5999,7 +6321,6 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                                 }
                             }
                         });
-                        // Dec's head is standable too
                         if (npc && !npc.isDead) {
                             const dHeadTop = (npc.pos.y - 5.5) + PLAYER_HEAD_TOP;
                             if (playerPos.y - 5.5 >= dHeadTop - 0.6) {
@@ -6019,26 +6340,16 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                             const wallhopActive = isWallhopEmbedded && !hasExposedSupport;
                             const wallhopSupported = !wallhopActive || wallhopEmbedTimer <= WALLHOP_WINDOW;
                             if (wallhopSupported) {
-                                if (highestPoint) {
-                                    playerPos.y = highestPoint.y + 5.5; playerVel.y = 0; playerVel.x = 0; playerVel.z = 0; isGrounded = true; lastGroundedTime = now;
-                                } else if (playerPos.y <= 7.5) {
-                                    playerPos.y = 7.5; playerVel.y = 0; playerVel.x = 0; playerVel.z = 0; isGrounded = true; lastGroundedTime = now;
-                                }
-                            } else if (playerPos.y - 5.5 < 2.05) {
-                                ejectFromWallhopBlock();
-                            }
+                                if (highestPoint) { playerPos.y = highestPoint.y + 5.5; playerVel.y = 0; playerVel.x = 0; playerVel.z = 0; isGrounded = true; lastGroundedTime = now; }
+                                else if (playerPos.y <= 7.5) { playerPos.y = 7.5; playerVel.y = 0; playerVel.x = 0; playerVel.z = 0; isGrounded = true; lastGroundedTime = now; }
+                            } else if (playerPos.y - 5.5 < 2.05) { ejectFromWallhopBlock(); }
                         }
                     }
                 }
             }
-
-            // --- SWORD COMBAT (all pairs involving the local player) ---
             updateSwordCombat(now);
-
-            // --- SPEED COIL SMOKE TRAIL (no trail with the Gravity Coil) ---
             updateCoilTrail(dt);
-
-            // --- CAMERA (material updates only when opacity actually changes) ---
+            updateStamperSystems(dt);
             if (!isRagdoll) {
                 charGroup.position.set(
                     playerPos.x + emoteRightDir.x * emoteLatOffset,
@@ -6047,9 +6358,7 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                 );
                 const headWorldPos = new THREE.Vector3();
                 charHead.getWorldPosition(headWorldPos);
-                if (isGrounded && !isWalking && !isJumpingAnim && !isFallingAnim && !activeEmote && !emoteRecovery) {
-                    headWorldPos.y = charGroup.position.y + 4.5;
-                }
+                if (isGrounded && !isWalking && !isJumpingAnim && !isFallingAnim && !activeEmote && !emoteRecovery) { headWorldPos.y = charGroup.position.y + 4.5; }
                 const isFirstPersonCam = camDist <= FIRST_PERSON_DIST;
                 let camOffset = (isShiftLock && !isFirstPersonCam) ? new THREE.Vector3(1,0,0).applyAxisAngle(new THREE.Vector3(0,1,0), camYaw).multiplyScalar(1.75) : new THREE.Vector3();
                 const ideal = new THREE.Vector3(headWorldPos.x + camOffset.x + Math.sin(camYaw)*Math.cos(camPitch)*camDist, headWorldPos.y + camOffset.y + Math.sin(camPitch)*camDist, headWorldPos.z + camOffset.z + Math.cos(camYaw)*Math.cos(camPitch)*camDist);
@@ -6066,14 +6375,11 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                     });
                 }
             }
-
             if (tapMarkerMesh && tapMarkerMesh.visible) {
                 tapMarkerMesh.scale.addScalar(dt * 2.0);
                 tapMarkerMesh.material.opacity -= dt * 2.0;
                 if (tapMarkerMesh.material.opacity <= 0) tapMarkerMesh.visible = false;
             }
-
-            // --- MULTIPLAYER: state ~15x/sec + host Dec sync ~10Hz + remote animation ---
             if (netJoined && netConns.length > 0) {
                 netSendTimer += dt;
                 if (netSendTimer >= 0.066) {
@@ -6091,6 +6397,7 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                         hp: Math.round(playerHealth),
                         h: isHoldingItem,
                         hi: heldGearId,
+                        ff: isForcefieldActive,
                         k: playerKills, dd: playerDeaths
                     };
                     const msg = { t: 'state', s: s };
@@ -6133,7 +6440,6 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
             return coilSmokeTex;
         }
         function updateCoilTrail(dt) {
-            // Speed Coil smoke trail while moving (no trail with the Gravity Coil)
             if (isHoldingSpeedCoil && !isRagdoll && playerHorizontalVel.length() > 6) {
                 coilParticleTimer += dt;
                 if (coilParticleTimer >= 0.045) {
@@ -6160,6 +6466,21 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
             }
         }
 
+        // ===================== PERF STATS (real FPS + Ping) =====================
+        function updatePerfStats(dt) {
+            fpsFrames++;
+            const t = performance.now();
+            if (t - fpsLastTick >= 1000) { currentFPS = fpsFrames; fpsFrames = 0; fpsLastTick = t; }
+            const fpsEl = document.getElementById('fps-display');
+            if (fpsEl) fpsEl.textContent = 'FPS: ' + currentFPS;
+            const pingEl = document.getElementById('ping-display');
+            if (netJoined && netConns.length > 0) {
+                pingTimer += dt;
+                if (pingTimer >= 2) { pingTimer = 0; broadcast({ t: 'ping', ts: performance.now() }); }
+                if (pingEl) pingEl.textContent = 'Ping: ' + (netPingMs === null ? '--' : Math.round(netPingMs)) + 'ms';
+            } else if (pingEl) pingEl.textContent = 'Ping: --ms';
+        }
+
         // ===================== SHIFTLOCK CURSOR =====================
         function updateShiftlockCursor() {
             const el = document.getElementById('shiftlock-cursor');
@@ -6171,18 +6492,14 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
 
         function renderFrame() {
             if (!renderer || !scene || !camera) return;
-            updateSkyElements(); // dome + sun + moon follow the camera (unreachable)
-            if (isAvatarEditorOpen && previewRenderer) {
-                previewRenderer.render(previewScene, previewCamera);
-            }
+            updateSkyElements();
+            if (isAvatarEditorOpen && previewRenderer) { previewRenderer.render(previewScene, previewCamera); }
             renderer.render(scene, camera);
             updateOverheadUI();
             updatePlotLabels();
             updateShiftlockCursor();
         }
 
-        // Real-time tick: sub-stepped simulation (max 0.1s per step) + render only while
-        // the tab is visible. Armored: a single bad frame can NEVER kill the game loop.
         function gameTick() {
             const t = performance.now();
             if (!lastTickTime) { lastTickTime = t; return; }
@@ -6194,11 +6511,9 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
             const step = simTotal / subSteps;
             try {
                 for (let i = 0; i < subSteps; i++) simulateStep(step);
-            } catch (e) {
-                console.error('Simulation error (recovered):', e);
-            }
+            } catch (e) { console.error('Simulation error (recovered):', e); }
             if (!document.hidden) {
-                try { renderFrame(); } catch (e) { console.error('Render error (recovered):', e); }
+                try { renderFrame(); updatePerfStats(dt); } catch (e) { console.error('Render error (recovered):', e); }
             }
         }
 
@@ -6220,29 +6535,21 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
         };
         window.closeInterface = function(id) {
             const el = document.getElementById(id);
-            if (el) {
-                el.classList.remove('open');
-                if (currentOpenInterface === id) currentOpenInterface = null;
-            }
+            if (el) { el.classList.remove('open'); if (currentOpenInterface === id) currentOpenInterface = null; }
         };
 
-        // ===================== GAME SETTINGS TOGGLES (all real + persisted) =====================
+        // ===================== GAME SETTINGS TOGGLES =====================
         window.toggleSetting = function(btn) {
+            const setting = btn.dataset.setting;
+            if (setting === 'forcefield') return; // LOCKED - functionality coming later
             const wasOn = btn.classList.contains('on');
             if (wasOn) { btn.classList.remove('on'); btn.classList.add('off'); btn.innerText = 'OFF'; }
             else { btn.classList.remove('off'); btn.classList.add('on'); btn.innerText = 'ON'; }
-            const setting = btn.dataset.setting;
-            if (setting === 'forcefield') {
-                isForcefieldPermanent = !wasOn;
-                localStorage.setItem('toh_forcefield', isForcefieldPermanent);
-                if (!wasOn) { isForcefieldPermanent = true; isForcefieldActive = true; }
-                else { isForcefieldPermanent = false; isForcefieldActive = false; forcefieldFade = 0; }
-            } else if (setting === 'timecycle') {
+            if (setting === 'timecycle') {
                 isTimeCycleActive = !wasOn;
                 localStorage.setItem('toh_timecycle', isTimeCycleActive);
-                timeCycleTime = Math.PI / 3; // reset to morning either way
+                timeCycleTime = Math.PI / 3;
                 if (wasOn) {
-                    // OFF: pure DEFAULT DAY SKYBOX at full weight - no tint, no blending
                     if (skyDome) {
                         skyDome.material.uniforms.uDayW.value = 1;
                         skyDome.material.uniforms.uSunsetW.value = 0;
@@ -6254,7 +6561,6 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                     if (sunSprite) sunSprite.visible = false;
                     if (moonSprite) moonSprite.visible = false;
                 }
-                // ON: the loop resumes driving the dome, sun & moon
             } else if (setting === 'textures') {
                 texturesEnabled = !wasOn;
                 localStorage.setItem('toh_textures', texturesEnabled);
@@ -6268,7 +6574,7 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                 } else {
                     scene.traverse(obj => {
                         if (obj.isMesh && obj.material.map) {
-                            if (obj.userData.isFace) return; // keep face decals
+                            if (obj.userData.isFace) return;
                             obj.userData.origMap = obj.material.map;
                             obj.material.map = null;
                             obj.material.needsUpdate = true;
@@ -6282,22 +6588,28 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
             } else if (setting === 'ingamemusic') {
                 ingameMusicEnabled = !wasOn;
                 localStorage.setItem('toh_ingamemusic', ingameMusicEnabled);
-                // No music track exists yet - reserved hook for the content phase
             } else if (setting === 'killclanmembers') {
                 killClanMembersEnabled = !wasOn;
                 localStorage.setItem('toh_killclanmembers', killClanMembersEnabled);
-                // OFF = peaceful mode vs Dec (sword damage blocked both directions)
             }
         };
 
         // Top UI bar wiring
         document.querySelectorAll('.ui-btn').forEach(btn => { btn.addEventListener('click', () => { toggleInterface(btn.getAttribute('data-interface')); }); });
 
+        // Build save / load / rotate wiring
+        document.getElementById('build-save-btn').addEventListener('click', saveMyBuild);
+        document.getElementById('build-load-btn').addEventListener('click', loadMyBuild);
+        document.getElementById('build-rotate-btn').addEventListener('click', rotateMyBuild);
+        document.getElementById('build-save-name-btn').addEventListener('click', () => {
+            localStorage.setItem('toh_lastBuildName', document.getElementById('build-save-name').value.trim());
+            addSystemChat('Save name set');
+        });
+        document.getElementById('build-save-name').value = localStorage.getItem('toh_lastBuildName') || '';
+        document.getElementById('stamper-back-btn').addEventListener('click', closeBlockDetail);
+        document.getElementById('stamper-rainbow-btn').addEventListener('click', () => addSystemChat('Rainbow blocks coming soon'));
+
         // ===================== BOOT SAFETY NET =====================
-        // No matter WHAT kills initialization (stalled network resource, script error,
-        // a duplicated chunk from a bad paste), the loading overlay is force-cleared
-        // so the page can never be left permanently unresponsive, and the real cause
-        // is surfaced in the console.
         let __booted = false;
         const __forceCloseLoader = () => {
             const l = document.getElementById('loading-screen');
@@ -6309,9 +6621,6 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
             __forceCloseLoader();
         }, 6000);
         window.addEventListener('error', (e) => {
-            // A SyntaxError (e.g. "Identifier 'x' has already been declared" from a
-            // duplicated chunk) kills the entire script silently - this surfaces it
-            // and clears the overlay instead of leaving a dead page.
             if (!__booted) __forceCloseLoader();
             console.error('Global error:', e.message, 'at', e.filename, 'line', e.lineno);
         });
