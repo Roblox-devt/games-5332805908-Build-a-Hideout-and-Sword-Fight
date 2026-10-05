@@ -349,7 +349,7 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
 <div id="dynamic-joystick-container" style="position: absolute; width: 100px; height: 100px; background: rgba(255,255,255,0.1); border: 2px solid rgba(255,255,255,0.5); border-radius: 50%; display: none; pointer-events: none; transform: translate(-50%, -50%); z-index: 26;"><div id="dynamic-joystick-knob" style="position: absolute; width: 44px; height: 44px; background: rgba(255,255,255,0.85); border-radius: 50%; transform: translate(-50%, -50%);"></div></div>
 <div id="stamper-menu"><div id="stamper-menu-title">Basic Building</div><div id="stamper-menu-footer"></div><div id="stamper-grid"></div><div id="stamper-detail"><div id="stamper-detail-canvas"></div><div id="stamper-detail-name"></div><div style="display:flex;gap:8px;width:100%;"><div class="stamper-dbtn" id="stamper-back-btn">Back</div><div class="stamper-dbtn stamper-rainbow" id="stamper-rainbow-btn">Rainbow</div></div></div></div>
 <div class="info-saved-toast" id="info-saved-toast">Player information saved!</div>
-<div id="version-text">Version 1.18.7</div>
+<div id="version-text">Version 1.19.0</div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.160.0/three.min.js"></script>
 <script src="https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js"></script>
 <script>
@@ -481,19 +481,24 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
         const _wallOrigin1 = new THREE.Vector3(), _wallOrigin2 = new THREE.Vector3(), _wallOrigin3 = new THREE.Vector3();
         const _hilt = new THREE.Vector3(), _tip = new THREE.Vector3(), _targetPos = new THREE.Vector3();
         const _lineVec = new THREE.Vector3(), _pointVec = new THREE.Vector3(), _closestPoint = new THREE.Vector3();
+        // NEW: scratch vectors for step-up surface probe + swept ceiling check
+        const _stepProbe = new THREE.Vector3(), _stepDown = new THREE.Vector3(0, -1, 0);
+        const _ceilOrig = new THREE.Vector3(), _ceilUp = new THREE.Vector3(0, 1, 0);
 
         // ===================== POINTER LOCK SAFETY =====================
         const POINTER_LOCK_RELOCK_COOLDOWN = 1.35;
         let lastPointerLockExitAt = -1e9;
         let pointerLockRequestPending = false;
         let lastPointerLockAttemptAt = -1e9;
-        function safeRequestPointerLock() {
+        // FIX (instant shift lock): 'force' bypasses the relock cooldown + throttle.
+        // Automatic re-locks (retry timer, checkPointerLockNeeds) still use the cooldown.
+        function safeRequestPointerLock(force) {
             if (!renderer || document.pointerLockElement === renderer.domElement) return;
             if (pointerLockRequestPending) return;
             if (!document.hasFocus()) return;
             const tNow = performance.now() / 1000;
             const sinceExit = tNow - lastPointerLockExitAt;
-            if (sinceExit < POINTER_LOCK_RELOCK_COOLDOWN) {
+            if (!force && sinceExit < POINTER_LOCK_RELOCK_COOLDOWN) {
                 if (!pointerLockRetryTimer) {
                     pointerLockRetryTimer = setTimeout(() => {
                         pointerLockRetryTimer = null;
@@ -505,7 +510,7 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                 }
                 return;
             }
-            if (tNow - lastPointerLockAttemptAt < 0.25) return;
+            if (!force && tNow - lastPointerLockAttemptAt < 0.25) return;
             lastPointerLockAttemptAt = tNow;
             pointerLockRequestPending = true;
             let released = false;
@@ -529,7 +534,6 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                 document.exitPointerLock();
             }
         }
-
         // ===================== CORE FUNCTIONS =====================
         function checkPhone() { return /iPhone|iPod|Android.*Mobile/i.test(navigator.userAgent) || (isMobile && Math.min(window.innerWidth, window.innerHeight) < 600); }
         function wrapAngle(a) {
@@ -656,7 +660,7 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
             slashSound = new Audio('https://us-tuna-sounds-files.voicemod.net/c4a606ff-eaf8-4699-b289-3071debb92c2-1693085608654.mp3');
             lungeSound = new Audio('https://us-tuna-sounds-files.voicemod.net/10d8de95-aae7-43ca-8018-62e8c3281ca2-1693085739438.mp3');
             speedCoilSound = new Audio('https://www.myinstants.com/media/sounds/roblox-speed-coil.mp3');
-            gravityCoilSound = new Audio('https://us-tuna-sounds-files.voicemod.net/b08b96bb-ba2a-4664-a541-490874e2143a-1659832866447.mp3');
+            gravityCoilSound = new Audio('https://us-tuna-sounds-files.voicemod.net/b08b96bb-ba6-4664-a541-490874e2143a-1659832866447.mp3');
         }
         function createSwordModel() {
             const group = new THREE.Group();
@@ -928,7 +932,7 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                         if (key === 'r') triggerRespawnSequence();
                         if (e.key === 'Enter') {
                             e.preventDefault();
-                            if (document.getElementById('leave-confirmation-panel').style.display === 'flex') window.location.href = "https://www.roblox.com";
+                            if (document.getElementById('leave-confirmation-panel').style.display === 'flex') window.location.href = "https://roblox-devt.github.io/home2";
                             else if (document.getElementById('respawn-confirmation-panel').style.display === 'flex') executeRagdollRespawn();
                         }
                         return;
@@ -977,11 +981,12 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                             if (!isShiftLockEnabled) return;
                             isShiftLock = !isShiftLock;
                             const mobBtn = document.getElementById('mobile-shiftlock');
-                            if (mobBtn) {
-                                if (isShiftLock) mobBtn.classList.add('active');
-                                else mobBtn.classList.remove('active');
-                            }
-                            checkPointerLockNeeds();
+                            if (mobBtn) mobBtn.classList.toggle('active', isShiftLock);
+                            // FIX (instant shift lock): request the lock IMMEDIATELY.
+                            // A keydown counts as a user gesture so the browser grants it
+                            // right away; force=true bypasses the relock cooldown.
+                            if (isShiftLock) safeRequestPointerLock(true);
+                            else safeExitPointerLock();
                         }
                     }
                 });
@@ -2447,7 +2452,6 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
             micGreenRect.setAttribute('y', greenY);
             micGreenRect.setAttribute('height', greenHeight);
         }
-
         // ===================== DEATH SYSTEM =====================
         function ragdollPlayer() {
             isRagdoll = true;
@@ -2804,7 +2808,7 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
             joystick.addEventListener('touchmove', handleJoystick);
             joystick.addEventListener('touchend', (e) => {
                 if (currentMovementMode !== 'classic') return;
-                for(let i=0; i<e.changedTouches.length; i++) {
+                for(let i=0;i<e.changedTouches.length;i++) {
                     if(e.changedTouches[i].identifier === joystickTouchId) {
                         joystickTouchId = null;
                         knob.style.transform = `translate(-50%, -50%)`;
@@ -2932,7 +2936,7 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
             addTriangle(v(W, -Hc, Dc), v(Wc, -H, Dc), v(Wc, -Hc, D), new THREE.Vector3(1, -1, 1).normalize());
             addTriangle(v(W, -Hc, -Dc), v(Wc, -Hc, -D), v(Wc, -H, -Dc), new THREE.Vector3(1, -1, -1).normalize());
             addTriangle(v(-W, Hc, Dc), v(-Wc, Hc, D), v(-Wc, H, Dc), new THREE.Vector3(-1, 1, 1).normalize());
-            addTriangle(v(-W, Hc, -Dc), v(-Wc, H, -Dc), v(-Wc, Hc, -D), new THREE.Vector3(-1, 1, -1).normalize());
+            addTriangle(v(-W, Hc, -Dc), v(-Wc, Hc, -D), v(-Wc, H, -Dc), new THREE.Vector3(-1, 1, -1).normalize());
             addTriangle(v(-W, -Hc, Dc), v(-Wc, -H, Dc), v(-Wc, -Hc, D), new THREE.Vector3(-1, -1, 1).normalize());
             addTriangle(v(-W, -Hc, -Dc), v(-Wc, -Hc, -D), v(-Wc, -H, -Dc), new THREE.Vector3(-1, -1, -1).normalize());
             const geo = new THREE.BufferGeometry();
@@ -2987,7 +2991,11 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                 for (let j = 0; j < radialSegments; j++) {
                     const a = r * (radialSegments + 1) + j;
                     const b = a + radialSegments + 1;
-                    indices.push(a, b, a + 1, b, b + 1, a + 1);
+                    // FIX (inside-out faces): the old index order (a, b, a+1, b, b+1, a+1)
+                    // wound BOTH triangles inward (normals pointing INTO the head). Harmless
+                    // while the face material stays DoubleSide, but it would vanish with
+                    // FrontSide. This order winds both triangles outward.
+                    indices.push(a, a + 1, b, a + 1, b + 1, b);
                 }
             }
             const geo = new THREE.BufferGeometry();
@@ -3424,7 +3432,6 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
             charGroup.add(forcefieldMesh);
             scene.add(charGroup);
         }
-
         // ===================== DEC - NPC ON THE NEW RIG =====================
         function spawnNPC(name, pos) {
             const npcGroup = new THREE.Group();
@@ -3647,7 +3654,7 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                 spawnPoints.push(new THREE.Vector3(spX, 7.6, spZ));
                 plotLabelAnchors.push(new THREE.Vector3(center.x, 10, center.z));
             });
-            const grassTex = new THREE.TextureLoader().load("https://devforum-uploads.s3.dualstack.us-east-2.amazonaws.com/uploads/optimized/4X/5/6/4/564d55107b215d781458200a8b52afce6e8f3c1c_2_750x750.png");
+            const grassTex = new THREE.TextureLoader().load("https://devforum-uploads.s3.dualstack.us-east-2.amazonaws.com/uploads/optimized/4X/5/6/4/564d55107b215d781458200e8b52afce6e8f3c1c_2_750x750.png");
             grassTex.colorSpace = THREE.SRGBColorSpace;
             const grassColor = 0xb0ffc5;
             const makeBorderBox = (width, depth, xPos, zPos, tex, color) => {
@@ -3813,12 +3820,20 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                         if (normal.y > WALKABLE_SLOPE_Y) continue;
                     }
                     const hitObj = hits[0].object;
-                    let topY = 2.0;
-                    if (hitObj.userData.topY !== undefined) {
+                    let topY;
+                    // FIX (true-shape slope collision): placed blocks (slopes, wedges,
+                    // stairs) resolve their step height by probing the ACTUAL surface
+                    // just past the obstacle instead of using the full-box AABB top —
+                    // so players and Dec step/jump onto the real ramp shape.
+                    if (hitObj.userData.isPlacedBlock) {
+                        wallRay.set(_stepProbe.set(pPos.x + moveDir.x * 1.4, feetY + 6.0, pPos.z + moveDir.z * 1.4), _stepDown);
+                        wallRay.far = 12;
+                        const dHits = wallRay.intersectObjects(objs);
+                        topY = (dHits.length > 0) ? dHits[0].point.y : new THREE.Box3().setFromObject(hitObj).max.y;
+                    } else if (hitObj.userData.topY !== undefined) {
                         topY = hitObj.userData.topY;
                     } else {
-                        const bb = new THREE.Box3().setFromObject(hitObj);
-                        topY = bb.max.y;
+                        topY = new THREE.Box3().setFromObject(hitObj).max.y;
                     }
                     const stepHeight = topY - feetY;
                     if (stepHeight > -0.1 && stepHeight <= 2.1) {
@@ -3875,6 +3890,10 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                 scene.updateMatrixWorld(true);
                 solidBlockBoxes = [];
                 collisionObjs.forEach(o => {
+                    // FIX: Box3.setFromObject ignores InstancedMesh instance matrices
+                    // and produced a phantom 4x4x4 solid box at world origin (the
+                    // baseplate!), polluting wallhop-embed checks near spawn-center.
+                    if (o.isInstancedMesh) return;
                     const b = new THREE.Box3().setFromObject(o);
                     if (!b.isEmpty() && (b.max.y - b.min.y) > 0.01 && (b.max.x - b.min.x) > 0.01 && (b.max.z - b.min.z) > 0.01) {
                         solidBlockBoxes.push(b);
@@ -3930,6 +3949,8 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                 scene.updateMatrixWorld(true);
                 cameraOcclusionBoxes = [];
                 collisionObjs.forEach(o => {
+                    // FIX: same InstancedMesh phantom-box guard as getSolidBlockBoxes()
+                    if (o.isInstancedMesh) return;
                     const b = new THREE.Box3().setFromObject(o);
                     if (!b.isEmpty() && (b.max.y - b.min.y) > 0.01) cameraOcclusionBoxes.push(b);
                 });
@@ -4043,7 +4064,7 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                     { dur: 0.3, poseTime: 0.2, pose: { rArmX: -120, rArmZ: 25, headX: 6 } },
                     { dur: 0.3, poseTime: 0.2, pose: { rArmX: -120, rArmZ: -10, headX: 6 } },
                     { dur: 0.3, poseTime: 0.2, pose: { rArmX: -120, rArmZ: 25, headX: 6 } },
-                    { dur: 0.45, pose: null }
+                    { dur: 0.45, poseTime: 0.4, pose: null }
                 ]
             },
             dance: {
@@ -4061,7 +4082,7 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                     { dur: 0.25, poseTime: 0.2, pose: { lArmX: -85, lArmZ: 10, rArmX: -85, rArmZ: 10, torsoZ: 10, headZ: 10, lLegZ: 20, rLegZ: -20, lLegX: 15, rLegX: -15, y: 0.5 } },
                     { dur: 0.25, poseTime: 0.2, pose: { lArmX: -75, lArmZ: 0, rArmX: -75, rArmZ: 0, torsoZ: 0, headZ: 0, lLegZ: 20, rLegZ: -20, lLegX: 15, rLegX: -15, y: 0 } },
                     { dur: 0.25, poseTime: 0.2, pose: { lArmX: -85, lArmZ: -10, rArmX: -85, rArmZ: -10, torsoZ: -10, headZ: -10, lLegZ: 20, rLegZ: -20, lLegX: -15, rLegX: 15, y: 0.5 } },
-                    { dur: 0.25, poseTime: 0.2, pose: { lArmX: -75, lArmZ: 0, rArmX: -75, rArmZ: 0, torsoZ: 0, headZ: 0, lLegZ: 20, rLegZ: -20, lLegX: -15, rLegX: 15, y: 0 } }
+                    { dur: 0.25, poseTime: 0.2, pose: { lArmX: -75, lArmZ: 0, rArmX: -75, rArmZ: 0, torsoZ: 0, headZ: 0, lLegZ: 20, rLegZ: -20, lLegX: 15, rLegX: -15, y: 0 } }
                 ]
             },
             laugh: {
@@ -4312,7 +4333,6 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                 if (b.t > 7.5) { b.el.remove(); rp.bubbles.splice(i, 1); }
             }
         }
-
         // ===================== REMOTE PLAYER ANIMATION =====================
         function updateRemotePlayers(dt) {
             remotePlayers.forEach(rp => {
@@ -5333,6 +5353,10 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
         function getBlockGeometry(typeId) {
             if (blockGeoCache.has(typeId)) return blockGeoCache.get(typeId);
             const pos = [], uvs = [], idx = [];
+            // FIX (inside-out faces): the old auto-orient check compared a cross
+            // product against itself (always >= 0) so it NEVER flipped anything —
+            // several faces rendered inside out. Winding is now hand-verified
+            // OUTWARD for every face below.
             const tri = (a, b, c) => {
                 const n = new THREE.Vector3().subVectors(b, a).cross(new THREE.Vector3().subVectors(c, a));
                 if (n.lengthSq() < 1e-9) return;
@@ -5344,37 +5368,58 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                 };
                 const i0 = pos.length / 3;
                 [a, b, c].forEach(v => { pos.push(v[0], v[1], v[2]); const uv = proj(v); uvs.push(uv[0], uv[1]); });
-                if (new THREE.Vector3().subVectors(b, a).cross(new THREE.Vector3().subVectors(c, a)).dot(n) >= 0) idx.push(i0, i0 + 1, i0 + 2);
-                else idx.push(i0, i0 + 2, i0 + 1);
+                idx.push(i0, i0 + 1, i0 + 2);
             };
             const quad = (a, b, c, d) => { tri(a, b, c); tri(a, c, d); };
             const box = (x0, x1, y0, y1, z0, z1) => {
                 const A = [x0, y0, z0], B = [x1, y0, z0], C = [x1, y0, z1], D = [x0, y0, z1];
                 const E = [x0, y1, z0], F = [x1, y1, z0], G = [x1, y1, z1], H = [x0, y1, z1];
-                quad(A, B, C, D); quad(E, F, G, H); quad(B, F, G, C); quad(A, E, H, D); quad(A, E, F, B); quad(D, H, G, C);
+                quad(A, B, C, D);   // bottom -Y
+                quad(E, H, G, F);   // top    +Y   (FIXED — was inside out)
+                quad(B, F, G, C);   // +X
+                quad(A, D, H, E);   // -X           (FIXED — was inside out)
+                quad(A, E, F, B);   // -Z
+                quad(D, C, G, H);   // +Z           (FIXED — was inside out)
             };
             const t = BLOCK_TYPES.find(b => b.id === typeId);
             if (typeId === 'brick') box(0, 4, 0, 4, 0, 4);
             else if (typeId === 'slab') box(0, 4, 0, 2, 0, 4);
             else if (typeId === 'cornerSlope') {
                 const A = [0,0,0], B = [4,0,0], C = [4,0,4], D = [0,0,4], E = [4,4,4];
-                quad(A, B, C, D); tri(B, C, E); tri(D, C, E); tri(A, B, E); tri(A, D, E);
+                quad(A, B, C, D);   // bottom
+                tri(B, E, C);       // +X      (FIXED — was tri(B,C,E))
+                tri(D, C, E);       // +Z
+                tri(A, E, B);       // slope, -Z side (FIXED — was tri(A,B,E))
+                tri(A, D, E);       // slope, -X side
             }
             else if (typeId === 'slope') {
                 const A = [0,0,0], B = [4,0,0], C = [4,0,4], D = [0,0,4], E = [4,4,0], F = [4,4,4];
-                quad(A, B, C, D); quad(B, C, F, E); tri(A, B, E); tri(D, C, F); quad(A, D, F, E);
+                quad(A, B, C, D);   // bottom
+                quad(B, E, F, C);   // +X back (FIXED — was quad(B,C,F,E))
+                tri(A, E, B);       // -Z side (FIXED — was tri(A,B,E))
+                tri(D, C, F);       // +Z side
+                quad(A, D, F, E);   // slope face
             }
             else if (typeId === 'longSlope') {
                 const A = [0,0,0], B = [8,0,0], C = [8,0,4], D = [0,0,4], E = [8,4,0], F = [8,4,4];
-                quad(A, B, C, D); quad(B, C, F, E); tri(A, B, E); tri(D, C, F); quad(A, D, F, E);
-            }
-            else if (typeId === 'longTriangle') {
-                const A = [0,0,0], B = [8,0,0], C = [8,0,4], T = [8,4,4];
-                tri(A, B, C); tri(B, C, T); tri(A, B, T); tri(A, C, T);
+                quad(A, B, C, D); quad(B, E, F, C); tri(A, E, B); tri(D, C, F); quad(A, D, F, E);
             }
             else if (typeId === 'triangle') {
-                const A = [0,0,0], B = [4,0,0], C = [4,0,4], D = [0,0,4], P = [2,4,2];
-                quad(A, B, C, D); tri(A, B, P); tri(B, C, P); tri(C, D, P); tri(D, A, P);
+                // FIX (wrong shape): this was a 4-sided pyramid. It is now the CORNER
+                // WEDGE (tetrahedron) that fills the corner between 3 wedges — like
+                // the corner pieces on the player model. Vertical corner edge at the
+                // origin; the X-Y-Z face is an EQUILATERAL triangle (side 4*sqrt(2)).
+                const O = [0,0,0], X = [4,0,0], Y = [0,4,0], Z = [0,0,4];
+                tri(O, X, Z);       // bottom
+                tri(O, Z, Y);       // -X side
+                tri(O, Y, X);       // -Z side
+                tri(X, Y, Z);       // equilateral slope face
+            }
+            else if (typeId === 'longTriangle') {
+                // FIX (wrong shape): same corner wedge as 'triangle', stretched to
+                // 8 studs long, 4 wide, 4 tall.
+                const O = [0,0,0], X = [8,0,0], Y = [0,4,0], Z = [0,0,4];
+                tri(O, X, Z); tri(O, Z, Y); tri(O, Y, X); tri(X, Y, Z);
             }
             else if (typeId === 'stairs') {
                 box(0, 4, 0, 1, 0, 4); box(1, 4, 1, 2, 0, 4); box(2, 4, 2, 3, 0, 4); box(3, 4, 3, 4, 0, 4);
@@ -5391,36 +5436,131 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
             blockGeoCache.set(typeId, geo);
             return geo;
         }
-        let blockMaterial = null;
-        function getBlockMaterial() {
-            if (blockMaterial) return blockMaterial;
-            const tex = new THREE.TextureLoader().load("https://devforum-uploads.s3.dualstack.us-east-2.amazonaws.com/uploads/original/4X/f/0/4/f04a1aabddc808b5cef98214d1a7f4724a7e5c2a.png");
+        // FIX (brick texture system): blocks are now a WHITE base mesh with a
+        // colored brick-skin overlay whose mortar lines are TRANSPARENT — the
+        // white base shows through the cracks, and the material color tints only
+        // the bricks. Replaces the old single getBlockMaterial().
+        let blockBaseMaterial = null, brickSkinTexture = null;
+        const brickSkinMatCache = new Map();
+        const plainBlockMatCache = new Map();
+        function getBlockBaseMaterial() {
+            if (blockBaseMaterial) return blockBaseMaterial;
+            blockBaseMaterial = new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.9 });   // WHITE under-block
+            attachAOShader(blockBaseMaterial);
+            aoState.materials = [...new Set([...aoState.materials, blockBaseMaterial])];
+            return blockBaseMaterial;
+        }
+        function buildBrickSkinTexture() {
+            const SIZE = 512;
+            const canvas = document.createElement('canvas');
+            canvas.width = canvas.height = SIZE;
+            const ctx = canvas.getContext('2d');
+            const tex = new THREE.CanvasTexture(canvas);
+            tex.wrapS = tex.wrapT = THREE.RepeatWrapping;
             tex.colorSpace = THREE.SRGBColorSpace;
-            tex.wrapS = THREE.RepeatWrapping; tex.wrapT = THREE.RepeatWrapping;
-            blockMaterial = new THREE.MeshStandardMaterial({ map: tex, color: BRICK_COLOR, roughness: 0.9 });
-            attachAOShader(blockMaterial);
-            return blockMaterial;
+            tex.anisotropy = renderer.capabilities.getMaxAnisotropy();
+            const drawProcedural = () => {   // fallback: white bricks with transparent mortar
+                ctx.clearRect(0, 0, SIZE, SIZE);
+                ctx.fillStyle = '#ffffff'; ctx.fillRect(0, 0, SIZE, SIZE);
+                const rows = 4, rowH = SIZE / rows, bw = SIZE / 2, m = Math.max(4, SIZE * 0.035);
+                ctx.globalCompositeOperation = 'destination-out';
+                for (let r = 0; r < rows; r++) {
+                    const y = r * rowH;
+                    ctx.fillRect(0, y, SIZE, m);
+                    const off = (r % 2) * (bw / 2);
+                    for (let x = off - bw; x < SIZE; x += bw) ctx.fillRect(x, y, m, rowH);
+                }
+                ctx.globalCompositeOperation = 'source-over';
+                tex.needsUpdate = true;
+            };
+            const applyFromImage = (img) => {   // your brick art: mortar -> transparent, bricks -> white (material.color tints them)
+                ctx.clearRect(0, 0, SIZE, SIZE);
+                ctx.drawImage(img, 0, 0, SIZE, SIZE);
+                const data = ctx.getImageData(0, 0, SIZE, SIZE);
+                const d = data.data;
+                for (let i = 0; i < d.length; i += 4) {
+                    const lum = (0.299 * d[i] + 0.587 * d[i+1] + 0.114 * d[i+2]) / 255;
+                    if (lum < 0.42) d[i+3] = 0;                                          // cracks -> white base shows through
+                    else { const v = Math.min(255, Math.round(((lum - 0.42) / 0.58) * 255)); d[i] = d[i+1] = d[i+2] = v; }
+                }
+                ctx.putImageData(data, 0, 0);
+                tex.needsUpdate = true;
+            };
+            drawProcedural();
+            const raw = "https://devforum-uploads.s3.dualstack.us-east-2.amazonaws.com/uploads/original/4X/f/0/4/f04a1aabddc808b5cef98214d1a7f4724a7e5c2a.png";
+            const srcs = [raw, "https://images.weserv.nl/?url=" + encodeURIComponent(raw)];
+            let si = 0;
+            const tryLoad = () => {
+                if (si >= srcs.length) return;
+                const img = new Image();
+                img.crossOrigin = 'Anonymous';
+                img.onload = () => {
+                    if (!img.width) { tryLoad(); return; }
+                    try { applyFromImage(img); } catch (e) { drawProcedural(); }
+                };
+                img.onerror = tryLoad;
+                img.src = srcs[si++];
+            };
+            tryLoad();
+            return tex;
+        }
+        function getBrickSkinMaterial(colorHex) {
+            const key = (colorHex === undefined || colorHex === null) ? BRICK_COLOR : colorHex;
+            if (brickSkinMatCache.has(key)) return brickSkinMatCache.get(key);
+            if (!brickSkinTexture) brickSkinTexture = buildBrickSkinTexture();
+            const m = new THREE.MeshStandardMaterial({
+                map: brickSkinTexture, color: key, roughness: 0.9,
+                alphaTest: 0.5,
+                polygonOffset: true, polygonOffsetFactor: -1, polygonOffsetUnits: -1   // skin floats just above the base
+            });
+            attachAOShader(m);
+            aoState.materials = [...new Set([...aoState.materials, m])];
+            brickSkinMatCache.set(key, m);
+            return m;
+        }
+        function getPlainBlockMaterial(colorHex) {   // Textures setting OFF
+            const key = (colorHex === undefined || colorHex === null) ? BRICK_COLOR : colorHex;
+            if (!plainBlockMatCache.has(key)) {
+                const m = new THREE.MeshStandardMaterial({ color: key, roughness: 0.9 });
+                attachAOShader(m);
+                aoState.materials = [...new Set([...aoState.materials, m])];
+                plainBlockMatCache.set(key, m);
+            }
+            return plainBlockMatCache.get(key);
+        }
+        function setAllBlockTextures(on) {
+            placedBlocks.forEach(rec => {
+                const skin = rec.mesh.getObjectByName('brickSkin');
+                if (skin) skin.visible = on;
+                rec.mesh.material = on ? getBlockBaseMaterial() : getPlainBlockMaterial(rec.color);
+            });
         }
         let placedBlocks = [];
-        function spawnBlockWorld(typeId, px, py, pz, ry, rx, rz, fromNet) {
+        function spawnBlockWorld(typeId, px, py, pz, ry, rx, rz, fromNet, colorHex) {
             const type = BLOCK_TYPES.find(b => b.id === typeId);
             if (!type) return null;
-            const mesh = new THREE.Mesh(getBlockGeometry(typeId), getBlockMaterial());
+            const geo = getBlockGeometry(typeId);
+            const mesh = new THREE.Mesh(geo, getBlockBaseMaterial());          // WHITE block underneath
+            const skin = new THREE.Mesh(geo, getBrickSkinMaterial(colorHex));  // colored bricks, transparent mortar
+            skin.name = 'brickSkin';
+            skin.userData.noShadow = true;      // base already casts; avoid double shadow
+            skin.visible = texturesEnabled;
+            mesh.add(skin);
             mesh.position.set(px, py, pz);
             mesh.rotation.set(rx || 0, ry || 0, rz || 0);
             mesh.castShadow = true; mesh.receiveShadow = true;
+            mesh.userData.isPlacedBlock = true; // tryStepUp probes the real surface for these (Part 5 fix)
             scene.add(mesh);
             collisionObjs.push(mesh);
             aoState.receivers.push(mesh);
             aoState.occluders.push(mesh);
-            const rec = { id: 'blk-' + Date.now() + '-' + Math.floor(Math.random() * 99999), typeId: typeId, mesh: mesh };
+            const rec = { id: 'blk-' + Date.now() + '-' + Math.floor(Math.random() * 99999), typeId: typeId, color: (colorHex === undefined ? BRICK_COLOR : colorHex), mesh: mesh };
             placedBlocks.push(rec);
             invalidateWorldCaches();
-            aoState.materials = [...new Set([...aoState.materials, getBlockMaterial()])];
             const lvl = (currentGraphicsMode === 'auto') ? getAutoGraphicsLevel() : graphicsQuality;
             applyRenderGraphicsSettings(lvl);
             if (!fromNet && netJoined && netConns.length > 0) {
-                const msg = { t: 'block', op: 'add', id: rec.id, type: typeId, p: [px, py, pz], r: [rx || 0, ry || 0, rz || 0] };
+                const msg = { t: 'block', op: 'add', id: rec.id, type: typeId, col: rec.color, p: [px, py, pz], r: [rx || 0, ry || 0, rz || 0] };
                 if (isHost) msg.from = myNetId();
                 broadcast(msg);
             }
@@ -5445,12 +5585,23 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
         let blockRot = { x: 0, y: 0, z: 0 };
         let hologramBounce = 0;
         let hammerHover = null, hammerOutline = null, hammerLine = null;
+        // FIX (cursor placement): track the mouse so blocks are placed where the
+        // player's cursor points (screen center is still used while shift-locked,
+        // where the cursor IS the crosshair).
+        let stamperMouseNDC = { x: 0, y: 0 };
+        window.addEventListener('pointermove', (e) => {
+            stamperMouseNDC.x = (e.clientX / window.innerWidth) * 2 - 1;
+            stamperMouseNDC.y = -(e.clientY / window.innerHeight) * 2 + 1;
+        });
         function plotCenterOf(idx) { const c = [ {x:144,z:-144},{x:144,z:0},{x:144,z:144},{x:0,z:-144},{x:0,z:0},{x:0,z:144},{x:-144,z:-144},{x:-144,z:0},{x:-144,z:144} ]; return c[idx] || c[0]; }
         function isInsidePlot(px, pz, idx) { const c = plotCenterOf(idx); return Math.abs(px - c.x) <= 56 && Math.abs(pz - c.z) <= 56; }
         function updateHologram() {
             if (!isHoldingStamper || !selectedBlockType || isRagdoll || isMenuOpen) { hideHologram(); return; }
             const type = BLOCK_TYPES.find(b => b.id === selectedBlockType);
-            cameraRay.setFromCamera({ x: 0, y: 0 }, camera);
+            // FIX (cursor placement): raycast from the mouse cursor when unlocked;
+            // from screen center while shift-locked / pointer-locked.
+            const useCenter = isShiftLock || document.pointerLockElement === renderer.domElement;
+            cameraRay.setFromCamera(useCenter ? { x: 0, y: 0 } : stamperMouseNDC, camera);
             const hits = cameraRay.intersectObjects(collisionObjs);
             let hx, hy, hz;
             if (hits.length > 0 && hits[0].distance < 60) {
@@ -5470,6 +5621,7 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                 hideHologram();
                 hologram = new THREE.Mesh(getBlockGeometry(selectedBlockType), new THREE.MeshBasicMaterial({ color: 0x7fd4ff, transparent: true, opacity: 0.45, depthWrite: false }));
                 hologram.renderOrder = 998;
+                hologram.userData.noShadow = true;   // FIX: never cast a real shadow
                 scene.add(hologram);
                 hologramTypeId = selectedBlockType;
             }
@@ -5496,7 +5648,9 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
             if (hammerLine) { scene.remove(hammerLine); hammerLine = null; }
             hammerHover = null;
             if (!isHoldingHammer || isRagdoll || isMenuOpen) return;
-            cameraRay.setFromCamera({ x: 0, y: 0 }, camera);
+            // FIX (cursor placement): hammer aims at the mouse cursor too.
+            const useCenter = isShiftLock || document.pointerLockElement === renderer.domElement;
+            cameraRay.setFromCamera(useCenter ? { x: 0, y: 0 } : stamperMouseNDC, camera);
             const meshes = placedBlocks.map(b => b.mesh);
             const hits = cameraRay.intersectObjects(meshes);
             if (hits.length > 0 && hits[0].distance < 60) {
@@ -5533,10 +5687,19 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
             blockPreviewRenderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, preserveDrawingBuffer: true });
             blockPreviewRenderer.setClearColor(0x000000, 0);
         }
+        // FIX (brick texture system): previews show the real white-base + colored-skin look
+        function makeBlockPreviewMesh(typeId) {
+            const geo = getBlockGeometry(typeId);
+            const base = new THREE.Mesh(geo, getBlockBaseMaterial());
+            const skin = new THREE.Mesh(geo, getBrickSkinMaterial());
+            skin.name = 'brickSkin';
+            base.add(skin);
+            return base;
+        }
         function renderBlockThumb(typeId, px) {
             ensureBlockPreview();
             const type = BLOCK_TYPES.find(b => b.id === typeId);
-            const m = new THREE.Mesh(getBlockGeometry(typeId), getBlockMaterial());
+            const m = makeBlockPreviewMesh(typeId);
             blockPreviewScene.add(m);
             const maxDim = Math.max(type.size[0], type.size[1], type.size[2]);
             const d = maxDim * 1.9;
@@ -5584,7 +5747,7 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
             document.getElementById('stamper-detail-name').textContent = bt.name;
             ensureBlockPreview();
             if (blockPreviewMesh) blockPreviewScene.remove(blockPreviewMesh);
-            blockPreviewMesh = new THREE.Mesh(getBlockGeometry(typeId), getBlockMaterial());
+            blockPreviewMesh = makeBlockPreviewMesh(typeId);
             blockPreviewScene.add(blockPreviewMesh);
             const maxDim = Math.max(bt.size[0], bt.size[1], bt.size[2]);
             blockPreviewCamera.position.set(maxDim * 1.6, maxDim * 1.7, maxDim * 1.6);
@@ -5626,7 +5789,7 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
         function saveMyBuild() {
             const nameInput = document.getElementById('build-save-name');
             const name = (nameInput.value.trim() || 'My Build');
-            const blocks = blocksOnMyPlot().map(rec => ({ type: rec.typeId, p: rec.mesh.position.toArray(), r: [rec.mesh.rotation.x, rec.mesh.rotation.y, rec.mesh.rotation.z] }));
+            const blocks = blocksOnMyPlot().map(rec => ({ type: rec.typeId, col: rec.color, p: rec.mesh.position.toArray(), r: [rec.mesh.rotation.x, rec.mesh.rotation.y, rec.mesh.rotation.z] }));
             localStorage.setItem('toh_build_' + name, JSON.stringify({ plot: currentSpawnIndex, blocks: blocks }));
             addSystemChat('Build saved as "' + name + '" (' + blocks.length + ' blocks)');
         }
@@ -5636,26 +5799,25 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
             if (!raw) { addSystemChat('No saved build named "' + name + '"'); return; }
             const data = JSON.parse(raw);
             blocksOnMyPlot().slice().forEach(rec => removeBlockRecord(rec, false));
-            data.blocks.forEach(b => spawnBlockWorld(b.type, b.p[0], b.p[1], b.p[2], b.r[1], b.r[0], b.r[2], false));
+            data.blocks.forEach(b => spawnBlockWorld(b.type, b.p[0], b.p[1], b.p[2], b.r[1], b.r[0], b.r[2], false, b.col));
             addSystemChat('Build "' + name + '" loaded (' + data.blocks.length + ' blocks)');
         }
         function rotateMyBuild() {
-            const mine = blocksOnMyPlot().map(rec => ({ type: rec.typeId, p: rec.mesh.position.toArray(), r: [rec.mesh.rotation.x, rec.mesh.rotation.y, rec.mesh.rotation.z] }));
+            const mine = blocksOnMyPlot().map(rec => ({ type: rec.typeId, col: rec.color, p: rec.mesh.position.toArray(), r: [rec.mesh.rotation.x, rec.mesh.rotation.y, rec.mesh.rotation.z] }));
             if (mine.length === 0) { addSystemChat('Nothing to rotate'); return; }
             blocksOnMyPlot().slice().forEach(rec => removeBlockRecord(rec, false));
             const c = plotCenterOf(currentSpawnIndex);
             mine.forEach(b => {
                 const relX = b.p[0] - c.x, relZ = b.p[2] - c.z;
                 const nx = c.x + relZ, nz = c.z - relX;
-                spawnBlockWorld(b.type, Math.round(nx / 2) * 2, b.p[1], Math.round(nz / 2) * 2, b.r[1] + Math.PI / 2, b.r[0], b.r[2], false);
+                spawnBlockWorld(b.type, Math.round(nx / 2) * 2, b.p[1], Math.round(nz / 2) * 2, b.r[1] + Math.PI / 2, b.r[0], b.r[2], false, b.col);
             });
             addSystemChat('Build rotated 90 degrees (' + mine.length + ' blocks)');
         }
         function handleBlockMsg(d, fromId) {
-            if (d.op === 'add') spawnBlockWorld(d.type, d.p[0], d.p[1], d.p[2], d.r[1], d.r[0], d.r[2], true);
+            if (d.op === 'add') spawnBlockWorld(d.type, d.p[0], d.p[1], d.p[2], d.r[1], d.r[0], d.r[2], true, d.col);
             else if (d.op === 'del') { const rec = placedBlocks.find(b => b.id === d.id); if (rec) removeBlockRecord(rec, true); }
         }
-
         // ===================== MAIN SIMULATION STEP =====================
         function simulateStep(dt) {
             gameTime += dt;
@@ -5740,7 +5902,7 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                         }
                     } else drop.rotVel.multiplyScalar(0.92);
                 }
-                const dist = drop.mesh.position.distanceTo(charGroup.position);
+                const dist = drop.mesh.distanceTo(charGroup.position);
                 if (dist < 3) {
                     let emptySlot = playerInventory.findIndex(s => s === null);
                     if (emptySlot !== -1) {
@@ -6278,11 +6440,30 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                         }
                     }
                     if (playerVel.y <= 0) wallJumpHugging = false;
-                    playerPos.y += playerVel.y * dt;
+                    // FIX (head through block bottoms): SWEPT head-vs-ceiling check.
+                    // The old code moved the head FIRST, then checked the ceiling and
+                    // only zeroed velocity — at jump speed (~53 studs/s) with a 0.1s
+                    // sub-step the head could travel 5.3 studs in one tick, clean
+                    // through a 4-stud block; once inside, the up-ray only hits
+                    // backfaces (FrontSide) so the block stopped existing for the
+                    // player, letting them jump up through floors. Now the full
+                    // travel is tested BEFORE moving and the head is clamped just
+                    // below the obstruction.
                     if (playerVel.y > 0) {
-                        ceilingRay.set(new THREE.Vector3(playerPos.x, playerPos.y - 0.2, playerPos.z), new THREE.Vector3(0, 1, 0));
+                        const travel = playerVel.y * dt;
+                        ceilingRay.set(_ceilOrig.set(playerPos.x, playerPos.y - 0.2, playerPos.z), _ceilUp);
+                        ceilingRay.far = travel + 0.9;
                         const cHHits = ceilingRay.intersectObjects(collisionObjs);
-                        if (cHHits.length > 0 && cHHits[0].distance < 0.9) playerVel.y = 0;
+                        if (cHHits.length > 0 && cHHits[0].distance < travel + 0.9) {
+                            const allowedRise = Math.max(0, cHHits[0].distance - 0.9);
+                            playerPos.y += Math.min(travel, allowedRise);
+                            playerVel.y = 0;
+                        } else {
+                            playerPos.y += travel;
+                        }
+                        ceilingRay.far = Infinity;   // don't leak 'far' into the climb ceiling check above
+                    } else {
+                        playerPos.y += playerVel.y * dt;
                     }
                     if (!isCurrentlyClimbing) {
                         isGrounded = false;
@@ -6564,9 +6745,12 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
             } else if (setting === 'textures') {
                 texturesEnabled = !wasOn;
                 localStorage.setItem('toh_textures', texturesEnabled);
+                // FIX: the new block system toggles via skin visibility + base material swap
+                setAllBlockTextures(texturesEnabled);
                 if (texturesEnabled) {
                     scene.traverse(obj => {
                         if (obj.isMesh && obj.userData.origMap !== undefined) {
+                            if (obj.name === 'brickSkin') return;   // skins manage themselves
                             obj.material.map = obj.userData.origMap;
                             obj.material.needsUpdate = true;
                         }
@@ -6575,6 +6759,7 @@ body{margin:0;overflow:hidden;background-color:#000;font-family:'Open Sans',sans
                     scene.traverse(obj => {
                         if (obj.isMesh && obj.material.map) {
                             if (obj.userData.isFace) return;
+                            if (obj.name === 'brickSkin') return;   // skins manage themselves
                             obj.userData.origMap = obj.material.map;
                             obj.material.map = null;
                             obj.material.needsUpdate = true;
